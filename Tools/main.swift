@@ -25,17 +25,16 @@
 import Foundation
 
 
-extension NSOutputStream
+extension OutputStream
 {
-    func write(string:String) {
+    func write(_ string: String) {
         if string.isEmpty {return}
         let encodedDataArray = [UInt8](string.utf8)
-        write(encodedDataArray, maxLength: encodedDataArray.count)
+        let _ = write(encodedDataArray, maxLength: encodedDataArray.count)
     }
 }
 
-
-class KhronosXmlDelegate : NSObject, NSXMLParserDelegate
+internal class KhronosXmlDelegate : NSObject, XMLParserDelegate
 {
     var path = ""
 
@@ -68,9 +67,19 @@ class KhronosXmlDelegate : NSObject, NSXMLParserDelegate
     var currentExtension = ""
     var commandExtensions = [String: [String]]()
 
+    public func parserDidStartDocument(_ parser: XMLParser) {
+          print("Started doc")
+    }
 
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String])
-    {
+    public func parserDidEndDocument(_ parser: XMLParser) {
+      print("Ended doc")
+    }
+
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName: String?, attributes: [String: String] = [:]) -> () {
+      let attributeDict = attributes
+
+      print("Started element \(elementName)")
+
         if (elementName == "registry") {return}
         if (!path.isEmpty) {path += "."}
         path += elementName
@@ -78,8 +87,8 @@ class KhronosXmlDelegate : NSObject, NSXMLParserDelegate
         if path == "extensions.extension" {
             currentExtension = attributeDict["name"]!
             assert(currentExtension.hasPrefix("GL_"))
-            currentExtension.removeRange(
-                currentExtension.startIndex..<currentExtension.startIndex.advancedBy(3)
+            currentExtension.removeSubrange(
+                currentExtension.startIndex..<currentExtension.index(currentExtension.startIndex, offsetBy: 3)
             )
             return
         }
@@ -179,44 +188,47 @@ class KhronosXmlDelegate : NSObject, NSXMLParserDelegate
                 paramGroup = s
             }
         }
-
     }
 
-    func parser(parser: NSXMLParser, foundCharacters string: String)
+    public func parser(_ parser: XMLParser, foundCharacters: String)
     {
+      print("found chars")
+        let str = foundCharacters
+
         if path == "commands.command.proto.ptype" {
-            cmdReturn = string
+            cmdReturn = str
             return
         }
 
         if path == "commands.command.proto.name" {
-            cmd = string
+            cmd = str
             return
         }
 
         if path == "commands.command.proto" {
-            cmdReturn += string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            cmdReturn += str.trimmingCharacters(in: .whitespaces)
             return
         }
 
         if path == "commands.command.param.ptype" {
-            paramType = string
+            paramType = str
             return
         }
 
         if path == "commands.command.param.name" {
-            paramName = string
+            paramName = str
             return
         }
 
         if path == "commands.command.param" {
-            paramPtr += string.stringByReplacingOccurrencesOfString(" ", withString: "")
+            paramPtr += str.replacingOccurrences(of: " ", with: "")
             return
         }
     }
 
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
+    public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
     {
+      print("ended element")
         if (elementName == "registry") {return}
         defer {
             if (elementName == path) {
@@ -224,8 +236,8 @@ class KhronosXmlDelegate : NSObject, NSXMLParserDelegate
             } else {
                 let el = "." + elementName
                 assert(path.hasSuffix(el))
-                let range = path.endIndex.advancedBy(-el.characters.count)..<path.endIndex
-                path.removeRange(range)
+                let range = path.index(path.endIndex, offsetBy: -el.characters.count)..<path.endIndex
+                path.removeSubrange(range)
             }
         }
 
@@ -241,11 +253,11 @@ class KhronosXmlDelegate : NSObject, NSXMLParserDelegate
 
         if path == "commands.command.param" {
             paramArr.append((name:paramName,type:paramType,ptr:paramPtr,group:paramGroup,len:paramLen))
-            paramName.removeAll(keepCapacity: true)
-            paramType.removeAll(keepCapacity: true)
-            paramPtr.removeAll(keepCapacity: true)
-            paramGroup.removeAll(keepCapacity: true)
-            paramLen.removeAll(keepCapacity: true)
+            paramName.removeAll(keepingCapacity: true)
+            paramType.removeAll(keepingCapacity: true)
+            paramPtr.removeAll(keepingCapacity: true)
+            paramGroup.removeAll(keepingCapacity: true)
+            paramLen.removeAll(keepingCapacity: true)
             return
         }
 
@@ -257,44 +269,76 @@ class KhronosXmlDelegate : NSObject, NSXMLParserDelegate
             commandReturns[cmd] = cmdReturn
             commandParams[cmd] = paramArr
 
-            cmd.removeAll(keepCapacity: true)
-            cmdReturn.removeAll(keepCapacity: true)
-            paramArr.removeAll(keepCapacity: true)
+            cmd.removeAll(keepingCapacity: true)
+            cmdReturn.removeAll(keepingCapacity: true)
+            paramArr.removeAll(keepingCapacity: true)
             return
         }
     }
 
-    func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError)
-    {
-        assert(false)
+    public func parser(_ parser: XMLParser, parseErrorOccurred error: NSError) {
+        print("error")
+        assert(false, "Parser error \(error)")
     }
+
+
+// stubs
+    public func parser(_ parser: XMLParser, didStartMappingPrefix: String, toURI: String) -> Void { print("Started mapping") }
+  	public func parser(_ parser: XMLParser, validationErrorOccurred: NSError) -> Void {print("validation errro")}
+  	public func parser(_ parser: XMLParser, foundCDATA: Data) -> Void {print("foundCDATA")}
+    public func parser(_ parser: XMLParser, foundComment: String) -> Void {print("found comment")}
+    public func parser(_ parser: XMLParser, resolveExternalEntityName: String, systemID: String?) -> Data? {print("resolving"); return nil}
+  	public func parser(_ parser: XMLParser, foundProcessingInstructionWithTarget: String, data: String?) -> Void {print("processing instr")}
+  	public func parser(_ parser: XMLParser, foundIgnorableWhitespace: String) -> Void {print("ignrows")}
+    public func parser(_ parser: XMLParser, didEndMappingPrefix: String) -> Void {print("endmapping")}
+  	public func parser(_ parser: XMLParser, foundExternalEntityDeclarationWithName: String, publicID: String?, systemID: String?) -> Void {print("ext ent")}
+  	public func parser(_ parser: XMLParser, foundInternalEntityDeclarationWithName: String, value: String?) -> Void {print("int ent")}
+  	public func parser(_ parser: XMLParser, foundElementDeclarationWithName: String, model: String) -> Void {print("el dec")}
+  	public func parser(_ parser: XMLParser, foundAttributeDeclarationWithName: String, forElement: String, type: String?, defaultValue: String?) -> Void {print("attr dec")}
+  	public func parser(_ parser: XMLParser, foundUnparsedEntityDeclarationWithName: String, publicID: String?, systemID: String?, notationName: String?) -> Void {print("unp ent dec name")}
+  	public func parser(_ parser: XMLParser, foundNotationDeclarationWithName: String, publicID: String?, systemID: String?) -> Void {print("notational dec")}
+}
+
+func chomper(_ filepath: String) -> KhronosXmlDelegate?
+{
+    // do a test read
+    guard let infile = FileHandle(forReadingAtPath: filepath)
+    else {
+      print("Could not open file")
+      return nil
+    }
+
+    print("Reading data")
+    let srcdata = infile.availableData
+    print("Can get \(srcdata.count) bytes")
+
+    print("Creating parser for '\(filepath)'")
+    let del = KhronosXmlDelegate()
+    let parser = XMLParser(data: srcdata)
+    parser.delegate = del
+    parser.delegate!.parser(parser, foundComment: "dood")
+    del.parser(parser, foundComment: "dood")
+    print("Running parser")
+    if parser.parse() == false {
+      print("Parsing the XML failed: \(parser.parserError)")
+    }
+
+    return del
 }
 
 
-func chomper(delegate:NSXMLParserDelegate, _ filename:String)
+func spitter(_ delegate: KhronosXmlDelegate, _ filename:String,
+    _ generator:(_:OutputStream, _:KhronosXmlDelegate) -> Void)
 {
-    let infile = NSInputStream(fileAtPath: filename)
-    infile!.open()
-    assert(infile?.streamStatus == .Open, "Unable to read \(filename)")
-    let xmlParser = NSXMLParser(stream: infile!)
-    xmlParser.delegate = delegate
-    xmlParser.parse()
-    infile!.close()
-}
-
-
-func spitter(delegate:KhronosXmlDelegate, _ filename:String,
-    _ generator:(outstream:NSOutputStream, delegate:KhronosXmlDelegate) -> Void)
-{
-    let outstream:NSOutputStream! = NSOutputStream(toFileAtPath: filename, append: false)
+    let outstream:OutputStream! = OutputStream(toFileAtPath: filename, append: false)
     outstream.open()
-    assert(outstream.streamStatus == .Open, "Unable to write \(filename)")
-    generator(outstream: outstream, delegate: delegate)
+    assert(outstream.streamStatus == .open, "Unable to write \(filename)")
+    generator(outstream, delegate)
     outstream.close()
 }
 
 
-func writeLicense(outstream:NSOutputStream)
+func writeLicense(_ outstream: OutputStream)
 {
     var s = "// WARNING: This file is generated. Modifications will be lost.\n\n"
     s += "// Copyright (c) 2015-2016 David Turnbull\n"
@@ -323,7 +367,7 @@ func writeLicense(outstream:NSOutputStream)
 }
 
 
-func writeDocs(outstream:NSOutputStream, _ delegate:KhronosXmlDelegate, _ cmd:String)
+func writeDocs(_ outstream: OutputStream, _ delegate:KhronosXmlDelegate, _ cmd:String)
 {
     var s = ""
     let params = delegate.commandParams[cmd]!
@@ -339,7 +383,7 @@ func writeDocs(outstream:NSOutputStream, _ delegate:KhronosXmlDelegate, _ cmd:St
 }
 
 
-func writeConstants(outstream:NSOutputStream, _ delegate:KhronosXmlDelegate)
+func writeConstants(_ outstream: OutputStream, _ delegate:KhronosXmlDelegate)
 {
     writeLicense(outstream)
     outstream.write("// GLenum constants\n")
@@ -359,7 +403,7 @@ func writeConstants(outstream:NSOutputStream, _ delegate:KhronosXmlDelegate)
 }
 
 
-func paramType(x:KhronosXmlDelegate.paramTuple) -> String
+func paramType(_ x: KhronosXmlDelegate.paramTuple) -> String
 {
     var type = x.type
 
@@ -398,8 +442,8 @@ func paramType(x:KhronosXmlDelegate.paramTuple) -> String
 }
 
 
-func returnType(cmd:String, _ delegate:KhronosXmlDelegate) -> String
-{
+  func returnType(_ cmd: String, _ delegate:KhronosXmlDelegate) -> String
+  {
     let retValue = delegate.commandReturns[cmd]!
     if retValue == "void" {
         return "Void"
@@ -413,7 +457,7 @@ func returnType(cmd:String, _ delegate:KhronosXmlDelegate) -> String
 }
 
 
-func writeCommands(outstream:NSOutputStream, _ delegate:KhronosXmlDelegate)
+func writeCommands(_ outstream: OutputStream, _ delegate:KhronosXmlDelegate)
 {
     var count:Int
     writeLicense(outstream)
@@ -432,7 +476,8 @@ func writeCommands(outstream:NSOutputStream, _ delegate:KhronosXmlDelegate)
         count = 0
         for t in types {
             body += t.0
-            if ++count < params.count {
+            count += 1
+            if count < params.count {
                 body += ", "
             }
         }
@@ -445,7 +490,8 @@ func writeCommands(outstream:NSOutputStream, _ delegate:KhronosXmlDelegate)
                 outstream.write("_ ")
             }
             outstream.write("\(t.0):\(t.1)")
-            if ++count < params.count {
+            count += 1
+            if count < params.count {
                 outstream.write(", ")
             }
         }
@@ -459,7 +505,8 @@ func writeCommands(outstream:NSOutputStream, _ delegate:KhronosXmlDelegate)
                     outstream.write("\(t.0) ")
                 }
                 outstream.write("\(t.0):\(t.1)")
-                if ++count < params.count {
+                count += 1
+                if count < params.count {
                     outstream.write(", ")
                 }
             }
@@ -470,7 +517,8 @@ func writeCommands(outstream:NSOutputStream, _ delegate:KhronosXmlDelegate)
         count = 0
         for t in types {
             outstream.write(t.1)
-            if ++count < params.count {
+            count += 1
+            if count < params.count {
                 outstream.write(", ")
             }
         }
@@ -480,7 +528,7 @@ func writeCommands(outstream:NSOutputStream, _ delegate:KhronosXmlDelegate)
 }
 
 
-func buildStringLits(delegate:KhronosXmlDelegate) -> [String] {
+func buildStringLits(_ delegate: KhronosXmlDelegate) -> [String] {
     var set = Set<String>()
     for (_,values) in delegate.commandVersions {
         for v in values {
@@ -492,11 +540,11 @@ func buildStringLits(delegate:KhronosXmlDelegate) -> [String] {
             set.insert(v)
         }
     }
-    return set.sort()
+    return set.sorted()
 }
 
 
-func writeLoaders(outstream:NSOutputStream, _ delegate:KhronosXmlDelegate)
+func writeLoaders(_ outstream: OutputStream, _ delegate:KhronosXmlDelegate)
 {
     var count:Int, index:Int
     writeLicense(outstream)
@@ -523,7 +571,8 @@ func writeLoaders(outstream:NSOutputStream, _ delegate:KhronosXmlDelegate)
                 outstream.write("_ ")
             }
             outstream.write("\(t.0):\(t.1)")
-            if ++count < params.count {
+            count += 1
+            if count < params.count {
                 outstream.write(", ")
             }
         }
@@ -538,19 +587,20 @@ func writeLoaders(outstream:NSOutputStream, _ delegate:KhronosXmlDelegate)
         var strnums = Array<Int>()
         if let vers = delegate.commandVersions[cmd] {
             for v in vers {
-                strnums.append(strings.indexOf(v)!)
+                strnums.append(strings.index(of: v)!)
             }
         }
         if let vers = delegate.commandExtensions[cmd] {
             for v in vers {
-                strnums.append(strings.indexOf(v)!)
+                strnums.append(strings.index(of: v)!)
             }
         }
         outstream.write("CommandInfo(\"\(cmd)\", [")
         count = 0
         for n in strnums {
             outstream.write("S\(n)")
-            if ++count < strnums.count {
+            count += 1
+            if count < strnums.count {
                 outstream.write(", ")
             }
         }
@@ -565,24 +615,23 @@ func writeLoaders(outstream:NSOutputStream, _ delegate:KhronosXmlDelegate)
         count = 0
         for t in types {
             outstream.write(t.0)
-            if ++count < params.count {
+            count += 1
+            if count < params.count {
                 outstream.write(", ")
             }
         }
         outstream.write(")\n}\n")
 
-        index++
+        index += 1
     }
 }
 
 
-func tidyDelegate(delegate:KhronosXmlDelegate)
+func tidyDelegate(_ delegate: KhronosXmlDelegate)
 {
-    // remove group options without a value
-    for (groupName, _) in delegate.groups {
-        while let idx = delegate.groups[groupName]!.indexOf({delegate.values[$0] == nil}) {
-            delegate.groups[groupName]!.removeAtIndex(idx)
-        }
+    // only keep group options with a value
+    for (groupName, groupValues) in delegate.groups {
+        delegate.groups[groupName] = groupValues.filter({delegate.values[$0] != nil})
     }
 
     // remove empty groups
@@ -603,7 +652,7 @@ func tidyDelegate(delegate:KhronosXmlDelegate)
                 delegate.commandParams[cmd]![count] =
                     (name:"input",type:x.type,ptr:x.ptr,group:x.group,len:x.len)
             }
-            count++
+            count += 1
         }
     }
 
@@ -635,57 +684,58 @@ func tidyDelegate(delegate:KhronosXmlDelegate)
     for key in delegate.bitfields {
         let value = delegate.values[key]!
         let valInt = strtoll(value,nil,0)
-        var valStr = String(valInt, radix:16, uppercase:true)
-        var addZeros = 8 - valStr.characters.count
-        while addZeros-- != 0 {
-            valStr = "0" + valStr
-        }
-        delegate.values[key] = "0x\(valStr)"
+        let valStr = String(valInt, radix:16, uppercase:true)
+        let padding = String(repeatElement("0", count: 8-valStr.characters.count))
+        delegate.values[key] = "0x\(padding)\(valStr)"
     }
 
     // Remove ES redundancy
-    for (key,val) in delegate.commandVersions {
+    for (key, val) in delegate.commandVersions {
         if val.contains("+ES 1.0") {
-            if let i = val.indexOf("+ES 2.0") {
-                delegate.commandVersions[key]?.removeAtIndex(i)
+            if let i = val.index(of: "+ES 2.0") {
+                delegate.commandVersions[key]?.remove(at: i)
             }
         }
     }
 
     // sorts
-    delegate.commands.sortInPlace()
-    delegate.enums.sortInPlace() {
+    delegate.commands.sort()
+    delegate.enums.sort() {
         strtoll(delegate.values[$0]!,nil,0) < strtoll(delegate.values[$1]!,nil,0)
     }
-    delegate.bitfields.sortInPlace() {
+    delegate.bitfields.sort() {
         strtoll(delegate.values[$0]!,nil,0) < strtoll(delegate.values[$1]!,nil,0)
     }
 }
 
 
-func saneDelegate(delegate:KhronosXmlDelegate)
+func saneDelegate(_ thede: KhronosXmlDelegate)
 {
     //assert on some minimum counts, just in case
-    assert(delegate.groups.count > 100)
-    assert(delegate.enums.count > 5000)
-    assert(delegate.bitfields.count > 200)
-    assert(delegate.values.count > 5000)
-    assert(delegate.commands.count > 3000)
+    assert(thede.groups.count > 100, "\(thede.groups.count) groups is too few.")
+    assert(thede.enums.count > 5000, "\(thede.enums.count) enums is too few.")
+    assert(thede.bitfields.count > 200, "\(thede.bitfields.count) bitfields is too few")
+    assert(thede.values.count > 5000, "\(thede.values.count) values is too few")
+    assert(thede.commands.count > 3000, "\(thede.commands.count) commands it too few")
 }
 
 
-if (Process.argc != 2) {
+if (CommandLine.arguments.count != 2) {
     // Got this from Xcode? Add $(SRCROOT)/OpenGL to arguments in scheme.
     print("\nusage: main.swift path_to_root\n")
     exit(1)
 }
-let pathPrefix = Process.arguments[1]
-var khronosDelegate = KhronosXmlDelegate()
-print("Working...")
-chomper(khronosDelegate, pathPrefix + "/Tools/gl.xml")
-tidyDelegate(khronosDelegate)
-saneDelegate(khronosDelegate)
-spitter(khronosDelegate, pathPrefix + "/Sources/Constants.swift", writeConstants)
-spitter(khronosDelegate, pathPrefix + "/Sources/Commands.swift", writeCommands)
-spitter(khronosDelegate, pathPrefix + "/Sources/Loaders.swift", writeLoaders)
+
+let pathPrefix = CommandLine.arguments[1]
+print("Using prefix: \(pathPrefix)")
+//var thede = KhronosXmlDelegate()
+guard var thede = chomper(pathPrefix + "/Tools/gl.xml") else {
+  print("OH EM GEEEEE")
+  exit(1)
+}
+tidyDelegate(thede)
+saneDelegate(thede)
+spitter(thede, pathPrefix + "/Sources/Constants.swift", writeConstants)
+spitter(thede, pathPrefix + "/Sources/Commands.swift", writeCommands)
+spitter(thede, pathPrefix + "/Sources/Loaders.swift", writeLoaders)
 print("Success")
