@@ -149,8 +149,8 @@ func getAddress(_ info: CommandInfo) -> UnsafeMutableRawPointer {
 
     var dlopenHandle: UnsafeMutableRawPointer?
     var glXGetProcAddress:(@convention(c) (UnsafePointer<GLchar>) -> UnsafeMutableRawPointer)? = nil
-    
-    func lookupAddress(info: CommandInfo) -> UnsafeMutableRawPointer? {
+
+    func lookupAddress(_ info: CommandInfo) -> UnsafeMutableRawPointer? {
         if dlopenHandle == nil {
             dlopenHandle = dlopen(nil, RTLD_LAZY | RTLD_LOCAL)
         }
@@ -174,10 +174,10 @@ func getAddress(_ info: CommandInfo) -> UnsafeMutableRawPointer {
         }
         return glXGetProcAddress!(info.name)
     }
-    
+
 #else
 
-    func lookupAddress(info: commandInfo) -> UnsafeMutableRawPointer {
+    func lookupAddress(_ info: commandInfo) -> UnsafeMutableRawPointer {
         fatalError("Unsupported OS")
     }
 
