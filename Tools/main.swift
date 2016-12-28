@@ -68,17 +68,13 @@ internal class KhronosXmlDelegate : NSObject, XMLParserDelegate
     var commandExtensions = [String: [String]]()
 
     public func parserDidStartDocument(_ parser: XMLParser) {
-          print("Started doc")
     }
 
     public func parserDidEndDocument(_ parser: XMLParser) {
-      print("Ended doc")
     }
 
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName: String?, attributes: [String: String] = [:]) -> () {
       let attributeDict = attributes
-
-      print("Started element \(elementName)")
 
         if (elementName == "registry") {return}
         if (!path.isEmpty) {path += "."}
@@ -192,7 +188,6 @@ internal class KhronosXmlDelegate : NSObject, XMLParserDelegate
 
     public func parser(_ parser: XMLParser, foundCharacters: String)
     {
-      print("found chars")
         let str = foundCharacters
 
         if path == "commands.command.proto.ptype" {
@@ -228,7 +223,6 @@ internal class KhronosXmlDelegate : NSObject, XMLParserDelegate
 
     public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
     {
-      print("ended element")
         if (elementName == "registry") {return}
         defer {
             if (elementName == path) {
@@ -276,27 +270,9 @@ internal class KhronosXmlDelegate : NSObject, XMLParserDelegate
         }
     }
 
-    public func parser(_ parser: XMLParser, parseErrorOccurred error: NSError) {
-        print("error")
+    public func parser(_ parser: XMLParser, parseErrorOccurred error: Error) {
         assert(false, "Parser error \(error)")
     }
-
-
-// stubs
-    public func parser(_ parser: XMLParser, didStartMappingPrefix: String, toURI: String) -> Void { print("Started mapping") }
-  	public func parser(_ parser: XMLParser, validationErrorOccurred: NSError) -> Void {print("validation errro")}
-  	public func parser(_ parser: XMLParser, foundCDATA: Data) -> Void {print("foundCDATA")}
-    public func parser(_ parser: XMLParser, foundComment: String) -> Void {print("found comment")}
-    public func parser(_ parser: XMLParser, resolveExternalEntityName: String, systemID: String?) -> Data? {print("resolving"); return nil}
-  	public func parser(_ parser: XMLParser, foundProcessingInstructionWithTarget: String, data: String?) -> Void {print("processing instr")}
-  	public func parser(_ parser: XMLParser, foundIgnorableWhitespace: String) -> Void {print("ignrows")}
-    public func parser(_ parser: XMLParser, didEndMappingPrefix: String) -> Void {print("endmapping")}
-  	public func parser(_ parser: XMLParser, foundExternalEntityDeclarationWithName: String, publicID: String?, systemID: String?) -> Void {print("ext ent")}
-  	public func parser(_ parser: XMLParser, foundInternalEntityDeclarationWithName: String, value: String?) -> Void {print("int ent")}
-  	public func parser(_ parser: XMLParser, foundElementDeclarationWithName: String, model: String) -> Void {print("el dec")}
-  	public func parser(_ parser: XMLParser, foundAttributeDeclarationWithName: String, forElement: String, type: String?, defaultValue: String?) -> Void {print("attr dec")}
-  	public func parser(_ parser: XMLParser, foundUnparsedEntityDeclarationWithName: String, publicID: String?, systemID: String?, notationName: String?) -> Void {print("unp ent dec name")}
-  	public func parser(_ parser: XMLParser, foundNotationDeclarationWithName: String, publicID: String?, systemID: String?) -> Void {print("notational dec")}
 }
 
 func chomper(_ filepath: String) -> KhronosXmlDelegate?
@@ -316,8 +292,6 @@ func chomper(_ filepath: String) -> KhronosXmlDelegate?
     let del = KhronosXmlDelegate()
     let parser = XMLParser(data: srcdata)
     parser.delegate = del
-    parser.delegate!.parser(parser, foundComment: "dood")
-    del.parser(parser, foundComment: "dood")
     print("Running parser")
     if parser.parse() == false {
       print("Parsing the XML failed: \(parser.parserError)")
@@ -410,17 +384,17 @@ func paramType(_ x: KhronosXmlDelegate.paramTuple) -> String
     if type == "GLvoid" {type = "Void"}
 
     if type == "struct _cl_context" {
-        type = "COpaquePointer"
+        type = "OpaquePointer"
     } else if type == "struct _cl_event" {
-        type = "COpaquePointer"
+        type = "OpaquePointer"
     } else if x.ptr == "const!*?" {
         type = "UnsafePointer<\(type)>"
     } else if x.ptr == "!*?" {
         type = "UnsafeMutablePointer<\(type)>"
     } else if x.ptr == "void*?" {
-        type = "UnsafeMutablePointer<Void>"
+        type = "UnsafeMutableRawPointer"
     } else if x.ptr == "constvoid*?" {
-        type = "UnsafePointer<Void>"
+        type = "UnsafeRawPointer"
     } else if x.ptr == "constvoid**?" {
         type = "UnsafeMutablePointer<UnsafePointer<Void>>"
     } else if x.ptr == "const!*const*?" {
@@ -428,14 +402,18 @@ func paramType(_ x: KhronosXmlDelegate.paramTuple) -> String
     } else if x.ptr == "const!**?" {
         type = "UnsafeMutablePointer<UnsafePointer<\(type)>>"
     } else if x.ptr == "void**?" {
-        type = "UnsafeMutablePointer<UnsafeMutablePointer<Void>>"
+        type = "UnsafeMutablePointer<UnsafeMutableRawPointer>"
     } else if x.ptr == "constvoid*const*?" {
-        type = "UnsafePointer<UnsafePointer<Void>>"
+        type = "UnsafePointer<UnsafeRawPointer>"
     }
     // Helper to find new pointer types
     // else if x.ptr != "!?" {
     //     print("\(cmd) \(count) \(x.ptr)")
     // }
+
+    // apparently UnsafePointer<Void> needed a special name...
+    type = type.replacingOccurrences(of: "UnsafePointer<Void>", with: "UnsafeRawPointer")
+    type = type.replacingOccurrences(of: "UnsafeMutablePointer<Void>", with: "UnsafeMutableRawPointer")
 
     return type
 
@@ -448,7 +426,7 @@ func paramType(_ x: KhronosXmlDelegate.paramTuple) -> String
     if retValue == "void" {
         return "Void"
     } else if retValue == "void *" {
-        return "UnsafeMutablePointer<Void>"
+        return "UnsafeMutableRawPointer"
     } else if retValue == "GLubyte*" {
         return "UnsafePointer<GLubyte>"
     } else {
@@ -459,70 +437,26 @@ func paramType(_ x: KhronosXmlDelegate.paramTuple) -> String
 
 func writeCommands(_ outstream: OutputStream, _ delegate:KhronosXmlDelegate)
 {
-    var count:Int
     writeLicense(outstream)
-    for cmd in delegate.commands {
-        let params = delegate.commandParams[cmd]!
+    for cmdName in delegate.commands {
+        let params = delegate.commandParams[cmdName]!
 
-        let types = params.map{($0.name,paramType($0))}
-        let returns = returnType(cmd, delegate)
+        let argTypes = params.map{($0.name, paramType($0))}
+        let cmdReturns = returnType(cmdName, delegate)
 
-        var body:String
-        if returns == "Void" {
-            body = " {\(cmd)_P("
-        } else {
-            body = " -> \(returns) {return \(cmd)_P("
-        }
-        count = 0
-        for t in types {
-            body += t.0
-            count += 1
-            if count < params.count {
-                body += ", "
-            }
-        }
-        body += ")}"
+	// build the parts of our command
+	let cmdParamDef = argTypes.map({"_ \($0.0) :\($0.1)"}).joined(separator: ", ")
+	let bodyCallArgs = params.map({$0.name}).joined(separator: ", ")
+	let cmdBody = "return \(cmdName)_P(\(bodyCallArgs))"
+	let cmdDef = "public func \(cmdName)(\(cmdParamDef)) -> \(cmdReturns) {\(cmdBody)}\n"
 
-        outstream.write("public func \(cmd)(")
-        count = 0
-        for t in types {
-            if count > 0 {
-                outstream.write("_ ")
-            }
-            outstream.write("\(t.0):\(t.1)")
-            count += 1
-            if count < params.count {
-                outstream.write(", ")
-            }
-        }
-        outstream.write(")\(body)\n")
+	// write it out
+        outstream.write(cmdDef)
 
-        if (params.count > 0) {
-            outstream.write("public func \(cmd)(")
-            count = 0
-            for t in types {
-                if count == 0 {
-                    outstream.write("\(t.0) ")
-                }
-                outstream.write("\(t.0):\(t.1)")
-                count += 1
-                if count < params.count {
-                    outstream.write(", ")
-                }
-            }
-            outstream.write(")\(body)\n")
-        }
-
-        outstream.write("var \(cmd)_P:@convention(c)(")
-        count = 0
-        for t in types {
-            outstream.write(t.1)
-            count += 1
-            if count < params.count {
-                outstream.write(", ")
-            }
-        }
-        outstream.write(") -> \(returns) = \(cmd)_L\n")
+	// build up the parts of the command Ptr var
+	let ptrParamDef = argTypes.map({"\($0.1)"}).joined(separator: ", ")
+	let ptrDef = "var \(cmdName)_P:@convention(c)(\(ptrParamDef)) -> \(cmdReturns) = \(cmdName)_L\n"
+	outstream.write(ptrDef)
 
     }
 }
@@ -605,7 +539,7 @@ func writeLoaders(_ outstream: OutputStream, _ delegate:KhronosXmlDelegate)
             }
         }
 
-        outstream.write("])), \(cmd)_P.dynamicType)\n")
+        outstream.write("])), to: type(of:\(cmd)_P))\n")
 
         if returns == "Void" {
             outstream.write("    \(cmd)_P(")
