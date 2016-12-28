@@ -2269,10 +2269,10 @@ public func glGetSharpenTexFuncSGIS(_ target :GLenum, _ points :UnsafeMutablePoi
 var glGetSharpenTexFuncSGIS_P:@convention(c)(GLenum, UnsafeMutablePointer<GLfloat>) -> Void = glGetSharpenTexFuncSGIS_L
 public func glGetStageIndexNV(_ shadertype :GLenum) -> GLushort {return glGetStageIndexNV_P(shadertype)}
 var glGetStageIndexNV_P:@convention(c)(GLenum) -> GLushort = glGetStageIndexNV_L
-public func glGetString(_ name :GLenum) -> UnsafePointer<GLubyte> {return glGetString_P(name)}
-var glGetString_P:@convention(c)(GLenum) -> UnsafePointer<GLubyte> = glGetString_L
-public func glGetStringi(_ name :GLenum, _ index :GLuint) -> UnsafePointer<GLubyte> {return glGetStringi_P(name, index)}
-var glGetStringi_P:@convention(c)(GLenum, GLuint) -> UnsafePointer<GLubyte> = glGetStringi_L
+public func glGetString(_ name :GLenum) -> UnsafePointer<GLubyte>? {return glGetString_P(name)}
+var glGetString_P:@convention(c)(GLenum) -> UnsafePointer<GLubyte>? = glGetString_L
+public func glGetStringi(_ name :GLenum, _ index :GLuint) -> UnsafePointer<GLubyte>? {return glGetStringi_P(name, index)}
+var glGetStringi_P:@convention(c)(GLenum, GLuint) -> UnsafePointer<GLubyte>? = glGetStringi_L
 public func glGetSubroutineIndex(_ program :GLuint, _ shadertype :GLenum, _ name :UnsafePointer<GLchar>) -> GLuint {return glGetSubroutineIndex_P(program, shadertype, name)}
 var glGetSubroutineIndex_P:@convention(c)(GLuint, GLenum, UnsafePointer<GLchar>) -> GLuint = glGetSubroutineIndex_L
 public func glGetSubroutineUniformLocation(_ program :GLuint, _ shadertype :GLenum, _ name :UnsafePointer<GLchar>) -> GLint {return glGetSubroutineUniformLocation_P(program, shadertype, name)}
@@ -2941,16 +2941,16 @@ public func glMap2f(_ target :GLenum, _ u1 :GLfloat, _ u2 :GLfloat, _ ustride :G
 var glMap2f_P:@convention(c)(GLenum, GLfloat, GLfloat, GLint, GLint, GLfloat, GLfloat, GLint, GLint, UnsafePointer<GLfloat>) -> Void = glMap2f_L
 public func glMap2xOES(_ target :GLenum, _ u1 :GLfixed, _ u2 :GLfixed, _ ustride :GLint, _ uorder :GLint, _ v1 :GLfixed, _ v2 :GLfixed, _ vstride :GLint, _ vorder :GLint, _ points :GLfixed) -> Void {return glMap2xOES_P(target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)}
 var glMap2xOES_P:@convention(c)(GLenum, GLfixed, GLfixed, GLint, GLint, GLfixed, GLfixed, GLint, GLint, GLfixed) -> Void = glMap2xOES_L
-public func glMapBuffer(_ target :GLenum, _ access :GLenum) -> UnsafeMutableRawPointer {return glMapBuffer_P(target, access)}
-var glMapBuffer_P:@convention(c)(GLenum, GLenum) -> UnsafeMutableRawPointer = glMapBuffer_L
-public func glMapBufferARB(_ target :GLenum, _ access :GLenum) -> UnsafeMutableRawPointer {return glMapBufferARB_P(target, access)}
-var glMapBufferARB_P:@convention(c)(GLenum, GLenum) -> UnsafeMutableRawPointer = glMapBufferARB_L
-public func glMapBufferOES(_ target :GLenum, _ access :GLenum) -> UnsafeMutableRawPointer {return glMapBufferOES_P(target, access)}
-var glMapBufferOES_P:@convention(c)(GLenum, GLenum) -> UnsafeMutableRawPointer = glMapBufferOES_L
-public func glMapBufferRange(_ target :GLenum, _ offset :GLintptr, _ length :GLsizeiptr, _ access :GLbitfield) -> UnsafeMutableRawPointer {return glMapBufferRange_P(target, offset, length, access)}
-var glMapBufferRange_P:@convention(c)(GLenum, GLintptr, GLsizeiptr, GLbitfield) -> UnsafeMutableRawPointer = glMapBufferRange_L
-public func glMapBufferRangeEXT(_ target :GLenum, _ offset :GLintptr, _ length :GLsizeiptr, _ access :GLbitfield) -> UnsafeMutableRawPointer {return glMapBufferRangeEXT_P(target, offset, length, access)}
-var glMapBufferRangeEXT_P:@convention(c)(GLenum, GLintptr, GLsizeiptr, GLbitfield) -> UnsafeMutableRawPointer = glMapBufferRangeEXT_L
+public func glMapBuffer(_ target :GLenum, _ access :GLenum) -> UnsafeMutableRawPointer? {return glMapBuffer_P(target, access)}
+var glMapBuffer_P:@convention(c)(GLenum, GLenum) -> UnsafeMutableRawPointer? = glMapBuffer_L
+public func glMapBufferARB(_ target :GLenum, _ access :GLenum) -> UnsafeMutableRawPointer? {return glMapBufferARB_P(target, access)}
+var glMapBufferARB_P:@convention(c)(GLenum, GLenum) -> UnsafeMutableRawPointer? = glMapBufferARB_L
+public func glMapBufferOES(_ target :GLenum, _ access :GLenum) -> UnsafeMutableRawPointer? {return glMapBufferOES_P(target, access)}
+var glMapBufferOES_P:@convention(c)(GLenum, GLenum) -> UnsafeMutableRawPointer? = glMapBufferOES_L
+public func glMapBufferRange(_ target :GLenum, _ offset :GLintptr, _ length :GLsizeiptr, _ access :GLbitfield) -> UnsafeMutableRawPointer? {return glMapBufferRange_P(target, offset, length, access)}
+var glMapBufferRange_P:@convention(c)(GLenum, GLintptr, GLsizeiptr, GLbitfield) -> UnsafeMutableRawPointer? = glMapBufferRange_L
+public func glMapBufferRangeEXT(_ target :GLenum, _ offset :GLintptr, _ length :GLsizeiptr, _ access :GLbitfield) -> UnsafeMutableRawPointer? {return glMapBufferRangeEXT_P(target, offset, length, access)}
+var glMapBufferRangeEXT_P:@convention(c)(GLenum, GLintptr, GLsizeiptr, GLbitfield) -> UnsafeMutableRawPointer? = glMapBufferRangeEXT_L
 public func glMapControlPointsNV(_ target :GLenum, _ index :GLuint, _ type :GLenum, _ ustride :GLsizei, _ vstride :GLsizei, _ uorder :GLint, _ vorder :GLint, _ packed :GLboolean, _ points :UnsafeRawPointer) -> Void {return glMapControlPointsNV_P(target, index, type, ustride, vstride, uorder, vorder, packed, points)}
 var glMapControlPointsNV_P:@convention(c)(GLenum, GLuint, GLenum, GLsizei, GLsizei, GLint, GLint, GLboolean, UnsafeRawPointer) -> Void = glMapControlPointsNV_L
 public func glMapGrid1d(_ un :GLint, _ u1 :GLdouble, _ u2 :GLdouble) -> Void {return glMapGrid1d_P(un, u1, u2)}
@@ -2965,22 +2965,22 @@ public func glMapGrid2f(_ un :GLint, _ u1 :GLfloat, _ u2 :GLfloat, _ vn :GLint, 
 var glMapGrid2f_P:@convention(c)(GLint, GLfloat, GLfloat, GLint, GLfloat, GLfloat) -> Void = glMapGrid2f_L
 public func glMapGrid2xOES(_ n :GLint, _ u1 :GLfixed, _ u2 :GLfixed, _ v1 :GLfixed, _ v2 :GLfixed) -> Void {return glMapGrid2xOES_P(n, u1, u2, v1, v2)}
 var glMapGrid2xOES_P:@convention(c)(GLint, GLfixed, GLfixed, GLfixed, GLfixed) -> Void = glMapGrid2xOES_L
-public func glMapNamedBuffer(_ buffer :GLuint, _ access :GLenum) -> UnsafeMutableRawPointer {return glMapNamedBuffer_P(buffer, access)}
-var glMapNamedBuffer_P:@convention(c)(GLuint, GLenum) -> UnsafeMutableRawPointer = glMapNamedBuffer_L
-public func glMapNamedBufferEXT(_ buffer :GLuint, _ access :GLenum) -> UnsafeMutableRawPointer {return glMapNamedBufferEXT_P(buffer, access)}
-var glMapNamedBufferEXT_P:@convention(c)(GLuint, GLenum) -> UnsafeMutableRawPointer = glMapNamedBufferEXT_L
-public func glMapNamedBufferRange(_ buffer :GLuint, _ offset :GLintptr, _ length :GLsizeiptr, _ access :GLbitfield) -> UnsafeMutableRawPointer {return glMapNamedBufferRange_P(buffer, offset, length, access)}
-var glMapNamedBufferRange_P:@convention(c)(GLuint, GLintptr, GLsizeiptr, GLbitfield) -> UnsafeMutableRawPointer = glMapNamedBufferRange_L
-public func glMapNamedBufferRangeEXT(_ buffer :GLuint, _ offset :GLintptr, _ length :GLsizeiptr, _ access :GLbitfield) -> UnsafeMutableRawPointer {return glMapNamedBufferRangeEXT_P(buffer, offset, length, access)}
-var glMapNamedBufferRangeEXT_P:@convention(c)(GLuint, GLintptr, GLsizeiptr, GLbitfield) -> UnsafeMutableRawPointer = glMapNamedBufferRangeEXT_L
-public func glMapObjectBufferATI(_ buffer :GLuint) -> UnsafeMutableRawPointer {return glMapObjectBufferATI_P(buffer)}
-var glMapObjectBufferATI_P:@convention(c)(GLuint) -> UnsafeMutableRawPointer = glMapObjectBufferATI_L
+public func glMapNamedBuffer(_ buffer :GLuint, _ access :GLenum) -> UnsafeMutableRawPointer? {return glMapNamedBuffer_P(buffer, access)}
+var glMapNamedBuffer_P:@convention(c)(GLuint, GLenum) -> UnsafeMutableRawPointer? = glMapNamedBuffer_L
+public func glMapNamedBufferEXT(_ buffer :GLuint, _ access :GLenum) -> UnsafeMutableRawPointer? {return glMapNamedBufferEXT_P(buffer, access)}
+var glMapNamedBufferEXT_P:@convention(c)(GLuint, GLenum) -> UnsafeMutableRawPointer? = glMapNamedBufferEXT_L
+public func glMapNamedBufferRange(_ buffer :GLuint, _ offset :GLintptr, _ length :GLsizeiptr, _ access :GLbitfield) -> UnsafeMutableRawPointer? {return glMapNamedBufferRange_P(buffer, offset, length, access)}
+var glMapNamedBufferRange_P:@convention(c)(GLuint, GLintptr, GLsizeiptr, GLbitfield) -> UnsafeMutableRawPointer? = glMapNamedBufferRange_L
+public func glMapNamedBufferRangeEXT(_ buffer :GLuint, _ offset :GLintptr, _ length :GLsizeiptr, _ access :GLbitfield) -> UnsafeMutableRawPointer? {return glMapNamedBufferRangeEXT_P(buffer, offset, length, access)}
+var glMapNamedBufferRangeEXT_P:@convention(c)(GLuint, GLintptr, GLsizeiptr, GLbitfield) -> UnsafeMutableRawPointer? = glMapNamedBufferRangeEXT_L
+public func glMapObjectBufferATI(_ buffer :GLuint) -> UnsafeMutableRawPointer? {return glMapObjectBufferATI_P(buffer)}
+var glMapObjectBufferATI_P:@convention(c)(GLuint) -> UnsafeMutableRawPointer? = glMapObjectBufferATI_L
 public func glMapParameterfvNV(_ target :GLenum, _ pname :GLenum, _ params :UnsafePointer<GLfloat>) -> Void {return glMapParameterfvNV_P(target, pname, params)}
 var glMapParameterfvNV_P:@convention(c)(GLenum, GLenum, UnsafePointer<GLfloat>) -> Void = glMapParameterfvNV_L
 public func glMapParameterivNV(_ target :GLenum, _ pname :GLenum, _ params :UnsafePointer<GLint>) -> Void {return glMapParameterivNV_P(target, pname, params)}
 var glMapParameterivNV_P:@convention(c)(GLenum, GLenum, UnsafePointer<GLint>) -> Void = glMapParameterivNV_L
-public func glMapTexture2DINTEL(_ texture :GLuint, _ level :GLint, _ access :GLbitfield, _ stride :UnsafeMutablePointer<GLint>, _ layout :UnsafeMutablePointer<GLenum>) -> UnsafeMutableRawPointer {return glMapTexture2DINTEL_P(texture, level, access, stride, layout)}
-var glMapTexture2DINTEL_P:@convention(c)(GLuint, GLint, GLbitfield, UnsafeMutablePointer<GLint>, UnsafeMutablePointer<GLenum>) -> UnsafeMutableRawPointer = glMapTexture2DINTEL_L
+public func glMapTexture2DINTEL(_ texture :GLuint, _ level :GLint, _ access :GLbitfield, _ stride :UnsafeMutablePointer<GLint>, _ layout :UnsafeMutablePointer<GLenum>) -> UnsafeMutableRawPointer? {return glMapTexture2DINTEL_P(texture, level, access, stride, layout)}
+var glMapTexture2DINTEL_P:@convention(c)(GLuint, GLint, GLbitfield, UnsafeMutablePointer<GLint>, UnsafeMutablePointer<GLenum>) -> UnsafeMutableRawPointer? = glMapTexture2DINTEL_L
 public func glMapVertexAttrib1dAPPLE(_ index :GLuint, _ size :GLuint, _ u1 :GLdouble, _ u2 :GLdouble, _ stride :GLint, _ order :GLint, _ points :UnsafePointer<GLdouble>) -> Void {return glMapVertexAttrib1dAPPLE_P(index, size, u1, u2, stride, order, points)}
 var glMapVertexAttrib1dAPPLE_P:@convention(c)(GLuint, GLuint, GLdouble, GLdouble, GLint, GLint, UnsafePointer<GLdouble>) -> Void = glMapVertexAttrib1dAPPLE_L
 public func glMapVertexAttrib1fAPPLE(_ index :GLuint, _ size :GLuint, _ u1 :GLfloat, _ u2 :GLfloat, _ stride :GLint, _ order :GLint, _ points :UnsafePointer<GLfloat>) -> Void {return glMapVertexAttrib1fAPPLE_P(index, size, u1, u2, stride, order, points)}
