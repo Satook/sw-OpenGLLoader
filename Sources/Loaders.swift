@@ -4886,11 +4886,11 @@ func glGetStageIndexNV_L(shadertype:GLenum) -> GLushort {
     glGetStageIndexNV_P = unsafeBitCast(getAddress(CommandInfo("glGetStageIndexNV", [S254])), to: type(of:glGetStageIndexNV_P))
     return glGetStageIndexNV_P(shadertype)
 }
-func glGetString_L(name:GLenum) -> UnsafePointer<GLubyte> {
+func glGetString_L(name:GLenum) -> UnsafePointer<GLubyte>? {
     glGetString_P = unsafeBitCast(getAddress(CommandInfo("glGetString", [S0, S18])), to: type(of:glGetString_P))
     return glGetString_P(name)
 }
-func glGetStringi_L(name:GLenum, _ index:GLuint) -> UnsafePointer<GLubyte> {
+func glGetStringi_L(name:GLenum, _ index:GLuint) -> UnsafePointer<GLubyte>? {
     glGetStringi_P = unsafeBitCast(getAddress(CommandInfo("glGetStringi", [S8, S20])), to: type(of:glGetStringi_P))
     return glGetStringi_P(name, index)
 }
@@ -6230,23 +6230,23 @@ func glMap2xOES_L(target:GLenum, _ u1:GLfixed, _ u2:GLfixed, _ ustride:GLint, _ 
     glMap2xOES_P = unsafeBitCast(getAddress(CommandInfo("glMap2xOES", [S316])), to: type(of:glMap2xOES_P))
     glMap2xOES_P(target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
 }
-func glMapBuffer_L(target:GLenum, _ access:GLenum) -> UnsafeMutableRawPointer {
+func glMapBuffer_L(target:GLenum, _ access:GLenum) -> UnsafeMutableRawPointer? {
     glMapBuffer_P = unsafeBitCast(getAddress(CommandInfo("glMapBuffer", [S5])), to: type(of:glMapBuffer_P))
     return glMapBuffer_P(target, access)
 }
-func glMapBufferARB_L(target:GLenum, _ access:GLenum) -> UnsafeMutableRawPointer {
+func glMapBufferARB_L(target:GLenum, _ access:GLenum) -> UnsafeMutableRawPointer? {
     glMapBufferARB_P = unsafeBitCast(getAddress(CommandInfo("glMapBufferARB", [S133])), to: type(of:glMapBufferARB_P))
     return glMapBufferARB_P(target, access)
 }
-func glMapBufferOES_L(target:GLenum, _ access:GLenum) -> UnsafeMutableRawPointer {
+func glMapBufferOES_L(target:GLenum, _ access:GLenum) -> UnsafeMutableRawPointer? {
     glMapBufferOES_P = unsafeBitCast(getAddress(CommandInfo("glMapBufferOES", [S320])), to: type(of:glMapBufferOES_P))
     return glMapBufferOES_P(target, access)
 }
-func glMapBufferRange_L(target:GLenum, _ offset:GLintptr, _ length:GLsizeiptr, _ access:GLbitfield) -> UnsafeMutableRawPointer {
+func glMapBufferRange_L(target:GLenum, _ offset:GLintptr, _ length:GLsizeiptr, _ access:GLbitfield) -> UnsafeMutableRawPointer? {
     glMapBufferRange_P = unsafeBitCast(getAddress(CommandInfo("glMapBufferRange", [S8, S20, S89])), to: type(of:glMapBufferRange_P))
     return glMapBufferRange_P(target, offset, length, access)
 }
-func glMapBufferRangeEXT_L(target:GLenum, _ offset:GLintptr, _ length:GLsizeiptr, _ access:GLbitfield) -> UnsafeMutableRawPointer {
+func glMapBufferRangeEXT_L(target:GLenum, _ offset:GLintptr, _ length:GLsizeiptr, _ access:GLbitfield) -> UnsafeMutableRawPointer? {
     glMapBufferRangeEXT_P = unsafeBitCast(getAddress(CommandInfo("glMapBufferRangeEXT", [S189])), to: type(of:glMapBufferRangeEXT_P))
     return glMapBufferRangeEXT_P(target, offset, length, access)
 }
@@ -6278,23 +6278,23 @@ func glMapGrid2xOES_L(n:GLint, _ u1:GLfixed, _ u2:GLfixed, _ v1:GLfixed, _ v2:GL
     glMapGrid2xOES_P = unsafeBitCast(getAddress(CommandInfo("glMapGrid2xOES", [S316])), to: type(of:glMapGrid2xOES_P))
     glMapGrid2xOES_P(n, u1, u2, v1, v2)
 }
-func glMapNamedBuffer_L(buffer:GLuint, _ access:GLenum) -> UnsafeMutableRawPointer {
+func glMapNamedBuffer_L(buffer:GLuint, _ access:GLenum) -> UnsafeMutableRawPointer? {
     glMapNamedBuffer_P = unsafeBitCast(getAddress(CommandInfo("glMapNamedBuffer", [S17, S69])), to: type(of:glMapNamedBuffer_P))
     return glMapNamedBuffer_P(buffer, access)
 }
-func glMapNamedBufferEXT_L(buffer:GLuint, _ access:GLenum) -> UnsafeMutableRawPointer {
+func glMapNamedBufferEXT_L(buffer:GLuint, _ access:GLenum) -> UnsafeMutableRawPointer? {
     glMapNamedBufferEXT_P = unsafeBitCast(getAddress(CommandInfo("glMapNamedBufferEXT", [S167])), to: type(of:glMapNamedBufferEXT_P))
     return glMapNamedBufferEXT_P(buffer, access)
 }
-func glMapNamedBufferRange_L(buffer:GLuint, _ offset:GLintptr, _ length:GLsizeiptr, _ access:GLbitfield) -> UnsafeMutableRawPointer {
+func glMapNamedBufferRange_L(buffer:GLuint, _ offset:GLintptr, _ length:GLsizeiptr, _ access:GLbitfield) -> UnsafeMutableRawPointer? {
     glMapNamedBufferRange_P = unsafeBitCast(getAddress(CommandInfo("glMapNamedBufferRange", [S17, S69])), to: type(of:glMapNamedBufferRange_P))
     return glMapNamedBufferRange_P(buffer, offset, length, access)
 }
-func glMapNamedBufferRangeEXT_L(buffer:GLuint, _ offset:GLintptr, _ length:GLsizeiptr, _ access:GLbitfield) -> UnsafeMutableRawPointer {
+func glMapNamedBufferRangeEXT_L(buffer:GLuint, _ offset:GLintptr, _ length:GLsizeiptr, _ access:GLbitfield) -> UnsafeMutableRawPointer? {
     glMapNamedBufferRangeEXT_P = unsafeBitCast(getAddress(CommandInfo("glMapNamedBufferRangeEXT", [S167])), to: type(of:glMapNamedBufferRangeEXT_P))
     return glMapNamedBufferRangeEXT_P(buffer, offset, length, access)
 }
-func glMapObjectBufferATI_L(buffer:GLuint) -> UnsafeMutableRawPointer {
+func glMapObjectBufferATI_L(buffer:GLuint) -> UnsafeMutableRawPointer? {
     glMapObjectBufferATI_P = unsafeBitCast(getAddress(CommandInfo("glMapObjectBufferATI", [S143])), to: type(of:glMapObjectBufferATI_P))
     return glMapObjectBufferATI_P(buffer)
 }
@@ -6306,7 +6306,7 @@ func glMapParameterivNV_L(target:GLenum, _ pname:GLenum, _ params:UnsafePointer<
     glMapParameterivNV_P = unsafeBitCast(getAddress(CommandInfo("glMapParameterivNV", [S265])), to: type(of:glMapParameterivNV_P))
     glMapParameterivNV_P(target, pname, params)
 }
-func glMapTexture2DINTEL_L(texture:GLuint, _ level:GLint, _ access:GLbitfield, _ stride:UnsafeMutablePointer<GLint>, _ layout:UnsafeMutablePointer<GLenum>) -> UnsafeMutableRawPointer {
+func glMapTexture2DINTEL_L(texture:GLuint, _ level:GLint, _ access:GLbitfield, _ stride:UnsafeMutablePointer<GLint>, _ layout:UnsafeMutablePointer<GLenum>) -> UnsafeMutableRawPointer? {
     glMapTexture2DINTEL_P = unsafeBitCast(getAddress(CommandInfo("glMapTexture2DINTEL", [S241])), to: type(of:glMapTexture2DINTEL_P))
     return glMapTexture2DINTEL_P(texture, level, access, stride, layout)
 }

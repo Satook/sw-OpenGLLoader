@@ -426,9 +426,9 @@ func paramType(_ x: KhronosXmlDelegate.paramTuple) -> String
     if retValue == "void" {
         return "Void"
     } else if retValue == "void *" {
-        return "UnsafeMutableRawPointer"
+        return "UnsafeMutableRawPointer?"
     } else if retValue == "GLubyte*" {
-        return "UnsafePointer<GLubyte>"
+        return "UnsafePointer<GLubyte>?"
     } else {
         return retValue
     }
