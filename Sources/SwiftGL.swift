@@ -117,10 +117,10 @@ private func buildError(_ info: CommandInfo) -> Never {
 }
 
 func getAddress(_ info: CommandInfo) -> UnsafeMutableRawPointer {
-    guard let fp = lookupAddress(info) else {
-	buildError(info)
-    }
-    return fp
+  guard let fp = lookupAddress(info) else {
+    buildError(info)
+  }
+  return fp
 }
 
 // Platform specific sections below.
