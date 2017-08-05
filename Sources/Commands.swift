@@ -624,11 +624,11 @@ public func glGetShaderSource_DUMMY(_ shader: GLuint, _ bufSize: GLsizei, _ leng
 var glGetShaderSource_P:@convention(c)(GLuint, GLsizei, UnsafeMutablePointer<GLsizei>?, UnsafeMutablePointer<GLchar>?) -> Void = glGetShaderSource_DUMMY
 
 public func glGetString(_ name: GLenum) -> UnsafePointer<GLubyte>? { return glGetString_P(name)}
-public func glGetString_DUMMY(_ name: GLenum) -> UnsafePointer<GLubyte>? { return 0 }
+public func glGetString_DUMMY(_ name: GLenum) -> UnsafePointer<GLubyte>? {return nil}
 var glGetString_P:@convention(c)(GLenum) -> UnsafePointer<GLubyte>? = glGetString_DUMMY
 
 public func glGetStringi(_ name: GLenum, _ index: GLuint) -> UnsafePointer<GLubyte>? { return glGetStringi_P(name, index)}
-public func glGetStringi_DUMMY(_ name: GLenum, _ index: GLuint) -> UnsafePointer<GLubyte>? { return 0 }
+public func glGetStringi_DUMMY(_ name: GLenum, _ index: GLuint) -> UnsafePointer<GLubyte>? {return nil}
 var glGetStringi_P:@convention(c)(GLenum, GLuint) -> UnsafePointer<GLubyte>? = glGetStringi_DUMMY
 
 public func glGetSynciv(_ sync: GLsync, _ pname: GLenum, _ bufSize: GLsizei, _ length: UnsafeMutablePointer<GLsizei>?, _ values: UnsafeMutablePointer<GLint>?) -> Void { return glGetSynciv_P(sync, pname, bufSize, length, values)}
@@ -780,11 +780,11 @@ public func glLogicOp_DUMMY(_ opcode: GLenum) -> Void {}
 var glLogicOp_P:@convention(c)(GLenum) -> Void = glLogicOp_DUMMY
 
 public func glMapBuffer(_ target: GLenum, _ access: GLenum) -> UnsafeMutableRawPointer? { return glMapBuffer_P(target, access)}
-public func glMapBuffer_DUMMY(_ target: GLenum, _ access: GLenum) -> UnsafeMutableRawPointer? { return 0 }
+public func glMapBuffer_DUMMY(_ target: GLenum, _ access: GLenum) -> UnsafeMutableRawPointer? {return nil}
 var glMapBuffer_P:@convention(c)(GLenum, GLenum) -> UnsafeMutableRawPointer? = glMapBuffer_DUMMY
 
 public func glMapBufferRange(_ target: GLenum, _ offset: GLintptr, _ length: GLsizeiptr, _ access: GLbitfield) -> UnsafeMutableRawPointer? { return glMapBufferRange_P(target, offset, length, access)}
-public func glMapBufferRange_DUMMY(_ target: GLenum, _ offset: GLintptr, _ length: GLsizeiptr, _ access: GLbitfield) -> UnsafeMutableRawPointer? { return 0 }
+public func glMapBufferRange_DUMMY(_ target: GLenum, _ offset: GLintptr, _ length: GLsizeiptr, _ access: GLbitfield) -> UnsafeMutableRawPointer? {return nil}
 var glMapBufferRange_P:@convention(c)(GLenum, GLintptr, GLsizeiptr, GLbitfield) -> UnsafeMutableRawPointer? = glMapBufferRange_DUMMY
 
 public func glMultiDrawArrays(_ mode: GLenum, _ first: UnsafePointer<GLint>?, _ count: UnsafePointer<GLsizei>?, _ drawcount: GLsizei) -> Void { return glMultiDrawArrays_P(mode, first, count, drawcount)}
@@ -1750,11 +1750,11 @@ public func glInvalidateNamedFramebufferSubData_DUMMY(_ framebuffer: GLuint, _ n
 var glInvalidateNamedFramebufferSubData_P:@convention(c)(GLuint, GLsizei, UnsafePointer<GLenum>?, GLint, GLint, GLsizei, GLsizei) -> Void = glInvalidateNamedFramebufferSubData_DUMMY
 
 public func glMapNamedBuffer(_ buffer: GLuint, _ access: GLenum) -> UnsafeMutableRawPointer? { return glMapNamedBuffer_P(buffer, access)}
-public func glMapNamedBuffer_DUMMY(_ buffer: GLuint, _ access: GLenum) -> UnsafeMutableRawPointer? { return 0 }
+public func glMapNamedBuffer_DUMMY(_ buffer: GLuint, _ access: GLenum) -> UnsafeMutableRawPointer? {return nil}
 var glMapNamedBuffer_P:@convention(c)(GLuint, GLenum) -> UnsafeMutableRawPointer? = glMapNamedBuffer_DUMMY
 
 public func glMapNamedBufferRange(_ buffer: GLuint, _ offset: GLintptr, _ length: GLsizeiptr, _ access: GLbitfield) -> UnsafeMutableRawPointer? { return glMapNamedBufferRange_P(buffer, offset, length, access)}
-public func glMapNamedBufferRange_DUMMY(_ buffer: GLuint, _ offset: GLintptr, _ length: GLsizeiptr, _ access: GLbitfield) -> UnsafeMutableRawPointer? { return 0 }
+public func glMapNamedBufferRange_DUMMY(_ buffer: GLuint, _ offset: GLintptr, _ length: GLsizeiptr, _ access: GLbitfield) -> UnsafeMutableRawPointer? {return nil}
 var glMapNamedBufferRange_P:@convention(c)(GLuint, GLintptr, GLsizeiptr, GLbitfield) -> UnsafeMutableRawPointer? = glMapNamedBufferRange_DUMMY
 
 public func glNamedBufferData(_ buffer: GLuint, _ size: GLsizeiptr, _ data: UnsafeRawPointer?, _ usage: GLenum) -> Void { return glNamedBufferData_P(buffer, size, data, usage)}
@@ -1934,3 +1934,4 @@ var glBindImageTexture_P:@convention(c)(GLuint, GLuint, GLint, GLboolean, GLint,
 public func glMemoryBarrier(_ barriers: GLbitfield) -> Void { return glMemoryBarrier_P(barriers)}
 public func glMemoryBarrier_DUMMY(_ barriers: GLbitfield) -> Void {}
 var glMemoryBarrier_P:@convention(c)(GLbitfield) -> Void = glMemoryBarrier_DUMMY
+

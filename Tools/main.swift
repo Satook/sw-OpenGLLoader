@@ -241,6 +241,8 @@ internal class GLCommand {
     var dummyReturnStr = " return \(dummyReturn) "
     if returnTypeStr == "Void" {
       dummyReturnStr = ""
+    } else if returnTypeStr.hasSuffix("?") {
+      dummyReturnStr = "return nil"
     }
 
     // we want
@@ -254,9 +256,14 @@ internal class GLCommand {
   }
 
   func loaderDefinition() -> String {
+    var castLine = "unsafeBitCast(proc, to: type(of:\(self.name)_P))"
+    // if it's a () -> Void we don't need to cast
+    if self.retType == "void" && self.params.count == 0 {
+      castLine = "proc"
+    }
     return
       "  if let proc = getCommandPtr(\"\(self.name)\") {\n" +
-      "    \(self.name)_P = unsafeBitCast(proc, to: type(of:\(self.name)_P))\n" +
+      "    \(self.name)_P = \(castLine)\n" +
       "  }\n"
   }
 }

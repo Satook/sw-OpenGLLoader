@@ -66,4 +66,4 @@ public typealias GLDEBUGPROCAMD = @convention(c)
 
 // We're working with GLFW, so it gives a func ptr back rather than a void *
 public typealias GLFuncType = @convention(c) () -> Void
-public typealias GetGLFunc = @convention(c) (_ : UnsafePointer<Int8>) -> GLFuncType
+public typealias GetGLFunc = @convention(c) (_ : UnsafePointer<Int8>) -> GLFuncType?
