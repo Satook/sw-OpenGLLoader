@@ -171,22 +171,6 @@ public func glColorMaski(_ index: GLuint, _ r: GLboolean, _ g: GLboolean, _ b: G
 public func glColorMaski_DUMMY(_ index: GLuint, _ r: GLboolean, _ g: GLboolean, _ b: GLboolean, _ a: GLboolean) -> Void {}
 var glColorMaski_P:@convention(c)(GLuint, GLboolean, GLboolean, GLboolean, GLboolean) -> Void = glColorMaski_DUMMY
 
-public func glColorP3ui(_ type: GLenum, _ color: GLuint) -> Void { return glColorP3ui_P(type, color)}
-public func glColorP3ui_DUMMY(_ type: GLenum, _ color: GLuint) -> Void {}
-var glColorP3ui_P:@convention(c)(GLenum, GLuint) -> Void = glColorP3ui_DUMMY
-
-public func glColorP3uiv(_ type: GLenum, _ color: UnsafePointer<GLuint>?) -> Void { return glColorP3uiv_P(type, color)}
-public func glColorP3uiv_DUMMY(_ type: GLenum, _ color: UnsafePointer<GLuint>?) -> Void {}
-var glColorP3uiv_P:@convention(c)(GLenum, UnsafePointer<GLuint>?) -> Void = glColorP3uiv_DUMMY
-
-public func glColorP4ui(_ type: GLenum, _ color: GLuint) -> Void { return glColorP4ui_P(type, color)}
-public func glColorP4ui_DUMMY(_ type: GLenum, _ color: GLuint) -> Void {}
-var glColorP4ui_P:@convention(c)(GLenum, GLuint) -> Void = glColorP4ui_DUMMY
-
-public func glColorP4uiv(_ type: GLenum, _ color: UnsafePointer<GLuint>?) -> Void { return glColorP4uiv_P(type, color)}
-public func glColorP4uiv_DUMMY(_ type: GLenum, _ color: UnsafePointer<GLuint>?) -> Void {}
-var glColorP4uiv_P:@convention(c)(GLenum, UnsafePointer<GLuint>?) -> Void = glColorP4uiv_DUMMY
-
 public func glCompileShader(_ shader: GLuint) -> Void { return glCompileShader_P(shader)}
 public func glCompileShader_DUMMY(_ shader: GLuint) -> Void {}
 var glCompileShader_P:@convention(c)(GLuint) -> Void = glCompileShader_DUMMY
@@ -799,46 +783,6 @@ public func glMultiDrawElementsBaseVertex(_ mode: GLenum, _ count: UnsafePointer
 public func glMultiDrawElementsBaseVertex_DUMMY(_ mode: GLenum, _ count: UnsafePointer<GLsizei>?, _ type: GLenum, _ indices: UnsafePointer<UnsafeRawPointer>?, _ drawcount: GLsizei, _ basevertex: UnsafePointer<GLint>?) -> Void {}
 var glMultiDrawElementsBaseVertex_P:@convention(c)(GLenum, UnsafePointer<GLsizei>?, GLenum, UnsafePointer<UnsafeRawPointer>?, GLsizei, UnsafePointer<GLint>?) -> Void = glMultiDrawElementsBaseVertex_DUMMY
 
-public func glMultiTexCoordP1ui(_ texture: GLenum, _ type: GLenum, _ coords: GLuint) -> Void { return glMultiTexCoordP1ui_P(texture, type, coords)}
-public func glMultiTexCoordP1ui_DUMMY(_ texture: GLenum, _ type: GLenum, _ coords: GLuint) -> Void {}
-var glMultiTexCoordP1ui_P:@convention(c)(GLenum, GLenum, GLuint) -> Void = glMultiTexCoordP1ui_DUMMY
-
-public func glMultiTexCoordP1uiv(_ texture: GLenum, _ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void { return glMultiTexCoordP1uiv_P(texture, type, coords)}
-public func glMultiTexCoordP1uiv_DUMMY(_ texture: GLenum, _ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void {}
-var glMultiTexCoordP1uiv_P:@convention(c)(GLenum, GLenum, UnsafePointer<GLuint>?) -> Void = glMultiTexCoordP1uiv_DUMMY
-
-public func glMultiTexCoordP2ui(_ texture: GLenum, _ type: GLenum, _ coords: GLuint) -> Void { return glMultiTexCoordP2ui_P(texture, type, coords)}
-public func glMultiTexCoordP2ui_DUMMY(_ texture: GLenum, _ type: GLenum, _ coords: GLuint) -> Void {}
-var glMultiTexCoordP2ui_P:@convention(c)(GLenum, GLenum, GLuint) -> Void = glMultiTexCoordP2ui_DUMMY
-
-public func glMultiTexCoordP2uiv(_ texture: GLenum, _ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void { return glMultiTexCoordP2uiv_P(texture, type, coords)}
-public func glMultiTexCoordP2uiv_DUMMY(_ texture: GLenum, _ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void {}
-var glMultiTexCoordP2uiv_P:@convention(c)(GLenum, GLenum, UnsafePointer<GLuint>?) -> Void = glMultiTexCoordP2uiv_DUMMY
-
-public func glMultiTexCoordP3ui(_ texture: GLenum, _ type: GLenum, _ coords: GLuint) -> Void { return glMultiTexCoordP3ui_P(texture, type, coords)}
-public func glMultiTexCoordP3ui_DUMMY(_ texture: GLenum, _ type: GLenum, _ coords: GLuint) -> Void {}
-var glMultiTexCoordP3ui_P:@convention(c)(GLenum, GLenum, GLuint) -> Void = glMultiTexCoordP3ui_DUMMY
-
-public func glMultiTexCoordP3uiv(_ texture: GLenum, _ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void { return glMultiTexCoordP3uiv_P(texture, type, coords)}
-public func glMultiTexCoordP3uiv_DUMMY(_ texture: GLenum, _ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void {}
-var glMultiTexCoordP3uiv_P:@convention(c)(GLenum, GLenum, UnsafePointer<GLuint>?) -> Void = glMultiTexCoordP3uiv_DUMMY
-
-public func glMultiTexCoordP4ui(_ texture: GLenum, _ type: GLenum, _ coords: GLuint) -> Void { return glMultiTexCoordP4ui_P(texture, type, coords)}
-public func glMultiTexCoordP4ui_DUMMY(_ texture: GLenum, _ type: GLenum, _ coords: GLuint) -> Void {}
-var glMultiTexCoordP4ui_P:@convention(c)(GLenum, GLenum, GLuint) -> Void = glMultiTexCoordP4ui_DUMMY
-
-public func glMultiTexCoordP4uiv(_ texture: GLenum, _ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void { return glMultiTexCoordP4uiv_P(texture, type, coords)}
-public func glMultiTexCoordP4uiv_DUMMY(_ texture: GLenum, _ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void {}
-var glMultiTexCoordP4uiv_P:@convention(c)(GLenum, GLenum, UnsafePointer<GLuint>?) -> Void = glMultiTexCoordP4uiv_DUMMY
-
-public func glNormalP3ui(_ type: GLenum, _ coords: GLuint) -> Void { return glNormalP3ui_P(type, coords)}
-public func glNormalP3ui_DUMMY(_ type: GLenum, _ coords: GLuint) -> Void {}
-var glNormalP3ui_P:@convention(c)(GLenum, GLuint) -> Void = glNormalP3ui_DUMMY
-
-public func glNormalP3uiv(_ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void { return glNormalP3uiv_P(type, coords)}
-public func glNormalP3uiv_DUMMY(_ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void {}
-var glNormalP3uiv_P:@convention(c)(GLenum, UnsafePointer<GLuint>?) -> Void = glNormalP3uiv_DUMMY
-
 public func glPixelStoref(_ pname: GLenum, _ param: GLfloat) -> Void { return glPixelStoref_P(pname, param)}
 public func glPixelStoref_DUMMY(_ pname: GLenum, _ param: GLfloat) -> Void {}
 var glPixelStoref_P:@convention(c)(GLenum, GLfloat) -> Void = glPixelStoref_DUMMY
@@ -939,14 +883,6 @@ public func glScissor(_ x: GLint, _ y: GLint, _ width: GLsizei, _ height: GLsize
 public func glScissor_DUMMY(_ x: GLint, _ y: GLint, _ width: GLsizei, _ height: GLsizei) -> Void {}
 var glScissor_P:@convention(c)(GLint, GLint, GLsizei, GLsizei) -> Void = glScissor_DUMMY
 
-public func glSecondaryColorP3ui(_ type: GLenum, _ color: GLuint) -> Void { return glSecondaryColorP3ui_P(type, color)}
-public func glSecondaryColorP3ui_DUMMY(_ type: GLenum, _ color: GLuint) -> Void {}
-var glSecondaryColorP3ui_P:@convention(c)(GLenum, GLuint) -> Void = glSecondaryColorP3ui_DUMMY
-
-public func glSecondaryColorP3uiv(_ type: GLenum, _ color: UnsafePointer<GLuint>?) -> Void { return glSecondaryColorP3uiv_P(type, color)}
-public func glSecondaryColorP3uiv_DUMMY(_ type: GLenum, _ color: UnsafePointer<GLuint>?) -> Void {}
-var glSecondaryColorP3uiv_P:@convention(c)(GLenum, UnsafePointer<GLuint>?) -> Void = glSecondaryColorP3uiv_DUMMY
-
 public func glShaderSource(_ shader: GLuint, _ count: GLsizei, _ string: UnsafePointer<UnsafePointer<GLchar>>?, _ length: UnsafePointer<GLint>?) -> Void { return glShaderSource_P(shader, count, string, length)}
 public func glShaderSource_DUMMY(_ shader: GLuint, _ count: GLsizei, _ string: UnsafePointer<UnsafePointer<GLchar>>?, _ length: UnsafePointer<GLint>?) -> Void {}
 var glShaderSource_P:@convention(c)(GLuint, GLsizei, UnsafePointer<UnsafePointer<GLchar>>?, UnsafePointer<GLint>?) -> Void = glShaderSource_DUMMY
@@ -978,38 +914,6 @@ var glStencilOpSeparate_P:@convention(c)(GLenum, GLenum, GLenum, GLenum) -> Void
 public func glTexBuffer(_ target: GLenum, _ internalformat: GLenum, _ buffer: GLuint) -> Void { return glTexBuffer_P(target, internalformat, buffer)}
 public func glTexBuffer_DUMMY(_ target: GLenum, _ internalformat: GLenum, _ buffer: GLuint) -> Void {}
 var glTexBuffer_P:@convention(c)(GLenum, GLenum, GLuint) -> Void = glTexBuffer_DUMMY
-
-public func glTexCoordP1ui(_ type: GLenum, _ coords: GLuint) -> Void { return glTexCoordP1ui_P(type, coords)}
-public func glTexCoordP1ui_DUMMY(_ type: GLenum, _ coords: GLuint) -> Void {}
-var glTexCoordP1ui_P:@convention(c)(GLenum, GLuint) -> Void = glTexCoordP1ui_DUMMY
-
-public func glTexCoordP1uiv(_ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void { return glTexCoordP1uiv_P(type, coords)}
-public func glTexCoordP1uiv_DUMMY(_ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void {}
-var glTexCoordP1uiv_P:@convention(c)(GLenum, UnsafePointer<GLuint>?) -> Void = glTexCoordP1uiv_DUMMY
-
-public func glTexCoordP2ui(_ type: GLenum, _ coords: GLuint) -> Void { return glTexCoordP2ui_P(type, coords)}
-public func glTexCoordP2ui_DUMMY(_ type: GLenum, _ coords: GLuint) -> Void {}
-var glTexCoordP2ui_P:@convention(c)(GLenum, GLuint) -> Void = glTexCoordP2ui_DUMMY
-
-public func glTexCoordP2uiv(_ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void { return glTexCoordP2uiv_P(type, coords)}
-public func glTexCoordP2uiv_DUMMY(_ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void {}
-var glTexCoordP2uiv_P:@convention(c)(GLenum, UnsafePointer<GLuint>?) -> Void = glTexCoordP2uiv_DUMMY
-
-public func glTexCoordP3ui(_ type: GLenum, _ coords: GLuint) -> Void { return glTexCoordP3ui_P(type, coords)}
-public func glTexCoordP3ui_DUMMY(_ type: GLenum, _ coords: GLuint) -> Void {}
-var glTexCoordP3ui_P:@convention(c)(GLenum, GLuint) -> Void = glTexCoordP3ui_DUMMY
-
-public func glTexCoordP3uiv(_ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void { return glTexCoordP3uiv_P(type, coords)}
-public func glTexCoordP3uiv_DUMMY(_ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void {}
-var glTexCoordP3uiv_P:@convention(c)(GLenum, UnsafePointer<GLuint>?) -> Void = glTexCoordP3uiv_DUMMY
-
-public func glTexCoordP4ui(_ type: GLenum, _ coords: GLuint) -> Void { return glTexCoordP4ui_P(type, coords)}
-public func glTexCoordP4ui_DUMMY(_ type: GLenum, _ coords: GLuint) -> Void {}
-var glTexCoordP4ui_P:@convention(c)(GLenum, GLuint) -> Void = glTexCoordP4ui_DUMMY
-
-public func glTexCoordP4uiv(_ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void { return glTexCoordP4uiv_P(type, coords)}
-public func glTexCoordP4uiv_DUMMY(_ type: GLenum, _ coords: UnsafePointer<GLuint>?) -> Void {}
-var glTexCoordP4uiv_P:@convention(c)(GLenum, UnsafePointer<GLuint>?) -> Void = glTexCoordP4uiv_DUMMY
 
 public func glTexImage1D(_ target: GLenum, _ level: GLint, _ internalformat: GLint, _ width: GLsizei, _ border: GLint, _ format: GLenum, _ type: GLenum, _ pixels: UnsafeRawPointer?) -> Void { return glTexImage1D_P(target, level, internalformat, width, border, format, type, pixels)}
 public func glTexImage1D_DUMMY(_ target: GLenum, _ level: GLint, _ internalformat: GLint, _ width: GLsizei, _ border: GLint, _ format: GLenum, _ type: GLenum, _ pixels: UnsafeRawPointer?) -> Void {}
@@ -1486,30 +1390,6 @@ var glVertexAttribP4uiv_P:@convention(c)(GLuint, GLenum, GLboolean, UnsafePointe
 public func glVertexAttribPointer(_ index: GLuint, _ size: GLint, _ type: GLenum, _ normalized: GLboolean, _ stride: GLsizei, _ pointer: UnsafeRawPointer?) -> Void { return glVertexAttribPointer_P(index, size, type, normalized, stride, pointer)}
 public func glVertexAttribPointer_DUMMY(_ index: GLuint, _ size: GLint, _ type: GLenum, _ normalized: GLboolean, _ stride: GLsizei, _ pointer: UnsafeRawPointer?) -> Void {}
 var glVertexAttribPointer_P:@convention(c)(GLuint, GLint, GLenum, GLboolean, GLsizei, UnsafeRawPointer?) -> Void = glVertexAttribPointer_DUMMY
-
-public func glVertexP2ui(_ type: GLenum, _ value: GLuint) -> Void { return glVertexP2ui_P(type, value)}
-public func glVertexP2ui_DUMMY(_ type: GLenum, _ value: GLuint) -> Void {}
-var glVertexP2ui_P:@convention(c)(GLenum, GLuint) -> Void = glVertexP2ui_DUMMY
-
-public func glVertexP2uiv(_ type: GLenum, _ value: UnsafePointer<GLuint>?) -> Void { return glVertexP2uiv_P(type, value)}
-public func glVertexP2uiv_DUMMY(_ type: GLenum, _ value: UnsafePointer<GLuint>?) -> Void {}
-var glVertexP2uiv_P:@convention(c)(GLenum, UnsafePointer<GLuint>?) -> Void = glVertexP2uiv_DUMMY
-
-public func glVertexP3ui(_ type: GLenum, _ value: GLuint) -> Void { return glVertexP3ui_P(type, value)}
-public func glVertexP3ui_DUMMY(_ type: GLenum, _ value: GLuint) -> Void {}
-var glVertexP3ui_P:@convention(c)(GLenum, GLuint) -> Void = glVertexP3ui_DUMMY
-
-public func glVertexP3uiv(_ type: GLenum, _ value: UnsafePointer<GLuint>?) -> Void { return glVertexP3uiv_P(type, value)}
-public func glVertexP3uiv_DUMMY(_ type: GLenum, _ value: UnsafePointer<GLuint>?) -> Void {}
-var glVertexP3uiv_P:@convention(c)(GLenum, UnsafePointer<GLuint>?) -> Void = glVertexP3uiv_DUMMY
-
-public func glVertexP4ui(_ type: GLenum, _ value: GLuint) -> Void { return glVertexP4ui_P(type, value)}
-public func glVertexP4ui_DUMMY(_ type: GLenum, _ value: GLuint) -> Void {}
-var glVertexP4ui_P:@convention(c)(GLenum, GLuint) -> Void = glVertexP4ui_DUMMY
-
-public func glVertexP4uiv(_ type: GLenum, _ value: UnsafePointer<GLuint>?) -> Void { return glVertexP4uiv_P(type, value)}
-public func glVertexP4uiv_DUMMY(_ type: GLenum, _ value: UnsafePointer<GLuint>?) -> Void {}
-var glVertexP4uiv_P:@convention(c)(GLenum, UnsafePointer<GLuint>?) -> Void = glVertexP4uiv_DUMMY
 
 public func glViewport(_ x: GLint, _ y: GLint, _ width: GLsizei, _ height: GLsizei) -> Void { return glViewport_P(x, y, width, height)}
 public func glViewport_DUMMY(_ x: GLint, _ y: GLint, _ width: GLsizei, _ height: GLsizei) -> Void {}

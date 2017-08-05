@@ -272,6 +272,7 @@ internal class GLCommand {
  * Stores the required commands and enums for a single GL profile
  */
 internal struct GLProfile {
+  var api = ""
   var name = ""
   var enums = Set<String>()
   var commands = Set<String>()
@@ -305,8 +306,11 @@ internal struct DefinitionSet {
  * Collects the info we need during the XML parsing
  */
 internal class GLXmlDelegate : NSObject, XMLParserDelegate {
+  let compat: Bool    // are we doing a compatability profile?
+
   // used to track the full element path
   var pathParts: [String] = []
+  var keepForProfile = true
 
   var currentCmd: GLCommand? = nil
   var currentParam: GLParam? = nil
@@ -318,10 +322,31 @@ internal class GLXmlDelegate : NSObject, XMLParserDelegate {
   var extensions: [String: GLExtension] = [:]
   var profiles: [GLProfile] = []
 
+  init(_ compat: Bool) {
+    self.compat = compat
+  }
+
   public func parserDidStartDocument(_ parser: XMLParser) {
   }
 
   public func parserDidEndDocument(_ parser: XMLParser) {
+  }
+
+  func setProfileKeepStatus(_ profileType: String?) {
+    // set which profile type we want to keep
+    let wantType = self.compat ? "compatibility" : "core"
+
+    if let pt = profileType {
+      if pt == "common" {
+        // this is common to both types (not frequently used)
+        keepForProfile = true
+      } else {
+        keepForProfile = pt == wantType
+      }
+    } else {
+      // default to keep
+      keepForProfile = true
+    }
   }
 
   func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName: String?, attributes: [String: String] = [:]) -> () {
@@ -338,20 +363,46 @@ internal class GLXmlDelegate : NSObject, XMLParserDelegate {
     case "extensions.extension":
       self.currentExtension = GLExtension()
       self.extensions[attributes["name"]!] = self.currentExtension
+    case "extensions.extension.require":
+      self.setProfileKeepStatus(attributes["profile"])
     case "extensions.extension.require.enum":
-      self.currentExtension!.enums.insert(attributes["name"]!)
+      if keepForProfile {
+        self.currentExtension!.enums.insert(attributes["name"]!)
+      }
     case "extensions.extension.require.command":
-      self.currentExtension!.commands.insert(attributes["name"]!)
+      if keepForProfile {
+        self.currentExtension!.commands.insert(attributes["name"]!)
+      }
     case "feature":
+      let newAPI = attributes["api"]!
+      if workingProfile.api == "" {
+        workingProfile.api = newAPI
+      } else if workingProfile.api != newAPI {
+        // we've started a new set of APIs, e.g. gl -> gles1, so clean the slate
+        workingProfile = GLProfile()
+        workingProfile.api = newAPI
+      }
       workingProfile.name = attributes["name"]!
+    case "feature.require":
+      self.setProfileKeepStatus(attributes["profile"])
+    case "feature.remove":
+      self.setProfileKeepStatus(attributes["profile"])
     case "feature.require.enum":
-      workingProfile.enums.insert(attributes["name"]!)
+      if keepForProfile {
+        workingProfile.enums.insert(attributes["name"]!)
+      }
     case "feature.require.command":
-      workingProfile.commands.insert(attributes["name"]!)
+      if keepForProfile {
+        workingProfile.commands.insert(attributes["name"]!)
+      }
     case "feature.remove.enum":
+      if keepForProfile {
       workingProfile.enums.remove(attributes["name"]!)
+    }
     case "feature.remove.command":
+      if keepForProfile {
       workingProfile.commands.remove(attributes["name"]!)
+    }
     case "enums.enum":
       var name = attributes["name"]!
       if let api = attributes["api"] {
@@ -435,7 +486,7 @@ internal class GLXmlDelegate : NSObject, XMLParserDelegate {
   }
 }
 
-func parseRegistryFile(_ filepath: String) -> GLXmlDelegate? {
+func parseRegistryFile(_ compat: Bool, _ filepath: String) -> GLXmlDelegate? {
     // do a test read
     guard let infile = FileHandle(forReadingAtPath: filepath)
     else {
@@ -446,7 +497,7 @@ func parseRegistryFile(_ filepath: String) -> GLXmlDelegate? {
     print("INFO: Reading data")
     let srcdata = infile.availableData
 
-    let del = GLXmlDelegate()
+    let del = GLXmlDelegate(compat)
     let parser = XMLParser(data: srcdata)
     parser.delegate = del
     print("INFO: Running parser")
@@ -609,10 +660,16 @@ func assertSaneDelegate(_ thede: GLXmlDelegate) {
     assert(thede.commands.count > 3000, "\(thede.commands.count) commands is too few")
 }
 
-let args = CommandLine.arguments
+var args = [String](CommandLine.arguments)
+// first take out --compat if it's there
+var compat_profile = false    // default to core profile only
+if let compatIdx = args.index(of: "--compat") {
+  args.remove(at: compatIdx)
+  compat_profile = true
+}
 if (args.count < 2) {
     // Got this from Xcode? Add $(SRCROOT)/OpenGL to arguments in scheme.
-    print("\nusage: main.swift BASEPATH GL_PROFILE [EXTENSION...]\n")
+    print("\nusage: main.swift --compat BASEPATH GL_PROFILE [EXTENSION...]\n")
     exit(1)
 }
 
@@ -620,7 +677,7 @@ let pathPrefix = args[1]
 print("Using prefix: \(pathPrefix)")
 
 let gldefpath = pathPrefix + "/Tools/gl.xml"
-guard var thede = parseRegistryFile(gldefpath) else {
+guard var thede = parseRegistryFile(compat_profile, gldefpath) else {
   print("Error parsing \(gldefpath). Exiting")
   exit(1)
 }
@@ -634,7 +691,7 @@ for (i, prof) in thede.profiles.enumerated() {
 
 // They didn't provide a profile name, or a valid one, so give them a list
 if (args.count < 3 || profMap[args[2]] == nil) {
-  print("\nusage: main.swift BASEPATH GL_PROFILE [EXTENSION...]\n")
+  print("\nusage: main.swift --compat BASEPATH GL_PROFILE [EXTENSION...]\n")
   print("\tAvailable profiles:")
   for prof in thede.profiles {
     print("\t\t\(prof.name)")

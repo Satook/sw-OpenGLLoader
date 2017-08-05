@@ -172,22 +172,6 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glColorMaski_P = unsafeBitCast(proc, to: type(of:glColorMaski_P))
   }
 
-  if let proc = getCommandPtr("glColorP3ui") {
-    glColorP3ui_P = unsafeBitCast(proc, to: type(of:glColorP3ui_P))
-  }
-
-  if let proc = getCommandPtr("glColorP3uiv") {
-    glColorP3uiv_P = unsafeBitCast(proc, to: type(of:glColorP3uiv_P))
-  }
-
-  if let proc = getCommandPtr("glColorP4ui") {
-    glColorP4ui_P = unsafeBitCast(proc, to: type(of:glColorP4ui_P))
-  }
-
-  if let proc = getCommandPtr("glColorP4uiv") {
-    glColorP4uiv_P = unsafeBitCast(proc, to: type(of:glColorP4uiv_P))
-  }
-
   if let proc = getCommandPtr("glCompileShader") {
     glCompileShader_P = unsafeBitCast(proc, to: type(of:glCompileShader_P))
   }
@@ -800,46 +784,6 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glMultiDrawElementsBaseVertex_P = unsafeBitCast(proc, to: type(of:glMultiDrawElementsBaseVertex_P))
   }
 
-  if let proc = getCommandPtr("glMultiTexCoordP1ui") {
-    glMultiTexCoordP1ui_P = unsafeBitCast(proc, to: type(of:glMultiTexCoordP1ui_P))
-  }
-
-  if let proc = getCommandPtr("glMultiTexCoordP1uiv") {
-    glMultiTexCoordP1uiv_P = unsafeBitCast(proc, to: type(of:glMultiTexCoordP1uiv_P))
-  }
-
-  if let proc = getCommandPtr("glMultiTexCoordP2ui") {
-    glMultiTexCoordP2ui_P = unsafeBitCast(proc, to: type(of:glMultiTexCoordP2ui_P))
-  }
-
-  if let proc = getCommandPtr("glMultiTexCoordP2uiv") {
-    glMultiTexCoordP2uiv_P = unsafeBitCast(proc, to: type(of:glMultiTexCoordP2uiv_P))
-  }
-
-  if let proc = getCommandPtr("glMultiTexCoordP3ui") {
-    glMultiTexCoordP3ui_P = unsafeBitCast(proc, to: type(of:glMultiTexCoordP3ui_P))
-  }
-
-  if let proc = getCommandPtr("glMultiTexCoordP3uiv") {
-    glMultiTexCoordP3uiv_P = unsafeBitCast(proc, to: type(of:glMultiTexCoordP3uiv_P))
-  }
-
-  if let proc = getCommandPtr("glMultiTexCoordP4ui") {
-    glMultiTexCoordP4ui_P = unsafeBitCast(proc, to: type(of:glMultiTexCoordP4ui_P))
-  }
-
-  if let proc = getCommandPtr("glMultiTexCoordP4uiv") {
-    glMultiTexCoordP4uiv_P = unsafeBitCast(proc, to: type(of:glMultiTexCoordP4uiv_P))
-  }
-
-  if let proc = getCommandPtr("glNormalP3ui") {
-    glNormalP3ui_P = unsafeBitCast(proc, to: type(of:glNormalP3ui_P))
-  }
-
-  if let proc = getCommandPtr("glNormalP3uiv") {
-    glNormalP3uiv_P = unsafeBitCast(proc, to: type(of:glNormalP3uiv_P))
-  }
-
   if let proc = getCommandPtr("glPixelStoref") {
     glPixelStoref_P = unsafeBitCast(proc, to: type(of:glPixelStoref_P))
   }
@@ -940,14 +884,6 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glScissor_P = unsafeBitCast(proc, to: type(of:glScissor_P))
   }
 
-  if let proc = getCommandPtr("glSecondaryColorP3ui") {
-    glSecondaryColorP3ui_P = unsafeBitCast(proc, to: type(of:glSecondaryColorP3ui_P))
-  }
-
-  if let proc = getCommandPtr("glSecondaryColorP3uiv") {
-    glSecondaryColorP3uiv_P = unsafeBitCast(proc, to: type(of:glSecondaryColorP3uiv_P))
-  }
-
   if let proc = getCommandPtr("glShaderSource") {
     glShaderSource_P = unsafeBitCast(proc, to: type(of:glShaderSource_P))
   }
@@ -978,38 +914,6 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
 
   if let proc = getCommandPtr("glTexBuffer") {
     glTexBuffer_P = unsafeBitCast(proc, to: type(of:glTexBuffer_P))
-  }
-
-  if let proc = getCommandPtr("glTexCoordP1ui") {
-    glTexCoordP1ui_P = unsafeBitCast(proc, to: type(of:glTexCoordP1ui_P))
-  }
-
-  if let proc = getCommandPtr("glTexCoordP1uiv") {
-    glTexCoordP1uiv_P = unsafeBitCast(proc, to: type(of:glTexCoordP1uiv_P))
-  }
-
-  if let proc = getCommandPtr("glTexCoordP2ui") {
-    glTexCoordP2ui_P = unsafeBitCast(proc, to: type(of:glTexCoordP2ui_P))
-  }
-
-  if let proc = getCommandPtr("glTexCoordP2uiv") {
-    glTexCoordP2uiv_P = unsafeBitCast(proc, to: type(of:glTexCoordP2uiv_P))
-  }
-
-  if let proc = getCommandPtr("glTexCoordP3ui") {
-    glTexCoordP3ui_P = unsafeBitCast(proc, to: type(of:glTexCoordP3ui_P))
-  }
-
-  if let proc = getCommandPtr("glTexCoordP3uiv") {
-    glTexCoordP3uiv_P = unsafeBitCast(proc, to: type(of:glTexCoordP3uiv_P))
-  }
-
-  if let proc = getCommandPtr("glTexCoordP4ui") {
-    glTexCoordP4ui_P = unsafeBitCast(proc, to: type(of:glTexCoordP4ui_P))
-  }
-
-  if let proc = getCommandPtr("glTexCoordP4uiv") {
-    glTexCoordP4uiv_P = unsafeBitCast(proc, to: type(of:glTexCoordP4uiv_P))
   }
 
   if let proc = getCommandPtr("glTexImage1D") {
@@ -1486,30 +1390,6 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
 
   if let proc = getCommandPtr("glVertexAttribPointer") {
     glVertexAttribPointer_P = unsafeBitCast(proc, to: type(of:glVertexAttribPointer_P))
-  }
-
-  if let proc = getCommandPtr("glVertexP2ui") {
-    glVertexP2ui_P = unsafeBitCast(proc, to: type(of:glVertexP2ui_P))
-  }
-
-  if let proc = getCommandPtr("glVertexP2uiv") {
-    glVertexP2uiv_P = unsafeBitCast(proc, to: type(of:glVertexP2uiv_P))
-  }
-
-  if let proc = getCommandPtr("glVertexP3ui") {
-    glVertexP3ui_P = unsafeBitCast(proc, to: type(of:glVertexP3ui_P))
-  }
-
-  if let proc = getCommandPtr("glVertexP3uiv") {
-    glVertexP3uiv_P = unsafeBitCast(proc, to: type(of:glVertexP3uiv_P))
-  }
-
-  if let proc = getCommandPtr("glVertexP4ui") {
-    glVertexP4ui_P = unsafeBitCast(proc, to: type(of:glVertexP4ui_P))
-  }
-
-  if let proc = getCommandPtr("glVertexP4uiv") {
-    glVertexP4uiv_P = unsafeBitCast(proc, to: type(of:glVertexP4uiv_P))
   }
 
   if let proc = getCommandPtr("glViewport") {
