@@ -256,7 +256,7 @@ internal class GLCommand {
   func loaderDefinition() -> String {
     return
       "  if let proc = getCommandPtr(\"\(self.name)\") {\n" +
-      "    \(self.name)_P = unsafeBitCase(proc, to: type(of:\(self.name)_P))\n" +
+      "    \(self.name)_P = unsafeBitCast(proc, to: type(of:\(self.name)_P))\n" +
       "  }\n"
   }
 }
