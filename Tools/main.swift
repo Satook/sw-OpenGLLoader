@@ -238,7 +238,7 @@ internal class GLCommand {
     let wrapperCallParams = self.params.map({return $0.safeName()}).joined(separator: ", ")
 
     let dummyReturn = dummyReturnVals[self.retType] ?? "0"
-    var dummyReturnStr = " return \"\(dummyReturn)\" "
+    var dummyReturnStr = " return \(dummyReturn) "
     if returnTypeStr == "Void" {
       dummyReturnStr = ""
     }

@@ -120,7 +120,7 @@ public func glBufferSubData_DUMMY(_ target: GLenum, _ offset: GLintptr, _ size: 
 var glBufferSubData_P:@convention(c)(GLenum, GLintptr, GLsizeiptr, UnsafeRawPointer?) -> Void = glBufferSubData_DUMMY
 
 public func glCheckFramebufferStatus(_ target: GLenum) -> GLenum { return glCheckFramebufferStatus_P(target)}
-public func glCheckFramebufferStatus_DUMMY(_ target: GLenum) -> GLenum { return "0" }
+public func glCheckFramebufferStatus_DUMMY(_ target: GLenum) -> GLenum { return 0 }
 var glCheckFramebufferStatus_P:@convention(c)(GLenum) -> GLenum = glCheckFramebufferStatus_DUMMY
 
 public func glClampColor(_ target: GLenum, _ clamp: GLenum) -> Void { return glClampColor_P(target, clamp)}
@@ -160,7 +160,7 @@ public func glClearStencil_DUMMY(_ s: GLint) -> Void {}
 var glClearStencil_P:@convention(c)(GLint) -> Void = glClearStencil_DUMMY
 
 public func glClientWaitSync(_ sync: GLsync, _ flags: GLbitfield, _ timeout: GLuint64) -> GLenum { return glClientWaitSync_P(sync, flags, timeout)}
-public func glClientWaitSync_DUMMY(_ sync: GLsync, _ flags: GLbitfield, _ timeout: GLuint64) -> GLenum { return "0" }
+public func glClientWaitSync_DUMMY(_ sync: GLsync, _ flags: GLbitfield, _ timeout: GLuint64) -> GLenum { return 0 }
 var glClientWaitSync_P:@convention(c)(GLsync, GLbitfield, GLuint64) -> GLenum = glClientWaitSync_DUMMY
 
 public func glColorMask(_ red: GLboolean, _ green: GLboolean, _ blue: GLboolean, _ alpha: GLboolean) -> Void { return glColorMask_P(red, green, blue, alpha)}
@@ -240,11 +240,11 @@ public func glCopyTexSubImage3D_DUMMY(_ target: GLenum, _ level: GLint, _ xoffse
 var glCopyTexSubImage3D_P:@convention(c)(GLenum, GLint, GLint, GLint, GLint, GLint, GLint, GLsizei, GLsizei) -> Void = glCopyTexSubImage3D_DUMMY
 
 public func glCreateProgram() -> GLuint { return glCreateProgram_P()}
-public func glCreateProgram_DUMMY() -> GLuint { return "0" }
+public func glCreateProgram_DUMMY() -> GLuint { return 0 }
 var glCreateProgram_P:@convention(c)() -> GLuint = glCreateProgram_DUMMY
 
 public func glCreateShader(_ type: GLenum) -> GLuint { return glCreateShader_P(type)}
-public func glCreateShader_DUMMY(_ type: GLenum) -> GLuint { return "0" }
+public func glCreateShader_DUMMY(_ type: GLenum) -> GLuint { return 0 }
 var glCreateShader_P:@convention(c)(GLenum) -> GLuint = glCreateShader_DUMMY
 
 public func glCullFace(_ mode: GLenum) -> Void { return glCullFace_P(mode)}
@@ -384,7 +384,7 @@ public func glEndTransformFeedback_DUMMY() -> Void {}
 var glEndTransformFeedback_P:@convention(c)() -> Void = glEndTransformFeedback_DUMMY
 
 public func glFenceSync(_ condition: GLenum, _ flags: GLbitfield) -> GLsync { return glFenceSync_P(condition, flags)}
-public func glFenceSync_DUMMY(_ condition: GLenum, _ flags: GLbitfield) -> GLsync { return "OpaquePointer(bitPattern:1)!" }
+public func glFenceSync_DUMMY(_ condition: GLenum, _ flags: GLbitfield) -> GLsync { return OpaquePointer(bitPattern:1)! }
 var glFenceSync_P:@convention(c)(GLenum, GLbitfield) -> GLsync = glFenceSync_DUMMY
 
 public func glFinish() -> Void { return glFinish_P()}
@@ -488,7 +488,7 @@ public func glGetAttachedShaders_DUMMY(_ program: GLuint, _ maxCount: GLsizei, _
 var glGetAttachedShaders_P:@convention(c)(GLuint, GLsizei, UnsafeMutablePointer<GLsizei>?, UnsafeMutablePointer<GLuint>?) -> Void = glGetAttachedShaders_DUMMY
 
 public func glGetAttribLocation(_ program: GLuint, _ name: UnsafePointer<GLchar>?) -> GLint { return glGetAttribLocation_P(program, name)}
-public func glGetAttribLocation_DUMMY(_ program: GLuint, _ name: UnsafePointer<GLchar>?) -> GLint { return "0" }
+public func glGetAttribLocation_DUMMY(_ program: GLuint, _ name: UnsafePointer<GLchar>?) -> GLint { return 0 }
 var glGetAttribLocation_P:@convention(c)(GLuint, UnsafePointer<GLchar>?) -> GLint = glGetAttribLocation_DUMMY
 
 public func glGetBooleani_v(_ target: GLenum, _ index: GLuint, _ data: UnsafeMutablePointer<GLboolean>?) -> Void { return glGetBooleani_v_P(target, index, data)}
@@ -524,7 +524,7 @@ public func glGetDoublev_DUMMY(_ pname: GLenum, _ data: UnsafeMutablePointer<GLd
 var glGetDoublev_P:@convention(c)(GLenum, UnsafeMutablePointer<GLdouble>?) -> Void = glGetDoublev_DUMMY
 
 public func glGetError() -> GLenum { return glGetError_P()}
-public func glGetError_DUMMY() -> GLenum { return "0" }
+public func glGetError_DUMMY() -> GLenum { return 0 }
 var glGetError_P:@convention(c)() -> GLenum = glGetError_DUMMY
 
 public func glGetFloatv(_ pname: GLenum, _ data: UnsafeMutablePointer<GLfloat>?) -> Void { return glGetFloatv_P(pname, data)}
@@ -532,11 +532,11 @@ public func glGetFloatv_DUMMY(_ pname: GLenum, _ data: UnsafeMutablePointer<GLfl
 var glGetFloatv_P:@convention(c)(GLenum, UnsafeMutablePointer<GLfloat>?) -> Void = glGetFloatv_DUMMY
 
 public func glGetFragDataIndex(_ program: GLuint, _ name: UnsafePointer<GLchar>?) -> GLint { return glGetFragDataIndex_P(program, name)}
-public func glGetFragDataIndex_DUMMY(_ program: GLuint, _ name: UnsafePointer<GLchar>?) -> GLint { return "0" }
+public func glGetFragDataIndex_DUMMY(_ program: GLuint, _ name: UnsafePointer<GLchar>?) -> GLint { return 0 }
 var glGetFragDataIndex_P:@convention(c)(GLuint, UnsafePointer<GLchar>?) -> GLint = glGetFragDataIndex_DUMMY
 
 public func glGetFragDataLocation(_ program: GLuint, _ name: UnsafePointer<GLchar>?) -> GLint { return glGetFragDataLocation_P(program, name)}
-public func glGetFragDataLocation_DUMMY(_ program: GLuint, _ name: UnsafePointer<GLchar>?) -> GLint { return "0" }
+public func glGetFragDataLocation_DUMMY(_ program: GLuint, _ name: UnsafePointer<GLchar>?) -> GLint { return 0 }
 var glGetFragDataLocation_P:@convention(c)(GLuint, UnsafePointer<GLchar>?) -> GLint = glGetFragDataLocation_DUMMY
 
 public func glGetFramebufferAttachmentParameteriv(_ target: GLenum, _ attachment: GLenum, _ pname: GLenum, _ params: UnsafeMutablePointer<GLint>?) -> Void { return glGetFramebufferAttachmentParameteriv_P(target, attachment, pname, params)}
@@ -624,11 +624,11 @@ public func glGetShaderSource_DUMMY(_ shader: GLuint, _ bufSize: GLsizei, _ leng
 var glGetShaderSource_P:@convention(c)(GLuint, GLsizei, UnsafeMutablePointer<GLsizei>?, UnsafeMutablePointer<GLchar>?) -> Void = glGetShaderSource_DUMMY
 
 public func glGetString(_ name: GLenum) -> UnsafePointer<GLubyte>? { return glGetString_P(name)}
-public func glGetString_DUMMY(_ name: GLenum) -> UnsafePointer<GLubyte>? { return "0" }
+public func glGetString_DUMMY(_ name: GLenum) -> UnsafePointer<GLubyte>? { return 0 }
 var glGetString_P:@convention(c)(GLenum) -> UnsafePointer<GLubyte>? = glGetString_DUMMY
 
 public func glGetStringi(_ name: GLenum, _ index: GLuint) -> UnsafePointer<GLubyte>? { return glGetStringi_P(name, index)}
-public func glGetStringi_DUMMY(_ name: GLenum, _ index: GLuint) -> UnsafePointer<GLubyte>? { return "0" }
+public func glGetStringi_DUMMY(_ name: GLenum, _ index: GLuint) -> UnsafePointer<GLubyte>? { return 0 }
 var glGetStringi_P:@convention(c)(GLenum, GLuint) -> UnsafePointer<GLubyte>? = glGetStringi_DUMMY
 
 public func glGetSynciv(_ sync: GLsync, _ pname: GLenum, _ bufSize: GLsizei, _ length: UnsafeMutablePointer<GLsizei>?, _ values: UnsafeMutablePointer<GLint>?) -> Void { return glGetSynciv_P(sync, pname, bufSize, length, values)}
@@ -668,7 +668,7 @@ public func glGetTransformFeedbackVarying_DUMMY(_ program: GLuint, _ index: GLui
 var glGetTransformFeedbackVarying_P:@convention(c)(GLuint, GLuint, GLsizei, UnsafeMutablePointer<GLsizei>?, UnsafeMutablePointer<GLsizei>?, UnsafeMutablePointer<GLenum>?, UnsafeMutablePointer<GLchar>?) -> Void = glGetTransformFeedbackVarying_DUMMY
 
 public func glGetUniformBlockIndex(_ program: GLuint, _ uniformBlockName: UnsafePointer<GLchar>?) -> GLuint { return glGetUniformBlockIndex_P(program, uniformBlockName)}
-public func glGetUniformBlockIndex_DUMMY(_ program: GLuint, _ uniformBlockName: UnsafePointer<GLchar>?) -> GLuint { return "0" }
+public func glGetUniformBlockIndex_DUMMY(_ program: GLuint, _ uniformBlockName: UnsafePointer<GLchar>?) -> GLuint { return 0 }
 var glGetUniformBlockIndex_P:@convention(c)(GLuint, UnsafePointer<GLchar>?) -> GLuint = glGetUniformBlockIndex_DUMMY
 
 public func glGetUniformfv(_ program: GLuint, _ location: GLint, _ params: UnsafeMutablePointer<GLfloat>?) -> Void { return glGetUniformfv_P(program, location, params)}
@@ -684,7 +684,7 @@ public func glGetUniformiv_DUMMY(_ program: GLuint, _ location: GLint, _ params:
 var glGetUniformiv_P:@convention(c)(GLuint, GLint, UnsafeMutablePointer<GLint>?) -> Void = glGetUniformiv_DUMMY
 
 public func glGetUniformLocation(_ program: GLuint, _ name: UnsafePointer<GLchar>?) -> GLint { return glGetUniformLocation_P(program, name)}
-public func glGetUniformLocation_DUMMY(_ program: GLuint, _ name: UnsafePointer<GLchar>?) -> GLint { return "0" }
+public func glGetUniformLocation_DUMMY(_ program: GLuint, _ name: UnsafePointer<GLchar>?) -> GLint { return 0 }
 var glGetUniformLocation_P:@convention(c)(GLuint, UnsafePointer<GLchar>?) -> GLint = glGetUniformLocation_DUMMY
 
 public func glGetUniformuiv(_ program: GLuint, _ location: GLint, _ params: UnsafeMutablePointer<GLuint>?) -> Void { return glGetUniformuiv_P(program, location, params)}
@@ -720,51 +720,51 @@ public func glHint_DUMMY(_ target: GLenum, _ mode: GLenum) -> Void {}
 var glHint_P:@convention(c)(GLenum, GLenum) -> Void = glHint_DUMMY
 
 public func glIsBuffer(_ buffer: GLuint) -> GLboolean { return glIsBuffer_P(buffer)}
-public func glIsBuffer_DUMMY(_ buffer: GLuint) -> GLboolean { return "false" }
+public func glIsBuffer_DUMMY(_ buffer: GLuint) -> GLboolean { return false }
 var glIsBuffer_P:@convention(c)(GLuint) -> GLboolean = glIsBuffer_DUMMY
 
 public func glIsEnabled(_ cap: GLenum) -> GLboolean { return glIsEnabled_P(cap)}
-public func glIsEnabled_DUMMY(_ cap: GLenum) -> GLboolean { return "false" }
+public func glIsEnabled_DUMMY(_ cap: GLenum) -> GLboolean { return false }
 var glIsEnabled_P:@convention(c)(GLenum) -> GLboolean = glIsEnabled_DUMMY
 
 public func glIsEnabledi(_ target: GLenum, _ index: GLuint) -> GLboolean { return glIsEnabledi_P(target, index)}
-public func glIsEnabledi_DUMMY(_ target: GLenum, _ index: GLuint) -> GLboolean { return "false" }
+public func glIsEnabledi_DUMMY(_ target: GLenum, _ index: GLuint) -> GLboolean { return false }
 var glIsEnabledi_P:@convention(c)(GLenum, GLuint) -> GLboolean = glIsEnabledi_DUMMY
 
 public func glIsFramebuffer(_ framebuffer: GLuint) -> GLboolean { return glIsFramebuffer_P(framebuffer)}
-public func glIsFramebuffer_DUMMY(_ framebuffer: GLuint) -> GLboolean { return "false" }
+public func glIsFramebuffer_DUMMY(_ framebuffer: GLuint) -> GLboolean { return false }
 var glIsFramebuffer_P:@convention(c)(GLuint) -> GLboolean = glIsFramebuffer_DUMMY
 
 public func glIsProgram(_ program: GLuint) -> GLboolean { return glIsProgram_P(program)}
-public func glIsProgram_DUMMY(_ program: GLuint) -> GLboolean { return "false" }
+public func glIsProgram_DUMMY(_ program: GLuint) -> GLboolean { return false }
 var glIsProgram_P:@convention(c)(GLuint) -> GLboolean = glIsProgram_DUMMY
 
 public func glIsQuery(_ id: GLuint) -> GLboolean { return glIsQuery_P(id)}
-public func glIsQuery_DUMMY(_ id: GLuint) -> GLboolean { return "false" }
+public func glIsQuery_DUMMY(_ id: GLuint) -> GLboolean { return false }
 var glIsQuery_P:@convention(c)(GLuint) -> GLboolean = glIsQuery_DUMMY
 
 public func glIsRenderbuffer(_ renderbuffer: GLuint) -> GLboolean { return glIsRenderbuffer_P(renderbuffer)}
-public func glIsRenderbuffer_DUMMY(_ renderbuffer: GLuint) -> GLboolean { return "false" }
+public func glIsRenderbuffer_DUMMY(_ renderbuffer: GLuint) -> GLboolean { return false }
 var glIsRenderbuffer_P:@convention(c)(GLuint) -> GLboolean = glIsRenderbuffer_DUMMY
 
 public func glIsSampler(_ sampler: GLuint) -> GLboolean { return glIsSampler_P(sampler)}
-public func glIsSampler_DUMMY(_ sampler: GLuint) -> GLboolean { return "false" }
+public func glIsSampler_DUMMY(_ sampler: GLuint) -> GLboolean { return false }
 var glIsSampler_P:@convention(c)(GLuint) -> GLboolean = glIsSampler_DUMMY
 
 public func glIsShader(_ shader: GLuint) -> GLboolean { return glIsShader_P(shader)}
-public func glIsShader_DUMMY(_ shader: GLuint) -> GLboolean { return "false" }
+public func glIsShader_DUMMY(_ shader: GLuint) -> GLboolean { return false }
 var glIsShader_P:@convention(c)(GLuint) -> GLboolean = glIsShader_DUMMY
 
 public func glIsSync(_ sync: GLsync) -> GLboolean { return glIsSync_P(sync)}
-public func glIsSync_DUMMY(_ sync: GLsync) -> GLboolean { return "false" }
+public func glIsSync_DUMMY(_ sync: GLsync) -> GLboolean { return false }
 var glIsSync_P:@convention(c)(GLsync) -> GLboolean = glIsSync_DUMMY
 
 public func glIsTexture(_ texture: GLuint) -> GLboolean { return glIsTexture_P(texture)}
-public func glIsTexture_DUMMY(_ texture: GLuint) -> GLboolean { return "false" }
+public func glIsTexture_DUMMY(_ texture: GLuint) -> GLboolean { return false }
 var glIsTexture_P:@convention(c)(GLuint) -> GLboolean = glIsTexture_DUMMY
 
 public func glIsVertexArray(_ array: GLuint) -> GLboolean { return glIsVertexArray_P(array)}
-public func glIsVertexArray_DUMMY(_ array: GLuint) -> GLboolean { return "false" }
+public func glIsVertexArray_DUMMY(_ array: GLuint) -> GLboolean { return false }
 var glIsVertexArray_P:@convention(c)(GLuint) -> GLboolean = glIsVertexArray_DUMMY
 
 public func glLineWidth(_ width: GLfloat) -> Void { return glLineWidth_P(width)}
@@ -780,11 +780,11 @@ public func glLogicOp_DUMMY(_ opcode: GLenum) -> Void {}
 var glLogicOp_P:@convention(c)(GLenum) -> Void = glLogicOp_DUMMY
 
 public func glMapBuffer(_ target: GLenum, _ access: GLenum) -> UnsafeMutableRawPointer? { return glMapBuffer_P(target, access)}
-public func glMapBuffer_DUMMY(_ target: GLenum, _ access: GLenum) -> UnsafeMutableRawPointer? { return "0" }
+public func glMapBuffer_DUMMY(_ target: GLenum, _ access: GLenum) -> UnsafeMutableRawPointer? { return 0 }
 var glMapBuffer_P:@convention(c)(GLenum, GLenum) -> UnsafeMutableRawPointer? = glMapBuffer_DUMMY
 
 public func glMapBufferRange(_ target: GLenum, _ offset: GLintptr, _ length: GLsizeiptr, _ access: GLbitfield) -> UnsafeMutableRawPointer? { return glMapBufferRange_P(target, offset, length, access)}
-public func glMapBufferRange_DUMMY(_ target: GLenum, _ offset: GLintptr, _ length: GLsizeiptr, _ access: GLbitfield) -> UnsafeMutableRawPointer? { return "0" }
+public func glMapBufferRange_DUMMY(_ target: GLenum, _ offset: GLintptr, _ length: GLsizeiptr, _ access: GLbitfield) -> UnsafeMutableRawPointer? { return 0 }
 var glMapBufferRange_P:@convention(c)(GLenum, GLintptr, GLsizeiptr, GLbitfield) -> UnsafeMutableRawPointer? = glMapBufferRange_DUMMY
 
 public func glMultiDrawArrays(_ mode: GLenum, _ first: UnsafePointer<GLint>?, _ count: UnsafePointer<GLsizei>?, _ drawcount: GLsizei) -> Void { return glMultiDrawArrays_P(mode, first, count, drawcount)}
@@ -1208,7 +1208,7 @@ public func glUniformMatrix4x3fv_DUMMY(_ location: GLint, _ count: GLsizei, _ tr
 var glUniformMatrix4x3fv_P:@convention(c)(GLint, GLsizei, GLboolean, UnsafePointer<GLfloat>?) -> Void = glUniformMatrix4x3fv_DUMMY
 
 public func glUnmapBuffer(_ target: GLenum) -> GLboolean { return glUnmapBuffer_P(target)}
-public func glUnmapBuffer_DUMMY(_ target: GLenum) -> GLboolean { return "false" }
+public func glUnmapBuffer_DUMMY(_ target: GLenum) -> GLboolean { return false }
 var glUnmapBuffer_P:@convention(c)(GLenum) -> GLboolean = glUnmapBuffer_DUMMY
 
 public func glUseProgram(_ program: GLuint) -> Void { return glUseProgram_P(program)}
@@ -1534,7 +1534,7 @@ public func glBlitNamedFramebuffer_DUMMY(_ readFramebuffer: GLuint, _ drawFrameb
 var glBlitNamedFramebuffer_P:@convention(c)(GLuint, GLuint, GLint, GLint, GLint, GLint, GLint, GLint, GLint, GLint, GLbitfield, GLenum) -> Void = glBlitNamedFramebuffer_DUMMY
 
 public func glCheckNamedFramebufferStatus(_ framebuffer: GLuint, _ target: GLenum) -> GLenum { return glCheckNamedFramebufferStatus_P(framebuffer, target)}
-public func glCheckNamedFramebufferStatus_DUMMY(_ framebuffer: GLuint, _ target: GLenum) -> GLenum { return "0" }
+public func glCheckNamedFramebufferStatus_DUMMY(_ framebuffer: GLuint, _ target: GLenum) -> GLenum { return 0 }
 var glCheckNamedFramebufferStatus_P:@convention(c)(GLuint, GLenum) -> GLenum = glCheckNamedFramebufferStatus_DUMMY
 
 public func glClearNamedBufferData(_ buffer: GLuint, _ internalformat: GLenum, _ format: GLenum, _ type: GLenum, _ data: UnsafeRawPointer?) -> Void { return glClearNamedBufferData_P(buffer, internalformat, format, type, data)}
@@ -1750,11 +1750,11 @@ public func glInvalidateNamedFramebufferSubData_DUMMY(_ framebuffer: GLuint, _ n
 var glInvalidateNamedFramebufferSubData_P:@convention(c)(GLuint, GLsizei, UnsafePointer<GLenum>?, GLint, GLint, GLsizei, GLsizei) -> Void = glInvalidateNamedFramebufferSubData_DUMMY
 
 public func glMapNamedBuffer(_ buffer: GLuint, _ access: GLenum) -> UnsafeMutableRawPointer? { return glMapNamedBuffer_P(buffer, access)}
-public func glMapNamedBuffer_DUMMY(_ buffer: GLuint, _ access: GLenum) -> UnsafeMutableRawPointer? { return "0" }
+public func glMapNamedBuffer_DUMMY(_ buffer: GLuint, _ access: GLenum) -> UnsafeMutableRawPointer? { return 0 }
 var glMapNamedBuffer_P:@convention(c)(GLuint, GLenum) -> UnsafeMutableRawPointer? = glMapNamedBuffer_DUMMY
 
 public func glMapNamedBufferRange(_ buffer: GLuint, _ offset: GLintptr, _ length: GLsizeiptr, _ access: GLbitfield) -> UnsafeMutableRawPointer? { return glMapNamedBufferRange_P(buffer, offset, length, access)}
-public func glMapNamedBufferRange_DUMMY(_ buffer: GLuint, _ offset: GLintptr, _ length: GLsizeiptr, _ access: GLbitfield) -> UnsafeMutableRawPointer? { return "0" }
+public func glMapNamedBufferRange_DUMMY(_ buffer: GLuint, _ offset: GLintptr, _ length: GLsizeiptr, _ access: GLbitfield) -> UnsafeMutableRawPointer? { return 0 }
 var glMapNamedBufferRange_P:@convention(c)(GLuint, GLintptr, GLsizeiptr, GLbitfield) -> UnsafeMutableRawPointer? = glMapNamedBufferRange_DUMMY
 
 public func glNamedBufferData(_ buffer: GLuint, _ size: GLsizeiptr, _ data: UnsafeRawPointer?, _ usage: GLenum) -> Void { return glNamedBufferData_P(buffer, size, data, usage)}
@@ -1878,7 +1878,7 @@ public func glTransformFeedbackBufferRange_DUMMY(_ xfb: GLuint, _ index: GLuint,
 var glTransformFeedbackBufferRange_P:@convention(c)(GLuint, GLuint, GLuint, GLintptr, GLsizeiptr) -> Void = glTransformFeedbackBufferRange_DUMMY
 
 public func glUnmapNamedBuffer(_ buffer: GLuint) -> GLboolean { return glUnmapNamedBuffer_P(buffer)}
-public func glUnmapNamedBuffer_DUMMY(_ buffer: GLuint) -> GLboolean { return "false" }
+public func glUnmapNamedBuffer_DUMMY(_ buffer: GLuint) -> GLboolean { return false }
 var glUnmapNamedBuffer_P:@convention(c)(GLuint) -> GLboolean = glUnmapNamedBuffer_DUMMY
 
 public func glVertexArrayAttribBinding(_ vaobj: GLuint, _ attribindex: GLuint, _ bindingindex: GLuint) -> Void { return glVertexArrayAttribBinding_P(vaobj, attribindex, bindingindex)}
@@ -1934,4 +1934,3 @@ var glBindImageTexture_P:@convention(c)(GLuint, GLuint, GLint, GLboolean, GLint,
 public func glMemoryBarrier(_ barriers: GLbitfield) -> Void { return glMemoryBarrier_P(barriers)}
 public func glMemoryBarrier_DUMMY(_ barriers: GLbitfield) -> Void {}
 var glMemoryBarrier_P:@convention(c)(GLbitfield) -> Void = glMemoryBarrier_DUMMY
-
