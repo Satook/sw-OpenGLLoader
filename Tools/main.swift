@@ -255,7 +255,7 @@ internal class GLCommand {
 
   func loaderDefinition() -> String {
     return
-      "  if let proc = getCommandPtr(\(self.name)) {\n" +
+      "  if let proc = getCommandPtr(\"\(self.name)\") {\n" +
       "    \(self.name)_P = unsafeBitCase(proc, to: type(of:\(self.name)_P))\n" +
       "  }\n"
   }
@@ -290,7 +290,7 @@ internal class GLExtension {
 internal struct DefinitionSet {
   let enums: [String: GLEnumDef]
   let commands: [String: GLCommand]
-  let extensions: [String: GLExtension]
+  let extensions: [(String, GLExtension)]
   let profile: GLProfile
 }
 
@@ -602,13 +602,14 @@ func assertSaneDelegate(_ thede: GLXmlDelegate) {
     assert(thede.commands.count > 3000, "\(thede.commands.count) commands is too few")
 }
 
-if (CommandLine.arguments.count != 2) {
+let args = CommandLine.arguments
+if (args.count < 2) {
     // Got this from Xcode? Add $(SRCROOT)/OpenGL to arguments in scheme.
-    print("\nusage: main.swift path_to_root\n")
+    print("\nusage: main.swift BASEPATH GL_PROFILE [EXTENSION...]\n")
     exit(1)
 }
 
-let pathPrefix = CommandLine.arguments[1]
+let pathPrefix = args[1]
 print("Using prefix: \(pathPrefix)")
 
 let gldefpath = pathPrefix + "/Tools/gl.xml"
@@ -618,12 +619,44 @@ guard var thede = parseRegistryFile(gldefpath) else {
 }
 assertSaneDelegate(thede)
 
-// TODO: filter by desired profile and extensions
+// lookup map for later use
+var profMap = [String: Int]()
+for (i, prof) in thede.profiles.enumerated() {
+  profMap[prof.name] = i
+}
+
+// They didn't provide a profile name, or a valid one, so give them a list
+if (args.count < 3 || profMap[args[2]] == nil) {
+  print("\nusage: main.swift BASEPATH GL_PROFILE [EXTENSION...]\n")
+  print("\tAvailable profiles:")
+  for prof in thede.profiles {
+    print("\t\t\(prof.name)")
+  }
+  exit(1)
+}
+let desiredProfile = args[2]
+
+// get the list of extensions the user wanted
+let extnNames = args.dropFirst(3)
+var wantedExtensions = [(String, GLExtension)]()
+extnNames.forEach() {
+  if let extn = thede.extensions[$0] {
+    wantedExtensions.append($0, extn)
+  } else {
+    print("Extension \($0) does not exist")
+    print("Options are:")
+    for (extName, _) in thede.extensions {
+      print("\t\(extName)")
+    }
+    exit(1)
+  }
+}
+
 let glDefs = DefinitionSet(
   enums: thede.enums,
   commands: thede.commands,
-  extensions: [:],
-  profile: thede.profiles.last!
+  extensions: wantedExtensions,
+  profile: thede.profiles[profMap[desiredProfile]!]
 )
 
 writeCodeFile(glDefs, pathPrefix + "/Sources/Enums.swift", generateEnums)
