@@ -1927,4 +1927,13 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glTexStorage3D_P = unsafeBitCase(proc, to: type(of:glTexStorage3D_P))
   }
 
+  // LOAD commands for extension GL_ARB_shader_image_load_store
+  if let proc = getCommandPtr("glBindImageTexture") {
+    glBindImageTexture_P = unsafeBitCase(proc, to: type(of:glBindImageTexture_P))
+  }
+
+  if let proc = getCommandPtr("glMemoryBarrier") {
+    glMemoryBarrier_P = unsafeBitCase(proc, to: type(of:glMemoryBarrier_P))
+  }
+
 }

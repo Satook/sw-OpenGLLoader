@@ -1926,3 +1926,12 @@ public func glTexStorage3D(_ target: GLenum, _ levels: GLsizei, _ internalformat
 public func glTexStorage3D_DUMMY(_ target: GLenum, _ levels: GLsizei, _ internalformat: GLenum, _ width: GLsizei, _ height: GLsizei, _ depth: GLsizei) -> Void {}
 var glTexStorage3D_P:@convention(c)(GLenum, GLsizei, GLenum, GLsizei, GLsizei, GLsizei) -> Void = glTexStorage3D_DUMMY
 
+// COMMANDS for extension GL_ARB_shader_image_load_store
+public func glBindImageTexture(_ unit: GLuint, _ texture: GLuint, _ level: GLint, _ layered: GLboolean, _ layer: GLint, _ access: GLenum, _ format: GLenum) -> Void { return glBindImageTexture_P(unit, texture, level, layered, layer, access, format)}
+public func glBindImageTexture_DUMMY(_ unit: GLuint, _ texture: GLuint, _ level: GLint, _ layered: GLboolean, _ layer: GLint, _ access: GLenum, _ format: GLenum) -> Void {}
+var glBindImageTexture_P:@convention(c)(GLuint, GLuint, GLint, GLboolean, GLint, GLenum, GLenum) -> Void = glBindImageTexture_DUMMY
+
+public func glMemoryBarrier(_ barriers: GLbitfield) -> Void { return glMemoryBarrier_P(barriers)}
+public func glMemoryBarrier_DUMMY(_ barriers: GLbitfield) -> Void {}
+var glMemoryBarrier_P:@convention(c)(GLbitfield) -> Void = glMemoryBarrier_DUMMY
+
