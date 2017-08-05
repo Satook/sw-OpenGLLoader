@@ -21,7 +21,7 @@
 // MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 
 
-public typealias GLenum = Int32
+public typealias GLenum = UInt32
 public typealias GLboolean = Bool
 public typealias GLbitfield = UInt32
 public typealias GLbyte = Int8
@@ -56,129 +56,13 @@ public typealias GLhalfNV = UInt16
 public typealias GLvdpauSurfaceNV = Int
 
 public typealias GLDEBUGPROC = @convention(c)
-    (GLenum, GLenum, GLuint, GLenum, GLsizei, UnsafePointer<GLchar>, UnsafeRawPointer) -> Void
+  (GLenum, GLenum, GLuint, GLenum, GLsizei, UnsafePointer<GLchar>, UnsafeRawPointer) -> Void
 public typealias GLDEBUGPROCARB = @convention(c)
-    (GLenum, GLenum, GLuint, GLenum, GLsizei, UnsafePointer<GLchar>, UnsafeRawPointer) -> Void
+  (GLenum, GLenum, GLuint, GLenum, GLsizei, UnsafePointer<GLchar>, UnsafeRawPointer) -> Void
 public typealias GLDEBUGPROCKHR = @convention(c)
-    (GLenum, GLenum, GLuint, GLenum, GLsizei, UnsafePointer<GLchar>, UnsafeRawPointer) -> Void
+  (GLenum, GLenum, GLuint, GLenum, GLsizei, UnsafePointer<GLchar>, UnsafeRawPointer) -> Void
 public typealias GLDEBUGPROCAMD = @convention(c)
-    (GLuint, GLenum, GLenum, GLsizei, UnsafePointer<GLchar>, UnsafeMutableRawPointer) -> Void
+  (GLuint, GLenum, GLenum, GLsizei, UnsafePointer<GLchar>, UnsafeMutableRawPointer) -> Void
 
-
-class CommandInfo : CustomStringConvertible {
-    let name: String
-    let support: [String]
-    init(_ name: String, _ support: [String]) {
-        self.name = name
-        self.support = support
-    }
-    var description: String {
-        return "(\(name): \(support))"
-    }
-}
-
-private func buildError(_ info: CommandInfo) -> Never {
-    var adds = ""
-    var rems = ""
-    var exts = ""
-    for support in info.support {
-        let short = support[support.index(support.startIndex, offsetBy: 1)..<support.endIndex]
-        if support[support.startIndex] == "+" {
-            if adds.characters.count > 0 {
-                adds += ", "
-            }
-            adds += short
-        } else if support[support.startIndex] == "-" {
-            if rems.characters.count > 0 {
-                rems += ", "
-            }
-            rems += short
-        } else {
-            if exts.characters.count > 0 {
-                exts += ", "
-            }
-            exts += "GL_\(support)"
-        }
-    }
-    var s = "\(info.name) not found"
-    if info.support.count > 0 {
-        s += "\n"
-    }
-    if adds.characters.count > 0 {
-        s += "Added in OpenGL \(adds)\n"
-    }
-    if rems.characters.count > 0 {
-        s += "Removed in OpenGL \(rems)\n"
-    }
-    if exts.characters.count > 0 {
-        s += "Extensions: \(exts)\n"
-    }
-    fatalError(s)
-}
-
-func getAddress(_ info: CommandInfo) -> UnsafeMutableRawPointer {
-  guard let fp = lookupAddress(info) else {
-    buildError(info)
-  }
-  return fp
-}
-
-// Platform specific sections below.
-// To support a new platform, implement lookupAddress.
-
-#if os(OSX)
-
-    import Darwin
-
-    let openGLframework = "/System/Library/Frameworks/OpenGL.framework/Versions/Current/OpenGL"
-    var dlopenHandle: UnsafeMutableRawPointer?
-
-    func lookupAddress(_ info: CommandInfo) -> UnsafeMutableRawPointer? {
-        if dlopenHandle == nil {
-            dlopenHandle = dlopen(openGLframework, RTLD_LAZY)
-        }
-        if dlopenHandle == nil {
-            fatalError("Failed to dlopen OpenGL.framework")
-        }
-        return dlsym(dlopenHandle, info.name)
-    }
-
-#elseif os(Linux)
-
-    import Glibc
-
-    var dlopenHandle: UnsafeMutableRawPointer?
-    var glXGetProcAddress:(@convention(c) (UnsafePointer<GLchar>) -> UnsafeMutableRawPointer)? = nil
-
-    func lookupAddress(_ info: CommandInfo) -> UnsafeMutableRawPointer? {
-        if dlopenHandle == nil {
-            dlopenHandle = dlopen(nil, RTLD_LAZY | RTLD_LOCAL)
-        }
-        if dlopenHandle == nil {
-            fatalError("Failed to obtain dlopenHandle")
-        }
-        if glXGetProcAddress == nil {
-            let fp = dlsym(dlopenHandle, "glXGetProcAddressARB")
-            if fp != nil {
-                glXGetProcAddress = unsafeBitCast(fp, to: type(of: glXGetProcAddress))
-            }
-        }
-        if glXGetProcAddress == nil {
-            let fp = dlsym(dlopenHandle, "glXGetProcAddress")
-            if fp != nil {
-                glXGetProcAddress = unsafeBitCast(fp, to: type(of: glXGetProcAddress))
-            }
-        }
-        if glXGetProcAddress == nil {
-            fatalError("Failed to find glXGetProcAddress")
-        }
-        return glXGetProcAddress!(info.name)
-    }
-
-#else
-
-    func lookupAddress(_ info: commandInfo) -> UnsafeMutableRawPointer {
-        fatalError("Unsupported OS")
-    }
-
-#endif
+// We're working with GLFW, so it gives a func ptr back rather than a void *
+public typealias GetGLFunc:@convention(c) () -> Void

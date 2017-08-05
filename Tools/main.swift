@@ -24,635 +24,583 @@
 
 import Foundation
 
+// for these two return types, I can't just "return 0" in the dummy func
+let dummyReturnVals = [
+  "GLboolean": "false",
+  "GLsync": "OpaquePointer(bitPattern:1)!"
+]
 
-extension OutputStream
-{
-    func write(_ string: String) {
-        if string.isEmpty {return}
-        let encodedDataArray = [UInt8](string.utf8)
-        let _ = write(encodedDataArray, maxLength: encodedDataArray.count)
+/*
+ * Add ability to write string as UTF8 encoded data.
+ */
+extension OutputStream {
+  func write(_ string: String) -> Int {
+    if string.isEmpty {
+      return 0
     }
+
+    let encodedDataArray = [UInt8](string.utf8)
+    return write(encodedDataArray, maxLength: encodedDataArray.count)
+  }
 }
 
-internal class KhronosXmlDelegate : NSObject, XMLParserDelegate
-{
-    var path = ""
-
-    var currentGroup = ""
-    var groups = [String: Array<String>]()
-
-    var currentEnumIsBitmask = false
-    var enums = Array<String>()
-    var bitfields = Array<String>()
-    var values = [String: String]()
-
-    var cmd = ""
-    var cmdReturn = ""
-    var paramName = ""
-    var paramType = ""
-    var paramPtr = ""
-    var paramGroup = ""
-    var paramLen = ""
-
-    typealias paramTuple = (name:String,type:String,ptr:String,group:String,len:String)
-
-    var commands = Array<String>()
-    var commandReturns = [String: String]()
-    var paramArr = [paramTuple]()
-    var commandParams = [String: [paramTuple]]()
-
-    var currentVersion = ""
-    var commandVersions = [String: [String]]()
-
-    var currentExtension = ""
-    var commandExtensions = [String: [String]]()
-
-    public func parserDidStartDocument(_ parser: XMLParser) {
+extension String {
+  /*
+   * Returns a new string with the first count characters removed.
+   */
+  func firstDropped(_ count: Int) -> String {
+    // make a non-optional copy of ourselves
+    var newStr = String(repeating: self, count: 1)
+    for _ in 0..<count {
+      newStr.remove(at: newStr.startIndex)
     }
 
-    public func parserDidEndDocument(_ parser: XMLParser) {
-    }
-
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName: String?, attributes: [String: String] = [:]) -> () {
-      let attributeDict = attributes
-
-        if (elementName == "registry") {return}
-        if (!path.isEmpty) {path += "."}
-        path += elementName
-
-        if path == "extensions.extension" {
-            currentExtension = attributeDict["name"]!
-            assert(currentExtension.hasPrefix("GL_"))
-            currentExtension.removeSubrange(
-                currentExtension.startIndex..<currentExtension.index(currentExtension.startIndex, offsetBy: 3)
-            )
-            return
-        }
-
-        if path == "extensions.extension.require.command" {
-            let name = attributeDict["name"]!
-            if commandExtensions[name] == nil {
-                commandExtensions[name] = [currentExtension]
-            } else {
-                commandExtensions[name]!.append(currentExtension)
-            }
-            return
-        }
-
-        if path == "feature" {
-            switch(attributeDict["api"]!) {
-            case "gl":
-                currentVersion = ""
-            case "gles1", "gles2":
-                currentVersion = "ES "
-            default:
-                assert(false)
-            }
-            currentVersion += attributeDict["number"]!
-            return
-        }
-
-        if path == "feature.require.command" {
-            let name = attributeDict["name"]!
-            if commandVersions[name] == nil {
-                commandVersions[name] = ["+\(currentVersion)"]
-            } else {
-                commandVersions[name]!.append("+\(currentVersion)")
-            }
-            return
-        }
-
-        if path == "feature.remove.command" {
-            commandVersions[attributeDict["name"]!]!.append("-\(currentVersion)")
-            return
-        }
-
-        if path == "groups.group" {
-            currentGroup = attributeDict["name"]!
-            assert(groups[currentGroup] == nil)
-            groups[currentGroup] = []
-            return
-        }
-
-        if path == "groups.group.enum" {
-            groups[currentGroup]?.append(attributeDict["name"]!)
-            return
-        }
-
-        if path == "enums" {
-            if attributeDict["type"] == nil {
-                currentEnumIsBitmask = false
-            } else if attributeDict["type"] == "bitmask" {
-                currentEnumIsBitmask = true
-            } else {
-                assert(false)
-            }
-            // OcclusionQueryEventMaskAMD has buggy record
-            if let name = attributeDict["namespace"] {
-                if (name == "OcclusionQueryEventMaskAMD") {
-                    currentEnumIsBitmask = true
-                }
-            }
-            return
-        }
-
-        if path == "enums.enum" {
-            var name = attributeDict["name"]!
-            if let api = attributeDict["api"] {
-                // GL_ACTIVE_PROGRAM_EXT has two different values
-                name += "_" + api
-            }
-            assert(values[name] == nil)
-            values[name] = attributeDict["value"]!
-
-
-            if currentEnumIsBitmask {
-                assert(!bitfields.contains(name))
-                bitfields.append(name)
-            } else {
-                assert(!enums.contains(name))
-                enums.append(name)
-            }
-            return
-        }
-
-        if path == "commands.command.param" {
-            if let s = attributeDict["len"] {
-                paramLen = s
-            }
-            if let s = attributeDict["group"] {
-                paramGroup = s
-            }
-        }
-    }
-
-    public func parser(_ parser: XMLParser, foundCharacters: String)
-    {
-        let str = foundCharacters
-
-        if path == "commands.command.proto.ptype" {
-            cmdReturn = str
-            return
-        }
-
-        if path == "commands.command.proto.name" {
-            cmd = str
-            return
-        }
-
-        if path == "commands.command.proto" {
-            cmdReturn += str.trimmingCharacters(in: .whitespaces)
-            return
-        }
-
-        if path == "commands.command.param.ptype" {
-            paramType = str
-            return
-        }
-
-        if path == "commands.command.param.name" {
-            paramName = str
-            return
-        }
-
-        if path == "commands.command.param" {
-            paramPtr += str.replacingOccurrences(of: " ", with: "")
-            return
-        }
-    }
-
-    public func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)
-    {
-        if (elementName == "registry") {return}
-        defer {
-            if (elementName == path) {
-                path.removeAll()
-            } else {
-                let el = "." + elementName
-                assert(path.hasSuffix(el))
-                let range = path.index(path.endIndex, offsetBy: -el.characters.count)..<path.endIndex
-                path.removeSubrange(range)
-            }
-        }
-
-        if path == "commands.command.param.ptype" {
-            paramPtr += "!"
-            return
-        }
-
-        if path == "commands.command.param.name" {
-            paramPtr += "?"
-            return
-        }
-
-        if path == "commands.command.param" {
-            paramArr.append((name:paramName,type:paramType,ptr:paramPtr,group:paramGroup,len:paramLen))
-            paramName.removeAll(keepingCapacity: true)
-            paramType.removeAll(keepingCapacity: true)
-            paramPtr.removeAll(keepingCapacity: true)
-            paramGroup.removeAll(keepingCapacity: true)
-            paramLen.removeAll(keepingCapacity: true)
-            return
-        }
-
-        if path == "commands.command" {
-            assert(!cmd.isEmpty)
-            assert(!cmdReturn.isEmpty)
-            assert(!commands.contains(cmd))
-            commands.append(cmd)
-            commandReturns[cmd] = cmdReturn
-            commandParams[cmd] = paramArr
-
-            cmd.removeAll(keepingCapacity: true)
-            cmdReturn.removeAll(keepingCapacity: true)
-            paramArr.removeAll(keepingCapacity: true)
-            return
-        }
-    }
-
-    public func parser(_ parser: XMLParser, parseErrorOccurred error: Error) {
-        assert(false, "Parser error \(error)")
-    }
+    return newStr
+  }
 }
 
-func chomper(_ filepath: String) -> KhronosXmlDelegate?
-{
+// Python-esque string repeating
+func * (left: String, right: Int) -> String {
+  return String(repeating: left, count: right)
+}
+
+/*
+ * Takes a textual enum value and makes sure it will be represented exactly in
+ * Swift literal syntax.
+ *
+ * Note: Literals are written out as UInt32(integerLiteral: "0xFFFF").
+ * This makes sure that the Swift compiler interprets the value as an unsigned
+ * value so that 0xFFFFFFFF won't overflow and such.
+ */
+func glEnumValueToSwiftLiteral(_ val: String) -> String {
+  // here are the cases we're covering
+  // negative base 10: use Int32
+  // large positive hex (i.e. len > 10): use UInt64
+  // positive hex: use UInt32
+  // small base 10: use UInt32
+
+  if val.hasPrefix("-") {
+    // it's negative so use a signed Int32
+    return "Int32(\(val))"
+  } else if val.hasPrefix("0x") {
+    // it's a hex numBuffers
+
+    // parse and print as UInt64 so we can pad neatly
+    guard let uintVal = UInt64(val.firstDropped(2), radix: 16) else {
+      assert(false, "Could not parse hex string \(val) for enum")
+    }
+    var valStr = String(uintVal, radix:16, uppercase:true)
+
+    // pad to multiple of 4 chars
+    let padCount = 4 - 4%valStr.characters.count
+    valStr = "0x" + "0"*padCount + valStr
+
+    // if longer than "0xffffffff", we need to use a 64 bit unsigned
+    if val.characters.count > 10 {
+      return "UInt64(integerLiteral: \(valStr))"
+    } else {
+      return "UInt32(integerLiteral: \(valStr))"
+    }
+  } else {
+    // it should just be a regular Integer
+    if UInt32(val) != nil {
+      return "UInt32(integerLiteral: \(val))"
+    } else {
+      assert(false, "Got weird enum value: \(val)")
+    }
+  }
+}
+
+func glParamToSwiftType(_ type: String, _ ptr: String) -> String {
+  var newType: String
+  // change custom C types to basic Swift ones
+  switch (type) {
+  case "GLvoid":
+    newType = "Void"
+  case "struct _cl_context":
+    newType = "OpaquePointer"
+  case "struct _cl_event":
+    newType = "OpaquePointer"
+  default:
+    newType = type
+  }
+
+  // handle C pointerisation
+  switch (ptr) {
+  case "const!*?":        // e.g. const GLuint * (glDeleteBuffers, buffers param)
+    newType = "UnsafePointer<\(newType)>?"
+  case "!*?":             // e.g. GLsizei * (glGetActiveAttrib, length param)
+    newType = "UnsafeMutablePointer<\(newType)>?"
+  case "void*?":          // e.g. void * (glGetCompressedTextureImage, pixels param)
+    newType = "UnsafeMutableRawPointer?"
+  case "constvoid*?":     // e.g. const void * (glNamedBufferData, data param)
+    newType = "UnsafeRawPointer?"
+  case "constvoid**?":    // e.g. const void ** (glNormalPointerListIBM, pointer param)
+    newType = "UnsafeMutablePointer<UnsafeRawPointer>?"
+  case "const!*const*?":  // e.g. const GLchar * const * (glShaderSource, string param)
+    newType = "UnsafePointer<UnsafePointer<\(newType)>>?"
+  case "const!**?":       // e.g. const GLcharARB ** (glShaderSourceARB, string param)
+    newType = "UnsafeMutablePointer<UnsafePointer<\(newType)>>?"
+  case "void**?":         // e.g. void ** (glGetBufferPointerv, params param)
+    newType = "UnsafeMutablePointer<UnsafeMutableRawPointer>?"
+  case "constvoid*const*?": // e.g. const void * const * (glMultiDrawElements, indices param)
+    newType = "UnsafePointer<UnsafeRawPointer>?"
+  default:
+    _ = newType
+  }
+
+  // Swift 3 changed UnsafePointer<Void> to UnsafeRawPointer
+  newType = newType.replacingOccurrences(of: "UnsafePointer<Void>", with: "UnsafeRawPointer")
+  newType = newType.replacingOccurrences(of: "UnsafeMutablePointer<Void>", with: "UnsafeMutableRawPointer")
+
+  return newType
+}
+
+func glReturnToSwiftType(_ type: String) -> String {
+  switch (type) {
+  case "void":
+      return "Void"
+  case "void *":
+      return "UnsafeMutableRawPointer?"
+  case "GLubyte*":
+      return "UnsafePointer<GLubyte>?"
+  default:
+      return type
+  }
+}
+
+/*
+ * Stores the information about a single GL enum definition
+ */
+internal class GLEnumDef {
+  var value: String
+
+  init(_ value: String) {
+    self.value = value
+  }
+
+  func definition(_ name: String) -> String {
+    let literal = glEnumValueToSwiftLiteral(self.value)
+    return "public let \(name) = \(literal)"
+  }
+}
+
+internal class GLParam {
+  var name: String = ""
+  var type: String = ""
+  var ptr: String = ""
+
+  /*
+   * Returns the param type as a valid Swift type declaration
+   *
+   * e.g. "UnsafeMutablePointer<UnsafeRawPointer>?"
+   */
+  func swiftType() -> String {
+    return glParamToSwiftType(self.type, self.ptr)
+  }
+
+  /*
+   * Returns the param as a valid swift parameter declaration.
+   *
+   * e.g. "_ op: GLenum"
+   */
+  func swiftFuncSpec() -> String {
+    return "_ \(self.safeName()): \(self.swiftType())"
+  }
+
+  /*
+   * Changes the param name if it conflicts with a Swift keyword
+   */
+  func safeName() -> String {
+    if self.name == "func" {
+      return "fn"
+    } else if self.name == "in" {
+      return "input"
+    } else {
+      return self.name
+    }
+  }
+}
+
+internal class GLCommand {
+  var name: String = ""
+  var retType: String = ""
+  var params: [GLParam] = []
+
+  func definition() -> String {
+    // get return type in Swift parlance
+    let returnTypeStr = glReturnToSwiftType(self.retType)
+    // get param list in Swift parlance
+    let swiftParamList = self.params.map({return $0.swiftFuncSpec()}).joined(separator: ", ")
+    // get param list in C parlance (for func pointer Type specification)
+    let ptrSpecParamList = self.params.map({return $0.swiftType()}).joined(separator: ", ")
+    // get arg names to hand to pointer from wrapper
+    let wrapperCallParams = self.params.map({return $0.safeName()}).joined(separator: ", ")
+
+    let dummyReturn = dummyReturnVals[self.retType] ?? "0"
+    var dummyReturnStr = " return \"\(dummyReturn)\" "
+    if returnTypeStr == "Void" {
+      dummyReturnStr = ""
+    }
+
+    // we want
+    //  - wrapper func that just calls the pointer
+    //  - func pointer that the loader will update
+    //  - dummy func
+    return
+      "public func \(self.name)(\(swiftParamList)) -> \(returnTypeStr) { return \(self.name)_P(\(wrapperCallParams))}\n" +
+      "public func \(self.name)_DUMMY(\(swiftParamList)) -> \(returnTypeStr) {\(dummyReturnStr)}\n" +
+      "var \(self.name)_P:@convention(c)(\(ptrSpecParamList)) -> \(returnTypeStr) = \(self.name)_DUMMY\n"
+  }
+
+  func loaderDefinition() -> String {
+    return
+      "  if let proc = getCommandPtr(\(self.name)) {\n" +
+      "    \(self.name)_P = unsafeBitCase(proc, to: type(of:\(self.name)_P))\n" +
+      "  }\n"
+  }
+}
+
+/**
+ * Stores the required commands and enums for a single GL profile
+ */
+internal struct GLProfile {
+  var name = ""
+  var enums = Set<String>()
+  var commands = Set<String>()
+}
+
+/*
+ * Stores information about the required enums and commands for a single GL extension
+ */
+internal class GLExtension {
+  var enums = Set<String>()
+  var commands = Set<String>()
+}
+
+/*
+ * Stores the resulting enums, commands and requested profile + extensions for
+ * writing out.
+ *
+ * enums should contain all enums
+ * commands should contain all commands
+ * extensions should contain the extensions that are to be written out
+ * profile should contain the profile that is desired
+ */
+internal struct DefinitionSet {
+  let enums: [String: GLEnumDef]
+  let commands: [String: GLCommand]
+  let extensions: [String: GLExtension]
+  let profile: GLProfile
+}
+
+/*
+ * Collects the info we need during the XML parsing
+ */
+internal class GLXmlDelegate : NSObject, XMLParserDelegate {
+  // used to track the full element path
+  var pathParts: [String] = []
+
+  var currentCmd: GLCommand? = nil
+  var currentParam: GLParam? = nil
+  var currentExtension: GLExtension? = nil
+  var workingProfile = GLProfile()              // each profile alters the last, so just save at the end of each one
+
+  var enums: [String: GLEnumDef] = [:]
+  var commands: [String: GLCommand] = [:]
+  var extensions: [String: GLExtension] = [:]
+  var profiles: [GLProfile] = []
+
+  public func parserDidStartDocument(_ parser: XMLParser) {
+  }
+
+  public func parserDidEndDocument(_ parser: XMLParser) {
+  }
+
+  func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName: String?, attributes: [String: String] = [:]) -> () {
+    // everything is inside the "registry" element, so we ignore for brevity
+    if (elementName == "registry") {
+      return
+    }
+    // track the path of the element we're currently within
+    pathParts.append(elementName)
+    let path = pathParts.joined(separator: ".")
+
+    // a new extension definition was started
+    switch(path) {
+    case "extensions.extension":
+      self.currentExtension = GLExtension()
+      self.extensions[attributes["name"]!] = self.currentExtension
+    case "extensions.extension.require.enum":
+      self.currentExtension!.enums.insert(attributes["name"]!)
+    case "extensions.extension.require.command":
+      self.currentExtension!.commands.insert(attributes["name"]!)
+    case "feature":
+      workingProfile.name = attributes["name"]!
+    case "feature.require.enum":
+      workingProfile.enums.insert(attributes["name"]!)
+    case "feature.require.command":
+      workingProfile.commands.insert(attributes["name"]!)
+    case "feature.remove.enum":
+      workingProfile.enums.remove(attributes["name"]!)
+    case "feature.remove.command":
+      workingProfile.commands.remove(attributes["name"]!)
+    case "enums.enum":
+      var name = attributes["name"]!
+      if let api = attributes["api"] {
+          // GL_ACTIVE_PROGRAM_EXT has two different values
+          name += "_" + api
+      }
+      // got all the info, can add now
+      self.enums[name] = GLEnumDef(attributes["value"]!)
+    case "commands.command":
+      // will get name from proto sub-element
+      // will get params from param sub-elements
+      self.currentCmd = GLCommand()
+    case "commands.command.param":
+      // will get type, name and ptr info from sub-elements and text
+      self.currentParam = GLParam()
+      self.currentCmd!.params.append(self.currentParam!)
+    default:
+      // we're not interested in this element type
+      return
+    }
+  }
+
+  func parser(_ parser: XMLParser, foundCharacters: String) {
+    let str = foundCharacters
+    let path = self.pathParts.joined(separator: ".")
+
+    switch (path) {
+    case "commands.command.proto.ptype":
+      self.currentCmd!.retType = str
+    case "commands.command.proto.name":
+      self.currentCmd!.name = str
+      self.commands[str] = self.currentCmd!
+    case "commands.command.proto":
+      self.currentCmd!.retType += str.trimmingCharacters(in: .whitespaces)
+    case "commands.command.param.ptype":
+      self.currentParam!.type = str
+    case "commands.command.param.name":
+      self.currentParam!.name = str
+    case "commands.command.param":
+      self.currentParam!.ptr += str.replacingOccurrences(of: " ", with: "")
+    default:
+      return
+    }
+  }
+
+  func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    // ignoring registry for brevity of path
+    if (elementName == "registry") {
+      return
+    }
+    // build our path (including this element)
+    let path = self.pathParts.joined(separator: ".")
+    // now pop the last element off the end
+    if let lastPart = self.pathParts.popLast() {
+      // this should always be the case
+      assert(lastPart == elementName,
+        "Ended \(elementName), it wasn't the last path part \(lastPart), other parts \(self.pathParts)")
+    }
+
+    switch (path) {
+    case "feature":
+      // safe off the current state of the working profile
+      self.profiles.append(workingProfile)
+    case "commands.command.param.ptype":
+      self.currentParam!.ptr += "!"
+    case "commands.command.param.name":
+      self.currentParam!.ptr += "?"
+    case "commands.command.param":
+      self.currentParam = nil
+    case "commands.command":
+      assert(!self.currentCmd!.name.isEmpty)
+      assert(!self.currentCmd!.retType.isEmpty)
+      self.currentCmd = nil
+    default:
+      return
+    }
+  }
+
+  func parser(_ parser: XMLParser, parseErrorOccurred error: Error) {
+    assert(false, "Parser error \(error)")
+  }
+}
+
+func parseRegistryFile(_ filepath: String) -> GLXmlDelegate? {
     // do a test read
     guard let infile = FileHandle(forReadingAtPath: filepath)
     else {
-      print("Could not open file")
+      print("ERROR: Could not open registry file: \(filepath)")
       return nil
     }
 
-    print("Reading data")
+    print("INFO: Reading data")
     let srcdata = infile.availableData
-    print("Can get \(srcdata.count) bytes")
 
-    print("Creating parser for '\(filepath)'")
-    let del = KhronosXmlDelegate()
+    let del = GLXmlDelegate()
     let parser = XMLParser(data: srcdata)
     parser.delegate = del
-    print("Running parser")
+    print("INFO: Running parser")
     if parser.parse() == false {
-      print("Parsing the XML failed: \(parser.parserError)")
+      if let err = parser.parserError {
+        print("ERROR: Parsing the XML failed with error \(err)")
+      } else {
+        print("ERROR: Parsing the XML failed with no description")
+      }
     }
 
     return del
 }
 
+typealias CodeBlockCallback = (_: String) -> Void
+typealias BlockGenerator = (_ : DefinitionSet, _ : @escaping CodeBlockCallback) -> Void
 
-func spitter(_ delegate: KhronosXmlDelegate, _ filename:String,
-    _ generator:(_:OutputStream, _:KhronosXmlDelegate) -> Void)
-{
-    let outstream:OutputStream! = OutputStream(toFileAtPath: filename, append: false)
-    outstream.open()
-    assert(outstream.streamStatus == .open, "Unable to write \(filename)")
-    generator(outstream, delegate)
-    outstream.close()
+let licenseText =
+"// NOTE: This file is generated.\n" +
+"// Copyright (c) 2017 Andrew Stewart\n" +
+"// Copyright (c) 2013-2016 The Khronos Group Inc.\n" +
+"//\n" +
+"// Permission is hereby granted, free of charge, to any person obtaining a\n" +
+"// copy of this software and/or associated documentation files (the \"Materials\"),\n" +
+"// to deal in the Materials without restriction, including\n" +
+"// without limitation the rights to use, copy, modify, merge, publish,\n" +
+"// distribute, sublicense, and/or sell copies of the Materials, and to\n" +
+"// permit persons to whom the Materials are furnished to do so, subject to\n" +
+"// the following conditions:\n" +
+"//\n" +
+"// The above copyright notice and this permission notice shall be included\n" +
+"// in all copies or substantial portions of the Materials.\n" +
+"//\n" +
+"// THE MATERIALS ARE PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\n" +
+"// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\n" +
+"// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\n" +
+"// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\n" +
+"// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\n" +
+"// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\n" +
+"// MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.\n\n\n"
+
+/*
+ * Give it the delegate and a function that generates content.
+ * The function should call the given callback for each block of code to be written.
+ * Each block is seperated by a line in the output stream
+ */
+func writeCodeFile(_ defs: DefinitionSet, _ filename: String, _ generator: BlockGenerator) -> Void {
+  let outstream:OutputStream! = OutputStream(toFileAtPath: filename, append: false)
+  outstream.open()
+  assert(outstream.streamStatus == .open, "Unable to write \(filename)")
+
+  _ = outstream.write(licenseText)
+  generator(defs, { codeBlock in
+    _ = outstream.write(codeBlock)
+    _ = outstream.write("\n")
+  })
+
+  outstream.close()
 }
 
+func generateEnums(_ defs: DefinitionSet, _ cb: @escaping CodeBlockCallback) {
+  // avoid spitting out dupes
+  var doneEnums = Set<String>()
 
-func writeLicense(_ outstream: OutputStream)
-{
-    var s = "// WARNING: This file is generated. Modifications will be lost.\n\n"
-    s += "// Copyright (c) 2015-2016 David Turnbull\n"
-    s += "// Copyright (c) 2013-2016 The Khronos Group Inc.\n"
-    s += "//\n"
-    s += "// Permission is hereby granted, free of charge, to any person obtaining a\n"
-    s += "// copy of this software and/or associated documentation files (the\n"
-    s += "// \"Materials\"), to deal in the Materials without restriction, including\n"
-    s += "// without limitation the rights to use, copy, modify, merge, publish,\n"
-    s += "// distribute, sublicense, and/or sell copies of the Materials, and to\n"
-    s += "// permit persons to whom the Materials are furnished to do so, subject to\n"
-    s += "// the following conditions:\n"
-    s += "//\n"
-    s += "// The above copyright notice and this permission notice shall be included\n"
-    s += "// in all copies or substantial portions of the Materials.\n"
-    s += "//\n"
-    s += "// THE MATERIALS ARE PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\n"
-    s += "// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\n"
-    s += "// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\n"
-    s += "// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\n"
-    s += "// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\n"
-    s += "// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\n"
-    s += "// MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.\n"
-    s += "\n\n"
-    outstream.write(s)
+  let genEnums : (_ : Set<String>, _ : String) -> Void = { enumNames, msg in
+    for enumName in enumNames.sorted() {
+      if doneEnums.contains(enumName) {
+        continue
+      }
+
+      if let enumDef = defs.enums[enumName] {
+        cb(enumDef.definition(enumName))
+      } else {
+        assert(false, msg + " refers to unknown enum \(enumName)")
+      }
+
+      doneEnums.insert(enumName)
+    }
+  }
+
+  // for the profile we've chosen
+  cb("// ENUMS for profile \(defs.profile.name)")
+  genEnums(defs.profile.enums, "Profile \(defs.profile.name)")
+
+  // now for all the desired extensions
+  for (extName, extInfo) in defs.extensions {
+    cb("// ENUMS for extension \(extName)")
+    genEnums(extInfo.enums, "Extension \(extName)")
+  }
 }
 
+func generateCommands(_ defs: DefinitionSet, _ cb: @escaping CodeBlockCallback) {
+  // avoid spitting out dupes
+  var doneCmds = Set<String>()
 
-func writeDocs(_ outstream: OutputStream, _ delegate:KhronosXmlDelegate, _ cmd:String)
-{
-    var s = ""
-    let params = delegate.commandParams[cmd]!
-    for p in params {
-        if !p.len.isEmpty {
-            if s.isEmpty {
-                s += "/// - parameters:\n"
-            }
-            s += "///   - \(p.name): length is \(p.len)\n"
-        }
+  let genCommands : (_ : Set<String>, _ : String) -> Void = { cmdNames, msg in
+    for cmdName in cmdNames.sorted() {
+      if doneCmds.contains(cmdName) {
+        continue
+      }
+      doneCmds.insert(cmdName)
+
+      if let cmdDef = defs.commands[cmdName] {
+        cb(cmdDef.definition())
+      } else {
+        assert(false, msg + " refers to unknown command \(cmdName)")
+      }
     }
-    outstream.write(s)
+  }
+
+  // for the profile we've chosen
+  cb("// COMMANDS for profile \(defs.profile.name)")
+  genCommands(defs.profile.commands, "Profile \(defs.profile.name)")
+
+  // now for all the desired extensions
+  for (extName, extInfo) in defs.extensions {
+    cb("// COMMANDS for extension \(extName)")
+    genCommands(extInfo.commands, "Extension \(extName)")
+  }
 }
 
+func generateLoader(_ defs: DefinitionSet, _ cb: @escaping CodeBlockCallback) {
+  // avoid dupes
+  var doneCmds = Set<String>()
 
-func writeConstants(_ outstream: OutputStream, _ delegate:KhronosXmlDelegate)
-{
-    writeLicense(outstream)
-    outstream.write("// GLenum constants\n")
-    for key in delegate.enums {
-        let value = delegate.values[key]!
-        if value.hasPrefix("-") {
-            outstream.write("public let \(key) = GLint(0)&\(value)\n")
-        } else {
-            outstream.write("public let \(key) = GLint(\(value))\n")
-        }
+  let genLoaders : (_ : Set<String>, _ : String) -> Void = { cmdNames, msg in
+    for cmdName in cmdNames.sorted() {
+      if doneCmds.contains(cmdName) {
+        continue
+      }
+      doneCmds.insert(cmdName)
+
+      if let cmdDef = defs.commands[cmdName] {
+        cb(cmdDef.loaderDefinition())
+      } else {
+        assert(false, msg + " refers to unknown command \(cmdName)")
+      }
     }
-    outstream.write("\n// GLbitfield constants\n")
-    for key in delegate.bitfields {
-        let s = "public let \(key) = GLuint(\(delegate.values[key]!))\n"
-        outstream.write(s)
-    }
+  }
+
+  // print the loader func preamble
+  cb("public func loadGL(_ getCommandPtr: GetGLFunc) {")
+
+  // for the profile we've chosen
+  cb("  // LOAD commands for profile \(defs.profile.name)")
+  genLoaders(defs.profile.commands, "Profile \(defs.profile.name)")
+
+  // now for all the desired extensions
+  for (extName, extInfo) in defs.extensions {
+    cb("  // LOAD commands for extension \(extName)")
+    genLoaders(extInfo.commands, "Extension \(extName)")
+  }
+
+  cb("}")
 }
 
-
-func paramType(_ x: KhronosXmlDelegate.paramTuple) -> String
-{
-    var type = x.type
-
-    if type == "GLvoid" {type = "Void"}
-
-    if type == "struct _cl_context" {
-        type = "OpaquePointer"
-    } else if type == "struct _cl_event" {
-        type = "OpaquePointer"
-    } else if x.ptr == "const!*?" {
-        type = "UnsafePointer<\(type)>?"
-    } else if x.ptr == "!*?" {
-        type = "UnsafeMutablePointer<\(type)>?"
-    } else if x.ptr == "void*?" {
-        type = "UnsafeMutableRawPointer?"
-    } else if x.ptr == "constvoid*?" {
-        type = "UnsafeRawPointer?"
-    } else if x.ptr == "constvoid**?" {
-        type = "UnsafeMutablePointer<UnsafePointer<Void>>?"
-    } else if x.ptr == "const!*const*?" {
-        type = "UnsafePointer<UnsafePointer<\(type)>>?"
-    } else if x.ptr == "const!**?" {
-        type = "UnsafeMutablePointer<UnsafePointer<\(type)>>?"
-    } else if x.ptr == "void**?" {
-        type = "UnsafeMutablePointer<UnsafeMutableRawPointer>?"
-    } else if x.ptr == "constvoid*const*?" {
-        type = "UnsafePointer<UnsafeRawPointer>?"
-    }
-    // Helper to find new pointer types
-    // else if x.ptr != "!?" {
-    //     print("\(cmd) \(count) \(x.ptr)")
-    // }
-
-    // apparently UnsafePointer<Void> needed a special name...
-    type = type.replacingOccurrences(of: "UnsafePointer<Void>", with: "UnsafeRawPointer")
-    type = type.replacingOccurrences(of: "UnsafeMutablePointer<Void>", with: "UnsafeMutableRawPointer")
-
-    return type
-
-}
-
-
-  func returnType(_ cmd: String, _ delegate:KhronosXmlDelegate) -> String
-  {
-    let retValue = delegate.commandReturns[cmd]!
-    if retValue == "void" {
-        return "Void"
-    } else if retValue == "void *" {
-        return "UnsafeMutableRawPointer?"
-    } else if retValue == "GLubyte*" {
-        return "UnsafePointer<GLubyte>?"
-    } else {
-        return retValue
-    }
-}
-
-
-func writeCommands(_ outstream: OutputStream, _ delegate:KhronosXmlDelegate)
-{
-    writeLicense(outstream)
-    for cmdName in delegate.commands {
-        let params = delegate.commandParams[cmdName]!
-
-        let argTypes = params.map{($0.name, paramType($0))}
-        let cmdReturns = returnType(cmdName, delegate)
-
-	// build the parts of our command
-	let cmdParamDef = argTypes.map({"_ \($0.0) :\($0.1)"}).joined(separator: ", ")
-	let bodyCallArgs = params.map({$0.name}).joined(separator: ", ")
-	let cmdBody = "return \(cmdName)_P(\(bodyCallArgs))"
-	let cmdDef = "public func \(cmdName)(\(cmdParamDef)) -> \(cmdReturns) {\(cmdBody)}\n"
-
-	// write it out
-        outstream.write(cmdDef)
-
-	// build up the parts of the command Ptr var
-	let ptrParamDef = argTypes.map({"\($0.1)"}).joined(separator: ", ")
-	let ptrDef = "var \(cmdName)_P:@convention(c)(\(ptrParamDef)) -> \(cmdReturns) = \(cmdName)_L\n"
-	outstream.write(ptrDef)
-
-    }
-}
-
-
-func buildStringLits(_ delegate: KhronosXmlDelegate) -> [String] {
-    var set = Set<String>()
-    for (_,values) in delegate.commandVersions {
-        for v in values {
-            set.insert(v)
-        }
-    }
-    for (_,values) in delegate.commandExtensions {
-        for v in values {
-            set.insert(v)
-        }
-    }
-    return set.sorted()
-}
-
-
-func writeLoaders(_ outstream: OutputStream, _ delegate:KhronosXmlDelegate)
-{
-    var count:Int, index:Int
-    writeLicense(outstream)
-
-    let strings = buildStringLits(delegate)
-    index = 0
-    for s in strings {
-        outstream.write("let S\(index) = \"\(s)\"\n")
-        index += 1
-    }
-    outstream.write("\n")
-
-    index = 0
-    for cmd in delegate.commands {
-        let params = delegate.commandParams[cmd]!
-
-        let types = params.map{($0.name,paramType($0))}
-        let returns = returnType(cmd, delegate)
-
-        outstream.write("func \(cmd)_L(")
-        count = 0
-        for t in types {
-            if count > 0 {
-                outstream.write("_ ")
-            }
-            outstream.write("\(t.0):\(t.1)")
-            count += 1
-            if count < params.count {
-                outstream.write(", ")
-            }
-        }
-        if returns == "Void" {
-            outstream.write(") {\n")
-        } else {
-            outstream.write(") -> \(returns) {\n")
-        }
-
-        outstream.write("    \(cmd)_P = unsafeBitCast(getAddress(")
-
-        var strnums = Array<Int>()
-        if let vers = delegate.commandVersions[cmd] {
-            for v in vers {
-                strnums.append(strings.index(of: v)!)
-            }
-        }
-        if let vers = delegate.commandExtensions[cmd] {
-            for v in vers {
-                strnums.append(strings.index(of: v)!)
-            }
-        }
-        outstream.write("CommandInfo(\"\(cmd)\", [")
-        count = 0
-        for n in strnums {
-            outstream.write("S\(n)")
-            count += 1
-            if count < strnums.count {
-                outstream.write(", ")
-            }
-        }
-
-        outstream.write("])), to: type(of:\(cmd)_P))\n")
-
-        if returns == "Void" {
-            outstream.write("    \(cmd)_P(")
-        } else {
-            outstream.write("    return \(cmd)_P(")
-        }
-        count = 0
-        for t in types {
-            outstream.write(t.0)
-            count += 1
-            if count < params.count {
-                outstream.write(", ")
-            }
-        }
-        outstream.write(")\n}\n")
-
-        index += 1
-    }
-}
-
-
-func tidyDelegate(_ delegate: KhronosXmlDelegate)
-{
-    // only keep group options with a value
-    for (groupName, groupValues) in delegate.groups {
-        delegate.groups[groupName] = groupValues.filter({delegate.values[$0] != nil})
-    }
-
-    // remove empty groups
-    let emptyGroups = delegate.groups.filter {$1.isEmpty}
-    for (key, _) in emptyGroups {
-        delegate.groups[key] = nil
-    }
-
-    // fix up param names that are swift keywords
-    for (cmd, params) in delegate.commandParams {
-        var count = 0
-        for x in params {
-            if x.name == "func" {
-                delegate.commandParams[cmd]![count] =
-                    (name:"fn",type:x.type,ptr:x.ptr,group:x.group,len:x.len)
-            }
-            if x.name == "in" {
-                delegate.commandParams[cmd]![count] =
-                    (name:"input",type:x.type,ptr:x.ptr,group:x.group,len:x.len)
-            }
-            count += 1
-        }
-    }
-
-    // normalize enums
-    for key in delegate.enums {
-        var value = delegate.values[key]!
-        if value == "0xFFFFFFFFFFFFFFFF" {value = "-1"}
-        if value == "0xFFFFFFFF" {value = "-1"}
-        let valInt = strtoll(value,nil,0)
-        if valInt < 0 {
-            delegate.values[key] = "\(valInt)"
-        } else {
-            var valStr = String(valInt, radix:16, uppercase:true)
-            switch(valStr.characters.count) {
-            case 1,5:
-                valStr = "000" + valStr
-            case 2,6:
-                valStr = "00" + valStr
-            case 3,7:
-                valStr = "0" + valStr
-            default:
-                break
-            }
-            delegate.values[key] = "0x\(valStr)"
-        }
-    }
-
-    // normalize bitfields
-    for key in delegate.bitfields {
-        let value = delegate.values[key]!
-        let valInt = strtoll(value,nil,0)
-        let valStr = String(valInt, radix:16, uppercase:true)
-        let padding = String(repeatElement("0", count: 8-valStr.characters.count))
-        delegate.values[key] = "0x\(padding)\(valStr)"
-    }
-
-    // Remove ES redundancy
-    for (key, val) in delegate.commandVersions {
-        if val.contains("+ES 1.0") {
-            if let i = val.index(of: "+ES 2.0") {
-                delegate.commandVersions[key]?.remove(at: i)
-            }
-        }
-    }
-
-    // sorts
-    delegate.commands.sort()
-    delegate.enums.sort() {
-        strtoll(delegate.values[$0]!,nil,0) < strtoll(delegate.values[$1]!,nil,0)
-    }
-    delegate.bitfields.sort() {
-        strtoll(delegate.values[$0]!,nil,0) < strtoll(delegate.values[$1]!,nil,0)
-    }
-}
-
-
-func saneDelegate(_ thede: KhronosXmlDelegate)
-{
+func assertSaneDelegate(_ thede: GLXmlDelegate) {
     //assert on some minimum counts, just in case
-    assert(thede.groups.count > 100, "\(thede.groups.count) groups is too few.")
     assert(thede.enums.count > 5000, "\(thede.enums.count) enums is too few.")
-    assert(thede.bitfields.count > 200, "\(thede.bitfields.count) bitfields is too few")
-    assert(thede.values.count > 5000, "\(thede.values.count) values is too few")
-    assert(thede.commands.count > 3000, "\(thede.commands.count) commands it too few")
+    assert(thede.commands.count > 3000, "\(thede.commands.count) commands is too few")
 }
-
 
 if (CommandLine.arguments.count != 2) {
     // Got this from Xcode? Add $(SRCROOT)/OpenGL to arguments in scheme.
@@ -662,14 +610,23 @@ if (CommandLine.arguments.count != 2) {
 
 let pathPrefix = CommandLine.arguments[1]
 print("Using prefix: \(pathPrefix)")
-//var thede = KhronosXmlDelegate()
-guard var thede = chomper(pathPrefix + "/Tools/gl.xml") else {
-  print("OH EM GEEEEE")
+
+let gldefpath = pathPrefix + "/Tools/gl.xml"
+guard var thede = parseRegistryFile(gldefpath) else {
+  print("Error parsing \(gldefpath). Exiting")
   exit(1)
 }
-tidyDelegate(thede)
-saneDelegate(thede)
-spitter(thede, pathPrefix + "/Sources/Constants.swift", writeConstants)
-spitter(thede, pathPrefix + "/Sources/Commands.swift", writeCommands)
-spitter(thede, pathPrefix + "/Sources/Loaders.swift", writeLoaders)
-print("Success")
+assertSaneDelegate(thede)
+
+// TODO: filter by desired profile and extensions
+let glDefs = DefinitionSet(
+  enums: thede.enums,
+  commands: thede.commands,
+  extensions: [:],
+  profile: thede.profiles.last!
+)
+
+writeCodeFile(glDefs, pathPrefix + "/Sources/Enums.swift", generateEnums)
+writeCodeFile(glDefs, pathPrefix + "/Sources/Commands.swift", generateCommands)
+writeCodeFile(glDefs, pathPrefix + "/Sources/Loader.swift", generateLoader)
+print("Code generation completed")
