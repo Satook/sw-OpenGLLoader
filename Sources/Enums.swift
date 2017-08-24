@@ -918,3 +918,5 @@ public let GL_UNSIGNED_INT_IMAGE_BUFFER = UInt32(integerLiteral: 0x00009067)
 public let GL_UNSIGNED_INT_IMAGE_CUBE = UInt32(integerLiteral: 0x00009066)
 public let GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY = UInt32(integerLiteral: 0x0000906A)
 public let GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT = UInt32(integerLiteral: 0x00001)
+// ENUMS for extension GL_ARB_map_buffer_alignment
+public let GL_MIN_MAP_BUFFER_ALIGNMENT = UInt32(integerLiteral: 0x000090BC)

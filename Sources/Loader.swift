@@ -1816,4 +1816,5 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glMemoryBarrier_P = unsafeBitCast(proc, to: type(of:glMemoryBarrier_P))
   }
 
+  // LOAD commands for extension GL_ARB_map_buffer_alignment
 }

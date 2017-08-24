@@ -1815,3 +1815,4 @@ public func glMemoryBarrier(_ barriers: GLbitfield) -> Void { return glMemoryBar
 public func glMemoryBarrier_DUMMY(_ barriers: GLbitfield) -> Void {}
 var glMemoryBarrier_P:@convention(c)(GLbitfield) -> Void = glMemoryBarrier_DUMMY
 
+// COMMANDS for extension GL_ARB_map_buffer_alignment
