@@ -296,12 +296,12 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glDisable_P = unsafeBitCast(proc, to: type(of:glDisable_P))
   }
 
-  if let proc = getCommandPtr("glDisablei") {
-    glDisablei_P = unsafeBitCast(proc, to: type(of:glDisablei_P))
-  }
-
   if let proc = getCommandPtr("glDisableVertexAttribArray") {
     glDisableVertexAttribArray_P = unsafeBitCast(proc, to: type(of:glDisableVertexAttribArray_P))
+  }
+
+  if let proc = getCommandPtr("glDisablei") {
+    glDisablei_P = unsafeBitCast(proc, to: type(of:glDisablei_P))
   }
 
   if let proc = getCommandPtr("glDrawArrays") {
@@ -348,12 +348,12 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glEnable_P = unsafeBitCast(proc, to: type(of:glEnable_P))
   }
 
-  if let proc = getCommandPtr("glEnablei") {
-    glEnablei_P = unsafeBitCast(proc, to: type(of:glEnablei_P))
-  }
-
   if let proc = getCommandPtr("glEnableVertexAttribArray") {
     glEnableVertexAttribArray_P = unsafeBitCast(proc, to: type(of:glEnableVertexAttribArray_P))
+  }
+
+  if let proc = getCommandPtr("glEnablei") {
+    glEnablei_P = unsafeBitCast(proc, to: type(of:glEnablei_P))
   }
 
   if let proc = getCommandPtr("glEndConditionalRender") {
@@ -416,10 +416,6 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glGenBuffers_P = unsafeBitCast(proc, to: type(of:glGenBuffers_P))
   }
 
-  if let proc = getCommandPtr("glGenerateMipmap") {
-    glGenerateMipmap_P = unsafeBitCast(proc, to: type(of:glGenerateMipmap_P))
-  }
-
   if let proc = getCommandPtr("glGenFramebuffers") {
     glGenFramebuffers_P = unsafeBitCast(proc, to: type(of:glGenFramebuffers_P))
   }
@@ -444,6 +440,10 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glGenVertexArrays_P = unsafeBitCast(proc, to: type(of:glGenVertexArrays_P))
   }
 
+  if let proc = getCommandPtr("glGenerateMipmap") {
+    glGenerateMipmap_P = unsafeBitCast(proc, to: type(of:glGenerateMipmap_P))
+  }
+
   if let proc = getCommandPtr("glGetActiveAttrib") {
     glGetActiveAttrib_P = unsafeBitCast(proc, to: type(of:glGetActiveAttrib_P))
   }
@@ -452,12 +452,12 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glGetActiveUniform_P = unsafeBitCast(proc, to: type(of:glGetActiveUniform_P))
   }
 
-  if let proc = getCommandPtr("glGetActiveUniformBlockiv") {
-    glGetActiveUniformBlockiv_P = unsafeBitCast(proc, to: type(of:glGetActiveUniformBlockiv_P))
-  }
-
   if let proc = getCommandPtr("glGetActiveUniformBlockName") {
     glGetActiveUniformBlockName_P = unsafeBitCast(proc, to: type(of:glGetActiveUniformBlockName_P))
+  }
+
+  if let proc = getCommandPtr("glGetActiveUniformBlockiv") {
+    glGetActiveUniformBlockiv_P = unsafeBitCast(proc, to: type(of:glGetActiveUniformBlockiv_P))
   }
 
   if let proc = getCommandPtr("glGetActiveUniformName") {
@@ -556,10 +556,6 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glGetProgramiv_P = unsafeBitCast(proc, to: type(of:glGetProgramiv_P))
   }
 
-  if let proc = getCommandPtr("glGetQueryiv") {
-    glGetQueryiv_P = unsafeBitCast(proc, to: type(of:glGetQueryiv_P))
-  }
-
   if let proc = getCommandPtr("glGetQueryObjecti64v") {
     glGetQueryObjecti64v_P = unsafeBitCast(proc, to: type(of:glGetQueryObjecti64v_P))
   }
@@ -576,12 +572,12 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glGetQueryObjectuiv_P = unsafeBitCast(proc, to: type(of:glGetQueryObjectuiv_P))
   }
 
-  if let proc = getCommandPtr("glGetRenderbufferParameteriv") {
-    glGetRenderbufferParameteriv_P = unsafeBitCast(proc, to: type(of:glGetRenderbufferParameteriv_P))
+  if let proc = getCommandPtr("glGetQueryiv") {
+    glGetQueryiv_P = unsafeBitCast(proc, to: type(of:glGetQueryiv_P))
   }
 
-  if let proc = getCommandPtr("glGetSamplerParameterfv") {
-    glGetSamplerParameterfv_P = unsafeBitCast(proc, to: type(of:glGetSamplerParameterfv_P))
+  if let proc = getCommandPtr("glGetRenderbufferParameteriv") {
+    glGetRenderbufferParameteriv_P = unsafeBitCast(proc, to: type(of:glGetRenderbufferParameteriv_P))
   }
 
   if let proc = getCommandPtr("glGetSamplerParameterIiv") {
@@ -592,6 +588,10 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glGetSamplerParameterIuiv_P = unsafeBitCast(proc, to: type(of:glGetSamplerParameterIuiv_P))
   }
 
+  if let proc = getCommandPtr("glGetSamplerParameterfv") {
+    glGetSamplerParameterfv_P = unsafeBitCast(proc, to: type(of:glGetSamplerParameterfv_P))
+  }
+
   if let proc = getCommandPtr("glGetSamplerParameteriv") {
     glGetSamplerParameteriv_P = unsafeBitCast(proc, to: type(of:glGetSamplerParameteriv_P))
   }
@@ -600,12 +600,12 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glGetShaderInfoLog_P = unsafeBitCast(proc, to: type(of:glGetShaderInfoLog_P))
   }
 
-  if let proc = getCommandPtr("glGetShaderiv") {
-    glGetShaderiv_P = unsafeBitCast(proc, to: type(of:glGetShaderiv_P))
-  }
-
   if let proc = getCommandPtr("glGetShaderSource") {
     glGetShaderSource_P = unsafeBitCast(proc, to: type(of:glGetShaderSource_P))
+  }
+
+  if let proc = getCommandPtr("glGetShaderiv") {
+    glGetShaderiv_P = unsafeBitCast(proc, to: type(of:glGetShaderiv_P))
   }
 
   if let proc = getCommandPtr("glGetString") {
@@ -632,16 +632,16 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glGetTexLevelParameteriv_P = unsafeBitCast(proc, to: type(of:glGetTexLevelParameteriv_P))
   }
 
-  if let proc = getCommandPtr("glGetTexParameterfv") {
-    glGetTexParameterfv_P = unsafeBitCast(proc, to: type(of:glGetTexParameterfv_P))
-  }
-
   if let proc = getCommandPtr("glGetTexParameterIiv") {
     glGetTexParameterIiv_P = unsafeBitCast(proc, to: type(of:glGetTexParameterIiv_P))
   }
 
   if let proc = getCommandPtr("glGetTexParameterIuiv") {
     glGetTexParameterIuiv_P = unsafeBitCast(proc, to: type(of:glGetTexParameterIuiv_P))
+  }
+
+  if let proc = getCommandPtr("glGetTexParameterfv") {
+    glGetTexParameterfv_P = unsafeBitCast(proc, to: type(of:glGetTexParameterfv_P))
   }
 
   if let proc = getCommandPtr("glGetTexParameteriv") {
@@ -656,32 +656,24 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glGetUniformBlockIndex_P = unsafeBitCast(proc, to: type(of:glGetUniformBlockIndex_P))
   }
 
-  if let proc = getCommandPtr("glGetUniformfv") {
-    glGetUniformfv_P = unsafeBitCast(proc, to: type(of:glGetUniformfv_P))
-  }
-
   if let proc = getCommandPtr("glGetUniformIndices") {
     glGetUniformIndices_P = unsafeBitCast(proc, to: type(of:glGetUniformIndices_P))
-  }
-
-  if let proc = getCommandPtr("glGetUniformiv") {
-    glGetUniformiv_P = unsafeBitCast(proc, to: type(of:glGetUniformiv_P))
   }
 
   if let proc = getCommandPtr("glGetUniformLocation") {
     glGetUniformLocation_P = unsafeBitCast(proc, to: type(of:glGetUniformLocation_P))
   }
 
+  if let proc = getCommandPtr("glGetUniformfv") {
+    glGetUniformfv_P = unsafeBitCast(proc, to: type(of:glGetUniformfv_P))
+  }
+
+  if let proc = getCommandPtr("glGetUniformiv") {
+    glGetUniformiv_P = unsafeBitCast(proc, to: type(of:glGetUniformiv_P))
+  }
+
   if let proc = getCommandPtr("glGetUniformuiv") {
     glGetUniformuiv_P = unsafeBitCast(proc, to: type(of:glGetUniformuiv_P))
-  }
-
-  if let proc = getCommandPtr("glGetVertexAttribdv") {
-    glGetVertexAttribdv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribdv_P))
-  }
-
-  if let proc = getCommandPtr("glGetVertexAttribfv") {
-    glGetVertexAttribfv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribfv_P))
   }
 
   if let proc = getCommandPtr("glGetVertexAttribIiv") {
@@ -692,12 +684,20 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glGetVertexAttribIuiv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribIuiv_P))
   }
 
-  if let proc = getCommandPtr("glGetVertexAttribiv") {
-    glGetVertexAttribiv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribiv_P))
-  }
-
   if let proc = getCommandPtr("glGetVertexAttribPointerv") {
     glGetVertexAttribPointerv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribPointerv_P))
+  }
+
+  if let proc = getCommandPtr("glGetVertexAttribdv") {
+    glGetVertexAttribdv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribdv_P))
+  }
+
+  if let proc = getCommandPtr("glGetVertexAttribfv") {
+    glGetVertexAttribfv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribfv_P))
+  }
+
+  if let proc = getCommandPtr("glGetVertexAttribiv") {
+    glGetVertexAttribiv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribiv_P))
   }
 
   if let proc = getCommandPtr("glHint") {
@@ -856,6 +856,14 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glSampleMaski_P = unsafeBitCast(proc, to: type(of:glSampleMaski_P))
   }
 
+  if let proc = getCommandPtr("glSamplerParameterIiv") {
+    glSamplerParameterIiv_P = unsafeBitCast(proc, to: type(of:glSamplerParameterIiv_P))
+  }
+
+  if let proc = getCommandPtr("glSamplerParameterIuiv") {
+    glSamplerParameterIuiv_P = unsafeBitCast(proc, to: type(of:glSamplerParameterIuiv_P))
+  }
+
   if let proc = getCommandPtr("glSamplerParameterf") {
     glSamplerParameterf_P = unsafeBitCast(proc, to: type(of:glSamplerParameterf_P))
   }
@@ -866,14 +874,6 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
 
   if let proc = getCommandPtr("glSamplerParameteri") {
     glSamplerParameteri_P = unsafeBitCast(proc, to: type(of:glSamplerParameteri_P))
-  }
-
-  if let proc = getCommandPtr("glSamplerParameterIiv") {
-    glSamplerParameterIiv_P = unsafeBitCast(proc, to: type(of:glSamplerParameterIiv_P))
-  }
-
-  if let proc = getCommandPtr("glSamplerParameterIuiv") {
-    glSamplerParameterIuiv_P = unsafeBitCast(proc, to: type(of:glSamplerParameterIuiv_P))
   }
 
   if let proc = getCommandPtr("glSamplerParameteriv") {
@@ -936,6 +936,14 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glTexImage3DMultisample_P = unsafeBitCast(proc, to: type(of:glTexImage3DMultisample_P))
   }
 
+  if let proc = getCommandPtr("glTexParameterIiv") {
+    glTexParameterIiv_P = unsafeBitCast(proc, to: type(of:glTexParameterIiv_P))
+  }
+
+  if let proc = getCommandPtr("glTexParameterIuiv") {
+    glTexParameterIuiv_P = unsafeBitCast(proc, to: type(of:glTexParameterIuiv_P))
+  }
+
   if let proc = getCommandPtr("glTexParameterf") {
     glTexParameterf_P = unsafeBitCast(proc, to: type(of:glTexParameterf_P))
   }
@@ -946,14 +954,6 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
 
   if let proc = getCommandPtr("glTexParameteri") {
     glTexParameteri_P = unsafeBitCast(proc, to: type(of:glTexParameteri_P))
-  }
-
-  if let proc = getCommandPtr("glTexParameterIiv") {
-    glTexParameterIiv_P = unsafeBitCast(proc, to: type(of:glTexParameterIiv_P))
-  }
-
-  if let proc = getCommandPtr("glTexParameterIuiv") {
-    glTexParameterIuiv_P = unsafeBitCast(proc, to: type(of:glTexParameterIuiv_P))
   }
 
   if let proc = getCommandPtr("glTexParameteriv") {
@@ -1196,30 +1196,6 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glVertexAttrib3sv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib3sv_P))
   }
 
-  if let proc = getCommandPtr("glVertexAttrib4bv") {
-    glVertexAttrib4bv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4bv_P))
-  }
-
-  if let proc = getCommandPtr("glVertexAttrib4d") {
-    glVertexAttrib4d_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4d_P))
-  }
-
-  if let proc = getCommandPtr("glVertexAttrib4dv") {
-    glVertexAttrib4dv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4dv_P))
-  }
-
-  if let proc = getCommandPtr("glVertexAttrib4f") {
-    glVertexAttrib4f_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4f_P))
-  }
-
-  if let proc = getCommandPtr("glVertexAttrib4fv") {
-    glVertexAttrib4fv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4fv_P))
-  }
-
-  if let proc = getCommandPtr("glVertexAttrib4iv") {
-    glVertexAttrib4iv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4iv_P))
-  }
-
   if let proc = getCommandPtr("glVertexAttrib4Nbv") {
     glVertexAttrib4Nbv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4Nbv_P))
   }
@@ -1246,6 +1222,30 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
 
   if let proc = getCommandPtr("glVertexAttrib4Nusv") {
     glVertexAttrib4Nusv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4Nusv_P))
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4bv") {
+    glVertexAttrib4bv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4bv_P))
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4d") {
+    glVertexAttrib4d_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4d_P))
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4dv") {
+    glVertexAttrib4dv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4dv_P))
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4f") {
+    glVertexAttrib4f_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4f_P))
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4fv") {
+    glVertexAttrib4fv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4fv_P))
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4iv") {
+    glVertexAttrib4iv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4iv_P))
   }
 
   if let proc = getCommandPtr("glVertexAttrib4s") {
@@ -1400,421 +1400,4 @@ public func loadGL(_ getCommandPtr: GetGLFunc) {
     glWaitSync_P = unsafeBitCast(proc, to: type(of:glWaitSync_P))
   }
 
-  // LOAD commands for extension GL_ARB_buffer_storage
-  if let proc = getCommandPtr("glBufferStorage") {
-    glBufferStorage_P = unsafeBitCast(proc, to: type(of:glBufferStorage_P))
-  }
-
-  // LOAD commands for extension GL_ARB_direct_state_access
-  if let proc = getCommandPtr("glBindTextureUnit") {
-    glBindTextureUnit_P = unsafeBitCast(proc, to: type(of:glBindTextureUnit_P))
-  }
-
-  if let proc = getCommandPtr("glBlitNamedFramebuffer") {
-    glBlitNamedFramebuffer_P = unsafeBitCast(proc, to: type(of:glBlitNamedFramebuffer_P))
-  }
-
-  if let proc = getCommandPtr("glCheckNamedFramebufferStatus") {
-    glCheckNamedFramebufferStatus_P = unsafeBitCast(proc, to: type(of:glCheckNamedFramebufferStatus_P))
-  }
-
-  if let proc = getCommandPtr("glClearNamedBufferData") {
-    glClearNamedBufferData_P = unsafeBitCast(proc, to: type(of:glClearNamedBufferData_P))
-  }
-
-  if let proc = getCommandPtr("glClearNamedBufferSubData") {
-    glClearNamedBufferSubData_P = unsafeBitCast(proc, to: type(of:glClearNamedBufferSubData_P))
-  }
-
-  if let proc = getCommandPtr("glClearNamedFramebufferfi") {
-    glClearNamedFramebufferfi_P = unsafeBitCast(proc, to: type(of:glClearNamedFramebufferfi_P))
-  }
-
-  if let proc = getCommandPtr("glClearNamedFramebufferfv") {
-    glClearNamedFramebufferfv_P = unsafeBitCast(proc, to: type(of:glClearNamedFramebufferfv_P))
-  }
-
-  if let proc = getCommandPtr("glClearNamedFramebufferiv") {
-    glClearNamedFramebufferiv_P = unsafeBitCast(proc, to: type(of:glClearNamedFramebufferiv_P))
-  }
-
-  if let proc = getCommandPtr("glClearNamedFramebufferuiv") {
-    glClearNamedFramebufferuiv_P = unsafeBitCast(proc, to: type(of:glClearNamedFramebufferuiv_P))
-  }
-
-  if let proc = getCommandPtr("glCompressedTextureSubImage1D") {
-    glCompressedTextureSubImage1D_P = unsafeBitCast(proc, to: type(of:glCompressedTextureSubImage1D_P))
-  }
-
-  if let proc = getCommandPtr("glCompressedTextureSubImage2D") {
-    glCompressedTextureSubImage2D_P = unsafeBitCast(proc, to: type(of:glCompressedTextureSubImage2D_P))
-  }
-
-  if let proc = getCommandPtr("glCompressedTextureSubImage3D") {
-    glCompressedTextureSubImage3D_P = unsafeBitCast(proc, to: type(of:glCompressedTextureSubImage3D_P))
-  }
-
-  if let proc = getCommandPtr("glCopyNamedBufferSubData") {
-    glCopyNamedBufferSubData_P = unsafeBitCast(proc, to: type(of:glCopyNamedBufferSubData_P))
-  }
-
-  if let proc = getCommandPtr("glCopyTextureSubImage1D") {
-    glCopyTextureSubImage1D_P = unsafeBitCast(proc, to: type(of:glCopyTextureSubImage1D_P))
-  }
-
-  if let proc = getCommandPtr("glCopyTextureSubImage2D") {
-    glCopyTextureSubImage2D_P = unsafeBitCast(proc, to: type(of:glCopyTextureSubImage2D_P))
-  }
-
-  if let proc = getCommandPtr("glCopyTextureSubImage3D") {
-    glCopyTextureSubImage3D_P = unsafeBitCast(proc, to: type(of:glCopyTextureSubImage3D_P))
-  }
-
-  if let proc = getCommandPtr("glCreateBuffers") {
-    glCreateBuffers_P = unsafeBitCast(proc, to: type(of:glCreateBuffers_P))
-  }
-
-  if let proc = getCommandPtr("glCreateFramebuffers") {
-    glCreateFramebuffers_P = unsafeBitCast(proc, to: type(of:glCreateFramebuffers_P))
-  }
-
-  if let proc = getCommandPtr("glCreateProgramPipelines") {
-    glCreateProgramPipelines_P = unsafeBitCast(proc, to: type(of:glCreateProgramPipelines_P))
-  }
-
-  if let proc = getCommandPtr("glCreateQueries") {
-    glCreateQueries_P = unsafeBitCast(proc, to: type(of:glCreateQueries_P))
-  }
-
-  if let proc = getCommandPtr("glCreateRenderbuffers") {
-    glCreateRenderbuffers_P = unsafeBitCast(proc, to: type(of:glCreateRenderbuffers_P))
-  }
-
-  if let proc = getCommandPtr("glCreateSamplers") {
-    glCreateSamplers_P = unsafeBitCast(proc, to: type(of:glCreateSamplers_P))
-  }
-
-  if let proc = getCommandPtr("glCreateTextures") {
-    glCreateTextures_P = unsafeBitCast(proc, to: type(of:glCreateTextures_P))
-  }
-
-  if let proc = getCommandPtr("glCreateTransformFeedbacks") {
-    glCreateTransformFeedbacks_P = unsafeBitCast(proc, to: type(of:glCreateTransformFeedbacks_P))
-  }
-
-  if let proc = getCommandPtr("glCreateVertexArrays") {
-    glCreateVertexArrays_P = unsafeBitCast(proc, to: type(of:glCreateVertexArrays_P))
-  }
-
-  if let proc = getCommandPtr("glDisableVertexArrayAttrib") {
-    glDisableVertexArrayAttrib_P = unsafeBitCast(proc, to: type(of:glDisableVertexArrayAttrib_P))
-  }
-
-  if let proc = getCommandPtr("glEnableVertexArrayAttrib") {
-    glEnableVertexArrayAttrib_P = unsafeBitCast(proc, to: type(of:glEnableVertexArrayAttrib_P))
-  }
-
-  if let proc = getCommandPtr("glFlushMappedNamedBufferRange") {
-    glFlushMappedNamedBufferRange_P = unsafeBitCast(proc, to: type(of:glFlushMappedNamedBufferRange_P))
-  }
-
-  if let proc = getCommandPtr("glGenerateTextureMipmap") {
-    glGenerateTextureMipmap_P = unsafeBitCast(proc, to: type(of:glGenerateTextureMipmap_P))
-  }
-
-  if let proc = getCommandPtr("glGetCompressedTextureImage") {
-    glGetCompressedTextureImage_P = unsafeBitCast(proc, to: type(of:glGetCompressedTextureImage_P))
-  }
-
-  if let proc = getCommandPtr("glGetNamedBufferParameteri64v") {
-    glGetNamedBufferParameteri64v_P = unsafeBitCast(proc, to: type(of:glGetNamedBufferParameteri64v_P))
-  }
-
-  if let proc = getCommandPtr("glGetNamedBufferParameteriv") {
-    glGetNamedBufferParameteriv_P = unsafeBitCast(proc, to: type(of:glGetNamedBufferParameteriv_P))
-  }
-
-  if let proc = getCommandPtr("glGetNamedBufferPointerv") {
-    glGetNamedBufferPointerv_P = unsafeBitCast(proc, to: type(of:glGetNamedBufferPointerv_P))
-  }
-
-  if let proc = getCommandPtr("glGetNamedBufferSubData") {
-    glGetNamedBufferSubData_P = unsafeBitCast(proc, to: type(of:glGetNamedBufferSubData_P))
-  }
-
-  if let proc = getCommandPtr("glGetNamedFramebufferAttachmentParameteriv") {
-    glGetNamedFramebufferAttachmentParameteriv_P = unsafeBitCast(proc, to: type(of:glGetNamedFramebufferAttachmentParameteriv_P))
-  }
-
-  if let proc = getCommandPtr("glGetNamedFramebufferParameteriv") {
-    glGetNamedFramebufferParameteriv_P = unsafeBitCast(proc, to: type(of:glGetNamedFramebufferParameteriv_P))
-  }
-
-  if let proc = getCommandPtr("glGetNamedRenderbufferParameteriv") {
-    glGetNamedRenderbufferParameteriv_P = unsafeBitCast(proc, to: type(of:glGetNamedRenderbufferParameteriv_P))
-  }
-
-  if let proc = getCommandPtr("glGetQueryBufferObjecti64v") {
-    glGetQueryBufferObjecti64v_P = unsafeBitCast(proc, to: type(of:glGetQueryBufferObjecti64v_P))
-  }
-
-  if let proc = getCommandPtr("glGetQueryBufferObjectiv") {
-    glGetQueryBufferObjectiv_P = unsafeBitCast(proc, to: type(of:glGetQueryBufferObjectiv_P))
-  }
-
-  if let proc = getCommandPtr("glGetQueryBufferObjectui64v") {
-    glGetQueryBufferObjectui64v_P = unsafeBitCast(proc, to: type(of:glGetQueryBufferObjectui64v_P))
-  }
-
-  if let proc = getCommandPtr("glGetQueryBufferObjectuiv") {
-    glGetQueryBufferObjectuiv_P = unsafeBitCast(proc, to: type(of:glGetQueryBufferObjectuiv_P))
-  }
-
-  if let proc = getCommandPtr("glGetTextureImage") {
-    glGetTextureImage_P = unsafeBitCast(proc, to: type(of:glGetTextureImage_P))
-  }
-
-  if let proc = getCommandPtr("glGetTextureLevelParameterfv") {
-    glGetTextureLevelParameterfv_P = unsafeBitCast(proc, to: type(of:glGetTextureLevelParameterfv_P))
-  }
-
-  if let proc = getCommandPtr("glGetTextureLevelParameteriv") {
-    glGetTextureLevelParameteriv_P = unsafeBitCast(proc, to: type(of:glGetTextureLevelParameteriv_P))
-  }
-
-  if let proc = getCommandPtr("glGetTextureParameterfv") {
-    glGetTextureParameterfv_P = unsafeBitCast(proc, to: type(of:glGetTextureParameterfv_P))
-  }
-
-  if let proc = getCommandPtr("glGetTextureParameterIiv") {
-    glGetTextureParameterIiv_P = unsafeBitCast(proc, to: type(of:glGetTextureParameterIiv_P))
-  }
-
-  if let proc = getCommandPtr("glGetTextureParameterIuiv") {
-    glGetTextureParameterIuiv_P = unsafeBitCast(proc, to: type(of:glGetTextureParameterIuiv_P))
-  }
-
-  if let proc = getCommandPtr("glGetTextureParameteriv") {
-    glGetTextureParameteriv_P = unsafeBitCast(proc, to: type(of:glGetTextureParameteriv_P))
-  }
-
-  if let proc = getCommandPtr("glGetTransformFeedbacki_v") {
-    glGetTransformFeedbacki_v_P = unsafeBitCast(proc, to: type(of:glGetTransformFeedbacki_v_P))
-  }
-
-  if let proc = getCommandPtr("glGetTransformFeedbacki64_v") {
-    glGetTransformFeedbacki64_v_P = unsafeBitCast(proc, to: type(of:glGetTransformFeedbacki64_v_P))
-  }
-
-  if let proc = getCommandPtr("glGetTransformFeedbackiv") {
-    glGetTransformFeedbackiv_P = unsafeBitCast(proc, to: type(of:glGetTransformFeedbackiv_P))
-  }
-
-  if let proc = getCommandPtr("glGetVertexArrayIndexed64iv") {
-    glGetVertexArrayIndexed64iv_P = unsafeBitCast(proc, to: type(of:glGetVertexArrayIndexed64iv_P))
-  }
-
-  if let proc = getCommandPtr("glGetVertexArrayIndexediv") {
-    glGetVertexArrayIndexediv_P = unsafeBitCast(proc, to: type(of:glGetVertexArrayIndexediv_P))
-  }
-
-  if let proc = getCommandPtr("glGetVertexArrayiv") {
-    glGetVertexArrayiv_P = unsafeBitCast(proc, to: type(of:glGetVertexArrayiv_P))
-  }
-
-  if let proc = getCommandPtr("glInvalidateNamedFramebufferData") {
-    glInvalidateNamedFramebufferData_P = unsafeBitCast(proc, to: type(of:glInvalidateNamedFramebufferData_P))
-  }
-
-  if let proc = getCommandPtr("glInvalidateNamedFramebufferSubData") {
-    glInvalidateNamedFramebufferSubData_P = unsafeBitCast(proc, to: type(of:glInvalidateNamedFramebufferSubData_P))
-  }
-
-  if let proc = getCommandPtr("glMapNamedBuffer") {
-    glMapNamedBuffer_P = unsafeBitCast(proc, to: type(of:glMapNamedBuffer_P))
-  }
-
-  if let proc = getCommandPtr("glMapNamedBufferRange") {
-    glMapNamedBufferRange_P = unsafeBitCast(proc, to: type(of:glMapNamedBufferRange_P))
-  }
-
-  if let proc = getCommandPtr("glNamedBufferData") {
-    glNamedBufferData_P = unsafeBitCast(proc, to: type(of:glNamedBufferData_P))
-  }
-
-  if let proc = getCommandPtr("glNamedBufferStorage") {
-    glNamedBufferStorage_P = unsafeBitCast(proc, to: type(of:glNamedBufferStorage_P))
-  }
-
-  if let proc = getCommandPtr("glNamedBufferSubData") {
-    glNamedBufferSubData_P = unsafeBitCast(proc, to: type(of:glNamedBufferSubData_P))
-  }
-
-  if let proc = getCommandPtr("glNamedFramebufferDrawBuffer") {
-    glNamedFramebufferDrawBuffer_P = unsafeBitCast(proc, to: type(of:glNamedFramebufferDrawBuffer_P))
-  }
-
-  if let proc = getCommandPtr("glNamedFramebufferDrawBuffers") {
-    glNamedFramebufferDrawBuffers_P = unsafeBitCast(proc, to: type(of:glNamedFramebufferDrawBuffers_P))
-  }
-
-  if let proc = getCommandPtr("glNamedFramebufferParameteri") {
-    glNamedFramebufferParameteri_P = unsafeBitCast(proc, to: type(of:glNamedFramebufferParameteri_P))
-  }
-
-  if let proc = getCommandPtr("glNamedFramebufferReadBuffer") {
-    glNamedFramebufferReadBuffer_P = unsafeBitCast(proc, to: type(of:glNamedFramebufferReadBuffer_P))
-  }
-
-  if let proc = getCommandPtr("glNamedFramebufferRenderbuffer") {
-    glNamedFramebufferRenderbuffer_P = unsafeBitCast(proc, to: type(of:glNamedFramebufferRenderbuffer_P))
-  }
-
-  if let proc = getCommandPtr("glNamedFramebufferTexture") {
-    glNamedFramebufferTexture_P = unsafeBitCast(proc, to: type(of:glNamedFramebufferTexture_P))
-  }
-
-  if let proc = getCommandPtr("glNamedFramebufferTextureLayer") {
-    glNamedFramebufferTextureLayer_P = unsafeBitCast(proc, to: type(of:glNamedFramebufferTextureLayer_P))
-  }
-
-  if let proc = getCommandPtr("glNamedRenderbufferStorage") {
-    glNamedRenderbufferStorage_P = unsafeBitCast(proc, to: type(of:glNamedRenderbufferStorage_P))
-  }
-
-  if let proc = getCommandPtr("glNamedRenderbufferStorageMultisample") {
-    glNamedRenderbufferStorageMultisample_P = unsafeBitCast(proc, to: type(of:glNamedRenderbufferStorageMultisample_P))
-  }
-
-  if let proc = getCommandPtr("glTextureBuffer") {
-    glTextureBuffer_P = unsafeBitCast(proc, to: type(of:glTextureBuffer_P))
-  }
-
-  if let proc = getCommandPtr("glTextureBufferRange") {
-    glTextureBufferRange_P = unsafeBitCast(proc, to: type(of:glTextureBufferRange_P))
-  }
-
-  if let proc = getCommandPtr("glTextureParameterf") {
-    glTextureParameterf_P = unsafeBitCast(proc, to: type(of:glTextureParameterf_P))
-  }
-
-  if let proc = getCommandPtr("glTextureParameterfv") {
-    glTextureParameterfv_P = unsafeBitCast(proc, to: type(of:glTextureParameterfv_P))
-  }
-
-  if let proc = getCommandPtr("glTextureParameteri") {
-    glTextureParameteri_P = unsafeBitCast(proc, to: type(of:glTextureParameteri_P))
-  }
-
-  if let proc = getCommandPtr("glTextureParameterIiv") {
-    glTextureParameterIiv_P = unsafeBitCast(proc, to: type(of:glTextureParameterIiv_P))
-  }
-
-  if let proc = getCommandPtr("glTextureParameterIuiv") {
-    glTextureParameterIuiv_P = unsafeBitCast(proc, to: type(of:glTextureParameterIuiv_P))
-  }
-
-  if let proc = getCommandPtr("glTextureParameteriv") {
-    glTextureParameteriv_P = unsafeBitCast(proc, to: type(of:glTextureParameteriv_P))
-  }
-
-  if let proc = getCommandPtr("glTextureStorage1D") {
-    glTextureStorage1D_P = unsafeBitCast(proc, to: type(of:glTextureStorage1D_P))
-  }
-
-  if let proc = getCommandPtr("glTextureStorage2D") {
-    glTextureStorage2D_P = unsafeBitCast(proc, to: type(of:glTextureStorage2D_P))
-  }
-
-  if let proc = getCommandPtr("glTextureStorage2DMultisample") {
-    glTextureStorage2DMultisample_P = unsafeBitCast(proc, to: type(of:glTextureStorage2DMultisample_P))
-  }
-
-  if let proc = getCommandPtr("glTextureStorage3D") {
-    glTextureStorage3D_P = unsafeBitCast(proc, to: type(of:glTextureStorage3D_P))
-  }
-
-  if let proc = getCommandPtr("glTextureStorage3DMultisample") {
-    glTextureStorage3DMultisample_P = unsafeBitCast(proc, to: type(of:glTextureStorage3DMultisample_P))
-  }
-
-  if let proc = getCommandPtr("glTextureSubImage1D") {
-    glTextureSubImage1D_P = unsafeBitCast(proc, to: type(of:glTextureSubImage1D_P))
-  }
-
-  if let proc = getCommandPtr("glTextureSubImage2D") {
-    glTextureSubImage2D_P = unsafeBitCast(proc, to: type(of:glTextureSubImage2D_P))
-  }
-
-  if let proc = getCommandPtr("glTextureSubImage3D") {
-    glTextureSubImage3D_P = unsafeBitCast(proc, to: type(of:glTextureSubImage3D_P))
-  }
-
-  if let proc = getCommandPtr("glTransformFeedbackBufferBase") {
-    glTransformFeedbackBufferBase_P = unsafeBitCast(proc, to: type(of:glTransformFeedbackBufferBase_P))
-  }
-
-  if let proc = getCommandPtr("glTransformFeedbackBufferRange") {
-    glTransformFeedbackBufferRange_P = unsafeBitCast(proc, to: type(of:glTransformFeedbackBufferRange_P))
-  }
-
-  if let proc = getCommandPtr("glUnmapNamedBuffer") {
-    glUnmapNamedBuffer_P = unsafeBitCast(proc, to: type(of:glUnmapNamedBuffer_P))
-  }
-
-  if let proc = getCommandPtr("glVertexArrayAttribBinding") {
-    glVertexArrayAttribBinding_P = unsafeBitCast(proc, to: type(of:glVertexArrayAttribBinding_P))
-  }
-
-  if let proc = getCommandPtr("glVertexArrayAttribFormat") {
-    glVertexArrayAttribFormat_P = unsafeBitCast(proc, to: type(of:glVertexArrayAttribFormat_P))
-  }
-
-  if let proc = getCommandPtr("glVertexArrayAttribIFormat") {
-    glVertexArrayAttribIFormat_P = unsafeBitCast(proc, to: type(of:glVertexArrayAttribIFormat_P))
-  }
-
-  if let proc = getCommandPtr("glVertexArrayAttribLFormat") {
-    glVertexArrayAttribLFormat_P = unsafeBitCast(proc, to: type(of:glVertexArrayAttribLFormat_P))
-  }
-
-  if let proc = getCommandPtr("glVertexArrayBindingDivisor") {
-    glVertexArrayBindingDivisor_P = unsafeBitCast(proc, to: type(of:glVertexArrayBindingDivisor_P))
-  }
-
-  if let proc = getCommandPtr("glVertexArrayElementBuffer") {
-    glVertexArrayElementBuffer_P = unsafeBitCast(proc, to: type(of:glVertexArrayElementBuffer_P))
-  }
-
-  if let proc = getCommandPtr("glVertexArrayVertexBuffer") {
-    glVertexArrayVertexBuffer_P = unsafeBitCast(proc, to: type(of:glVertexArrayVertexBuffer_P))
-  }
-
-  if let proc = getCommandPtr("glVertexArrayVertexBuffers") {
-    glVertexArrayVertexBuffers_P = unsafeBitCast(proc, to: type(of:glVertexArrayVertexBuffers_P))
-  }
-
-  // LOAD commands for extension GL_ARB_texture_storage
-  if let proc = getCommandPtr("glTexStorage1D") {
-    glTexStorage1D_P = unsafeBitCast(proc, to: type(of:glTexStorage1D_P))
-  }
-
-  if let proc = getCommandPtr("glTexStorage2D") {
-    glTexStorage2D_P = unsafeBitCast(proc, to: type(of:glTexStorage2D_P))
-  }
-
-  if let proc = getCommandPtr("glTexStorage3D") {
-    glTexStorage3D_P = unsafeBitCast(proc, to: type(of:glTexStorage3D_P))
-  }
-
-  // LOAD commands for extension GL_ARB_shader_image_load_store
-  if let proc = getCommandPtr("glBindImageTexture") {
-    glBindImageTexture_P = unsafeBitCast(proc, to: type(of:glBindImageTexture_P))
-  }
-
-  if let proc = getCommandPtr("glMemoryBarrier") {
-    glMemoryBarrier_P = unsafeBitCast(proc, to: type(of:glMemoryBarrier_P))
-  }
-
-  // LOAD commands for extension GL_ARB_map_buffer_alignment
 }
