@@ -705,7 +705,7 @@ let extnNames = args.dropFirst(3)
 var wantedExtensions = [(String, GLExtension)]()
 extnNames.forEach() {
   if let extn = thede.extensions[$0] {
-    wantedExtensions.append($0, extn)
+    wantedExtensions.append(($0, extn))
   } else {
     print("Extension \($0) does not exist")
     print("Options are:")
