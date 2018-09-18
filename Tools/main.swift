@@ -92,11 +92,11 @@ func glEnumValueToSwiftLiteral(_ val: String) -> String {
     var valStr = String(uintVal, radix:16, uppercase:true)
 
     // pad to multiple of 4 chars
-    let padCount = 4 - 4%valStr.characters.count
+    let padCount = 4 - 4%valStr.count
     valStr = "0x" + "0"*padCount + valStr
 
     // if longer than "0xffffffff", we need to use a 64 bit unsigned
-    if val.characters.count > 10 {
+    if val.count > 10 {
       return "UInt64(integerLiteral: \(valStr))"
     } else {
       return "UInt32(integerLiteral: \(valStr))"
