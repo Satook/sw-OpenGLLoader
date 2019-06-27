@@ -9,21 +9,21 @@ Using a loader
 
 To load an OpenGL version 3.3 profile
 
-'''swift
+```swift
 import GLLoader33
 
 guard GLLoader33.loadGL(getGLProc) else {
   print("Could now load GL 3.3 profile")
   exit(1)
 }
-'''
+```
 
 The type signature of getGLProc is:
 
-'''swift
+```swift
 public typealias GLFuncType = @convention(c) () -> Void
 public typealias GetGLFunc = @convention(c) (_ : UnsafePointer<Int8>) -> GLFuncType?
-'''
+```
 
 All bindings default to stub implementations and only point at the real OpenGL
 functions after loadGL() has returned successfully.
@@ -36,9 +36,9 @@ If you don't want functions for a Core 3.3 profile, or want to add extensions,
 
 In the repo root:
 
-'''bash
+```bash
 swift run glgen Tools/gl.xml loader4.6 --profile GL_VERSION_4_6
-'''
+```
 
 This will generate a new set of GL functions and loader func in the "loader4.6"
 directory. As renderers will likely depend on specific profile/extension
