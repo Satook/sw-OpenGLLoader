@@ -283,8 +283,8 @@ public func glDepthMask(_ flag: GLboolean) -> Void { return glDepthMask_P(flag)}
 public func glDepthMask_DUMMY(_ flag: GLboolean) -> Void {}
 var glDepthMask_P:@convention(c)(GLboolean) -> Void = glDepthMask_DUMMY
 
-public func glDepthRange(_ near: GLdouble, _ far: GLdouble) -> Void { return glDepthRange_P(near, far)}
-public func glDepthRange_DUMMY(_ near: GLdouble, _ far: GLdouble) -> Void {}
+public func glDepthRange(_ n: GLdouble, _ f: GLdouble) -> Void { return glDepthRange_P(n, f)}
+public func glDepthRange_DUMMY(_ n: GLdouble, _ f: GLdouble) -> Void {}
 var glDepthRange_P:@convention(c)(GLdouble, GLdouble) -> Void = glDepthRange_DUMMY
 
 public func glDetachShader(_ program: GLuint, _ shader: GLuint) -> Void { return glDetachShader_P(program, shader)}

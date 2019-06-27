@@ -21,8 +21,8 @@
 // TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 
-
 import Foundation
+import Commander
 
 // for these two return types, I can't just "return 0" in the dummy func
 let dummyReturnVals = [
@@ -249,10 +249,12 @@ internal class GLCommand {
     //  - wrapper func that just calls the pointer
     //  - func pointer that the loader will update
     //  - dummy func
-    return
-      "public func \(self.name)(\(swiftParamList)) -> \(returnTypeStr) { return \(self.name)_P(\(wrapperCallParams))}\n" +
-      "public func \(self.name)_DUMMY(\(swiftParamList)) -> \(returnTypeStr) {\(dummyReturnStr)}\n" +
-      "var \(self.name)_P:@convention(c)(\(ptrSpecParamList)) -> \(returnTypeStr) = \(self.name)_DUMMY\n"
+    return """
+public func \(self.name)(\(swiftParamList)) -> \(returnTypeStr) { return \(self.name)_P(\(wrapperCallParams))}
+public func \(self.name)_DUMMY(\(swiftParamList)) -> \(returnTypeStr) {\(dummyReturnStr)}
+var \(self.name)_P:@convention(c)(\(ptrSpecParamList)) -> \(returnTypeStr) = \(self.name)_DUMMY
+
+"""
   }
 
   func loaderDefinition() -> String {
@@ -261,10 +263,15 @@ internal class GLCommand {
     if self.retType == "void" && self.params.count == 0 {
       castLine = "proc"
     }
-    return
-      "  if let proc = getCommandPtr(\"\(self.name)\") {\n" +
-      "    \(self.name)_P = \(castLine)\n" +
-      "  }\n"
+
+    return """
+  if let proc = getCommandPtr(\"\(self.name)\") {
+    \(self.name)_P = \(castLine)
+  } else {
+    return false
+  }
+
+"""
   }
 }
 
@@ -362,16 +369,18 @@ internal class GLXmlDelegate : NSObject, XMLParserDelegate {
     switch(path) {
     case "extensions.extension":
       self.currentExtension = GLExtension()
-      self.extensions[attributes["name"]!] = self.currentExtension
+      if let attr = attributes["name"] {
+        self.extensions[attr] = self.currentExtension
+      }
     case "extensions.extension.require":
       self.setProfileKeepStatus(attributes["profile"])
     case "extensions.extension.require.enum":
       if keepForProfile {
-        self.currentExtension!.enums.insert(attributes["name"]!)
+        self.currentExtension?.enums.insert(attributes["name"]!)
       }
     case "extensions.extension.require.command":
       if keepForProfile {
-        self.currentExtension!.commands.insert(attributes["name"]!)
+        self.currentExtension?.commands.insert(attributes["name"]!)
       }
     case "feature":
       let newAPI = attributes["api"]!
@@ -418,7 +427,7 @@ internal class GLXmlDelegate : NSObject, XMLParserDelegate {
     case "commands.command.param":
       // will get type, name and ptr info from sub-elements and text
       self.currentParam = GLParam()
-      self.currentCmd!.params.append(self.currentParam!)
+      self.currentCmd?.params.append(self.currentParam!)
     default:
       // we're not interested in this element type
       return
@@ -431,18 +440,18 @@ internal class GLXmlDelegate : NSObject, XMLParserDelegate {
 
     switch (path) {
     case "commands.command.proto.ptype":
-      self.currentCmd!.retType = str
+      self.currentCmd?.retType = str
     case "commands.command.proto.name":
-      self.currentCmd!.name = str
+      self.currentCmd?.name = str
       self.commands[str] = self.currentCmd!
     case "commands.command.proto":
-      self.currentCmd!.retType += str.trimmingCharacters(in: .whitespaces)
+      self.currentCmd?.retType += str.trimmingCharacters(in: .whitespaces)
     case "commands.command.param.ptype":
-      self.currentParam!.type = str
+      self.currentParam?.type = str
     case "commands.command.param.name":
-      self.currentParam!.name = str
+      self.currentParam?.name = str
     case "commands.command.param":
-      self.currentParam!.ptr += str.replacingOccurrences(of: " ", with: "")
+      self.currentParam?.ptr += str.replacingOccurrences(of: " ", with: "")
     default:
       return
     }
@@ -467,9 +476,9 @@ internal class GLXmlDelegate : NSObject, XMLParserDelegate {
       // safe off the current state of the working profile
       self.profiles.append(workingProfile)
     case "commands.command.param.ptype":
-      self.currentParam!.ptr += "!"
+      self.currentParam?.ptr += "!"
     case "commands.command.param.name":
-      self.currentParam!.ptr += "?"
+      self.currentParam?.ptr += "?"
     case "commands.command.param":
       self.currentParam = nil
     case "commands.command":
@@ -488,14 +497,13 @@ internal class GLXmlDelegate : NSObject, XMLParserDelegate {
 
 func parseRegistryFile(_ compat: Bool, _ filepath: String) -> GLXmlDelegate? {
     // do a test read
-    guard let infile = FileHandle(forReadingAtPath: filepath)
-    else {
+    guard let infile = FileHandle(forReadingAtPath: filepath) else {
       print("ERROR: Could not open registry file: \(filepath)")
       return nil
     }
 
     print("INFO: Reading data")
-    let srcdata = infile.availableData
+    let srcdata = infile.readDataToEndOfFile()
 
     let del = GLXmlDelegate(compat)
     let parser = XMLParser(data: srcdata)
@@ -558,11 +566,16 @@ func writeCodeFile(_ defs: DefinitionSet, _ filename: String, _ generator: Block
   outstream.close()
 }
 
-func generateEnums(_ defs: DefinitionSet, _ cb: @escaping CodeBlockCallback) {
+func generateSwiftGL(_ defs: DefinitionSet, _ cb: CodeBlockCallback) {
+  // this is just some basic definitions
+  cb(swiftGLCode)
+}
+
+func generateEnums(_ defs: DefinitionSet, _ cb: CodeBlockCallback) {
   // avoid spitting out dupes
   var doneEnums = Set<String>()
 
-  let genEnums : (_ : Set<String>, _ : String) -> Void = { enumNames, msg in
+  func genEnums(_ enumNames: Set<String>, _ msg: String) {
     for enumName in enumNames.sorted() {
       if doneEnums.contains(enumName) {
         continue
@@ -623,7 +636,7 @@ func generateLoader(_ defs: DefinitionSet, _ cb: @escaping CodeBlockCallback) {
   // avoid dupes
   var doneCmds = Set<String>()
 
-  let genLoaders : (_ : Set<String>, _ : String) -> Void = { cmdNames, msg in
+  func genLoaders(_ cmdNames: Set<String>, _ msg: String) {
     for cmdName in cmdNames.sorted() {
       if doneCmds.contains(cmdName) {
         continue
@@ -639,7 +652,7 @@ func generateLoader(_ defs: DefinitionSet, _ cb: @escaping CodeBlockCallback) {
   }
 
   // print the loader func preamble
-  cb("public func loadGL(_ getCommandPtr: GetGLFunc) {")
+  cb("public func loadGL(_ getCommandPtr: GetGLFunc) -> Bool {")
 
   // for the profile we've chosen
   cb("  // LOAD commands for profile \(defs.profile.name)")
@@ -651,79 +664,82 @@ func generateLoader(_ defs: DefinitionSet, _ cb: @escaping CodeBlockCallback) {
     genLoaders(extInfo.commands, "Extension \(extName)")
   }
 
-  cb("}")
+  cb("""
+  return true
+}
+""")
 }
 
-func assertSaneDelegate(_ thede: GLXmlDelegate) {
-    //assert on some minimum counts, just in case
-    assert(thede.enums.count > 5000, "\(thede.enums.count) enums is too few.")
-    assert(thede.commands.count > 3000, "\(thede.commands.count) commands is too few")
-}
-
-var args = [String](CommandLine.arguments)
-// first take out --compat if it's there
-var compat_profile = false    // default to core profile only
-if let compatIdx = args.index(of: "--compat") {
-  args.remove(at: compatIdx)
-  compat_profile = true
-}
-if (args.count < 2) {
-    // Got this from Xcode? Add $(SRCROOT)/OpenGL to arguments in scheme.
-    print("\nusage: main.swift --compat BASEPATH GL_PROFILE [EXTENSION...]\n")
+func assertSaneDelegate(_ glfile: String, _ thede: GLXmlDelegate) {
+  func fail(_ msg: String) {
+    print("ERROR: Invalid registry file \"\(glfile)\": \(msg)")
     exit(1)
-}
-
-let pathPrefix = args[1]
-print("Using prefix: \(pathPrefix)")
-
-let gldefpath = pathPrefix + "/Tools/gl.xml"
-guard var thede = parseRegistryFile(compat_profile, gldefpath) else {
-  print("Error parsing \(gldefpath). Exiting")
-  exit(1)
-}
-assertSaneDelegate(thede)
-
-// lookup map for later use
-var profMap = [String: Int]()
-for (i, prof) in thede.profiles.enumerated() {
-  profMap[prof.name] = i
-}
-
-// They didn't provide a profile name, or a valid one, so give them a list
-if (args.count < 3 || profMap[args[2]] == nil) {
-  print("\nusage: main.swift --compat BASEPATH GL_PROFILE [EXTENSION...]\n")
-  print("\tAvailable profiles:")
-  for prof in thede.profiles {
-    print("\t\t\(prof.name)")
   }
-  exit(1)
-}
-let desiredProfile = args[2]
 
-// get the list of extensions the user wanted
-let extnNames = args.dropFirst(3)
-var wantedExtensions = [(String, GLExtension)]()
-extnNames.forEach() {
-  if let extn = thede.extensions[$0] {
-    wantedExtensions.append(($0, extn))
-  } else {
-    print("Extension \($0) does not exist")
-    print("Options are:")
-    for (extName, _) in thede.extensions {
-      print("\t\(extName)")
+  // check on some minimum counts, just in case
+  if thede.enums.count < 5000 {
+    fail("\(thede.enums.count) enums is too few")
+  }
+  if thede.commands.count < 3000 {
+    fail("\(thede.commands.count) commands is too few")
+  }
+}
+
+command(
+  Flag("compat", default: false, description: "Should a compatibility profile be generated, false == core"),
+  Option("profile", default: "GL_VERSION_3_3", description: "The OpenGL profile use"),
+  Argument<String>("glxml", description: "The OpenGL XML registry file to read"),
+  Argument<String>("outdir", description: "The directory to write out generated code"),
+  Argument<[String]>("extension", description: "OpenGL extensions to add to the loader")
+) { (compat, profile, glfile, outdir, extensions) in
+
+  guard let thede = parseRegistryFile(compat, glfile) else {
+    print("Error parsing \(glfile). Exiting")
+    exit(1)
+  }
+  assertSaneDelegate(glfile, thede)
+
+  // lookup map for later use
+  let profMap = [String: Int](uniqueKeysWithValues: thede.profiles.enumerated().map { (i, prof) in
+    (prof.name, i)
+  })
+
+  // They didn't provide a valid profile name so provide a list
+  if profMap[profile] == nil {
+    print("ERROR: Invalid profile \(profile) requested")
+    print("\tAvailable profiles:")
+    for prof in thede.profiles {
+      print("\t\t\(prof.name)")
     }
     exit(1)
   }
-}
+  let desiredProfile = profile
 
-let glDefs = DefinitionSet(
-  enums: thede.enums,
-  commands: thede.commands,
-  extensions: wantedExtensions,
-  profile: thede.profiles[profMap[desiredProfile]!]
-)
+  // get the list of extensions the user wanted
+  let wantedExtensions = extensions.map { eName -> (String, GLExtension) in
+    guard let extn = thede.extensions[eName] else {
+      print("Extension \(eName) does not exist")
+      print("Options are:")
+      for (extName, _) in thede.extensions {
+        print("\t\(extName)")
+      }
+      exit(1)
+    }
 
-writeCodeFile(glDefs, pathPrefix + "/Sources/Enums.swift", generateEnums)
-writeCodeFile(glDefs, pathPrefix + "/Sources/Commands.swift", generateCommands)
-writeCodeFile(glDefs, pathPrefix + "/Sources/Loader.swift", generateLoader)
-print("Code generation completed")
+    return (eName, extn)
+  }
+
+  let glDefs = DefinitionSet(
+    enums: thede.enums,
+    commands: thede.commands,
+    extensions: wantedExtensions,
+    profile: thede.profiles[profMap[desiredProfile]!]
+  )
+
+  writeCodeFile(glDefs, "\(outdir)/Enums.swift", generateEnums)
+  writeCodeFile(glDefs, "\(outdir)/Commands.swift", generateCommands)
+  writeCodeFile(glDefs, "\(outdir)/Loader.swift", generateLoader)
+  writeCodeFile(glDefs, "\(outdir)/SwiftGL.swift", generateSwiftGL)
+  print("Code generation completed")
+
+}.run()

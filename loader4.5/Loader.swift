@@ -1,0 +1,3946 @@
+// NOTE: This file is generated.
+// Copyright (c) 2017 Andrew Stewart
+// Copyright (c) 2013-2016 The Khronos Group Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and/or associated documentation files (the "Materials"),
+// to deal in the Materials without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Materials, and to
+// permit persons to whom the Materials are furnished to do so, subject to
+// the following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Materials.
+//
+// THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+// CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+// MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
+
+
+public func loadGL(_ getCommandPtr: GetGLFunc) -> Bool {
+  // LOAD commands for profile GL_VERSION_4_5
+  if let proc = getCommandPtr("glActiveShaderProgram") {
+    glActiveShaderProgram_P = unsafeBitCast(proc, to: type(of:glActiveShaderProgram_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glActiveTexture") {
+    glActiveTexture_P = unsafeBitCast(proc, to: type(of:glActiveTexture_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glAttachShader") {
+    glAttachShader_P = unsafeBitCast(proc, to: type(of:glAttachShader_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBeginConditionalRender") {
+    glBeginConditionalRender_P = unsafeBitCast(proc, to: type(of:glBeginConditionalRender_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBeginQuery") {
+    glBeginQuery_P = unsafeBitCast(proc, to: type(of:glBeginQuery_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBeginQueryIndexed") {
+    glBeginQueryIndexed_P = unsafeBitCast(proc, to: type(of:glBeginQueryIndexed_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBeginTransformFeedback") {
+    glBeginTransformFeedback_P = unsafeBitCast(proc, to: type(of:glBeginTransformFeedback_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindAttribLocation") {
+    glBindAttribLocation_P = unsafeBitCast(proc, to: type(of:glBindAttribLocation_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindBuffer") {
+    glBindBuffer_P = unsafeBitCast(proc, to: type(of:glBindBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindBufferBase") {
+    glBindBufferBase_P = unsafeBitCast(proc, to: type(of:glBindBufferBase_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindBufferRange") {
+    glBindBufferRange_P = unsafeBitCast(proc, to: type(of:glBindBufferRange_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindBuffersBase") {
+    glBindBuffersBase_P = unsafeBitCast(proc, to: type(of:glBindBuffersBase_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindBuffersRange") {
+    glBindBuffersRange_P = unsafeBitCast(proc, to: type(of:glBindBuffersRange_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindFragDataLocation") {
+    glBindFragDataLocation_P = unsafeBitCast(proc, to: type(of:glBindFragDataLocation_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindFragDataLocationIndexed") {
+    glBindFragDataLocationIndexed_P = unsafeBitCast(proc, to: type(of:glBindFragDataLocationIndexed_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindFramebuffer") {
+    glBindFramebuffer_P = unsafeBitCast(proc, to: type(of:glBindFramebuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindImageTexture") {
+    glBindImageTexture_P = unsafeBitCast(proc, to: type(of:glBindImageTexture_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindImageTextures") {
+    glBindImageTextures_P = unsafeBitCast(proc, to: type(of:glBindImageTextures_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindProgramPipeline") {
+    glBindProgramPipeline_P = unsafeBitCast(proc, to: type(of:glBindProgramPipeline_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindRenderbuffer") {
+    glBindRenderbuffer_P = unsafeBitCast(proc, to: type(of:glBindRenderbuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindSampler") {
+    glBindSampler_P = unsafeBitCast(proc, to: type(of:glBindSampler_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindSamplers") {
+    glBindSamplers_P = unsafeBitCast(proc, to: type(of:glBindSamplers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindTexture") {
+    glBindTexture_P = unsafeBitCast(proc, to: type(of:glBindTexture_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindTextureUnit") {
+    glBindTextureUnit_P = unsafeBitCast(proc, to: type(of:glBindTextureUnit_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindTextures") {
+    glBindTextures_P = unsafeBitCast(proc, to: type(of:glBindTextures_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindTransformFeedback") {
+    glBindTransformFeedback_P = unsafeBitCast(proc, to: type(of:glBindTransformFeedback_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindVertexArray") {
+    glBindVertexArray_P = unsafeBitCast(proc, to: type(of:glBindVertexArray_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindVertexBuffer") {
+    glBindVertexBuffer_P = unsafeBitCast(proc, to: type(of:glBindVertexBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBindVertexBuffers") {
+    glBindVertexBuffers_P = unsafeBitCast(proc, to: type(of:glBindVertexBuffers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBlendColor") {
+    glBlendColor_P = unsafeBitCast(proc, to: type(of:glBlendColor_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBlendEquation") {
+    glBlendEquation_P = unsafeBitCast(proc, to: type(of:glBlendEquation_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBlendEquationSeparate") {
+    glBlendEquationSeparate_P = unsafeBitCast(proc, to: type(of:glBlendEquationSeparate_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBlendEquationSeparatei") {
+    glBlendEquationSeparatei_P = unsafeBitCast(proc, to: type(of:glBlendEquationSeparatei_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBlendEquationi") {
+    glBlendEquationi_P = unsafeBitCast(proc, to: type(of:glBlendEquationi_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBlendFunc") {
+    glBlendFunc_P = unsafeBitCast(proc, to: type(of:glBlendFunc_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBlendFuncSeparate") {
+    glBlendFuncSeparate_P = unsafeBitCast(proc, to: type(of:glBlendFuncSeparate_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBlendFuncSeparatei") {
+    glBlendFuncSeparatei_P = unsafeBitCast(proc, to: type(of:glBlendFuncSeparatei_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBlendFunci") {
+    glBlendFunci_P = unsafeBitCast(proc, to: type(of:glBlendFunci_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBlitFramebuffer") {
+    glBlitFramebuffer_P = unsafeBitCast(proc, to: type(of:glBlitFramebuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBlitNamedFramebuffer") {
+    glBlitNamedFramebuffer_P = unsafeBitCast(proc, to: type(of:glBlitNamedFramebuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBufferData") {
+    glBufferData_P = unsafeBitCast(proc, to: type(of:glBufferData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBufferStorage") {
+    glBufferStorage_P = unsafeBitCast(proc, to: type(of:glBufferStorage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glBufferSubData") {
+    glBufferSubData_P = unsafeBitCast(proc, to: type(of:glBufferSubData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCheckFramebufferStatus") {
+    glCheckFramebufferStatus_P = unsafeBitCast(proc, to: type(of:glCheckFramebufferStatus_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCheckNamedFramebufferStatus") {
+    glCheckNamedFramebufferStatus_P = unsafeBitCast(proc, to: type(of:glCheckNamedFramebufferStatus_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClampColor") {
+    glClampColor_P = unsafeBitCast(proc, to: type(of:glClampColor_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClear") {
+    glClear_P = unsafeBitCast(proc, to: type(of:glClear_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearBufferData") {
+    glClearBufferData_P = unsafeBitCast(proc, to: type(of:glClearBufferData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearBufferSubData") {
+    glClearBufferSubData_P = unsafeBitCast(proc, to: type(of:glClearBufferSubData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearBufferfi") {
+    glClearBufferfi_P = unsafeBitCast(proc, to: type(of:glClearBufferfi_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearBufferfv") {
+    glClearBufferfv_P = unsafeBitCast(proc, to: type(of:glClearBufferfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearBufferiv") {
+    glClearBufferiv_P = unsafeBitCast(proc, to: type(of:glClearBufferiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearBufferuiv") {
+    glClearBufferuiv_P = unsafeBitCast(proc, to: type(of:glClearBufferuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearColor") {
+    glClearColor_P = unsafeBitCast(proc, to: type(of:glClearColor_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearDepth") {
+    glClearDepth_P = unsafeBitCast(proc, to: type(of:glClearDepth_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearDepthf") {
+    glClearDepthf_P = unsafeBitCast(proc, to: type(of:glClearDepthf_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearNamedBufferData") {
+    glClearNamedBufferData_P = unsafeBitCast(proc, to: type(of:glClearNamedBufferData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearNamedBufferSubData") {
+    glClearNamedBufferSubData_P = unsafeBitCast(proc, to: type(of:glClearNamedBufferSubData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearNamedFramebufferfi") {
+    glClearNamedFramebufferfi_P = unsafeBitCast(proc, to: type(of:glClearNamedFramebufferfi_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearNamedFramebufferfv") {
+    glClearNamedFramebufferfv_P = unsafeBitCast(proc, to: type(of:glClearNamedFramebufferfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearNamedFramebufferiv") {
+    glClearNamedFramebufferiv_P = unsafeBitCast(proc, to: type(of:glClearNamedFramebufferiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearNamedFramebufferuiv") {
+    glClearNamedFramebufferuiv_P = unsafeBitCast(proc, to: type(of:glClearNamedFramebufferuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearStencil") {
+    glClearStencil_P = unsafeBitCast(proc, to: type(of:glClearStencil_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearTexImage") {
+    glClearTexImage_P = unsafeBitCast(proc, to: type(of:glClearTexImage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClearTexSubImage") {
+    glClearTexSubImage_P = unsafeBitCast(proc, to: type(of:glClearTexSubImage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClientWaitSync") {
+    glClientWaitSync_P = unsafeBitCast(proc, to: type(of:glClientWaitSync_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glClipControl") {
+    glClipControl_P = unsafeBitCast(proc, to: type(of:glClipControl_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glColorMask") {
+    glColorMask_P = unsafeBitCast(proc, to: type(of:glColorMask_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glColorMaski") {
+    glColorMaski_P = unsafeBitCast(proc, to: type(of:glColorMaski_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCompileShader") {
+    glCompileShader_P = unsafeBitCast(proc, to: type(of:glCompileShader_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCompressedTexImage1D") {
+    glCompressedTexImage1D_P = unsafeBitCast(proc, to: type(of:glCompressedTexImage1D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCompressedTexImage2D") {
+    glCompressedTexImage2D_P = unsafeBitCast(proc, to: type(of:glCompressedTexImage2D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCompressedTexImage3D") {
+    glCompressedTexImage3D_P = unsafeBitCast(proc, to: type(of:glCompressedTexImage3D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCompressedTexSubImage1D") {
+    glCompressedTexSubImage1D_P = unsafeBitCast(proc, to: type(of:glCompressedTexSubImage1D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCompressedTexSubImage2D") {
+    glCompressedTexSubImage2D_P = unsafeBitCast(proc, to: type(of:glCompressedTexSubImage2D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCompressedTexSubImage3D") {
+    glCompressedTexSubImage3D_P = unsafeBitCast(proc, to: type(of:glCompressedTexSubImage3D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCompressedTextureSubImage1D") {
+    glCompressedTextureSubImage1D_P = unsafeBitCast(proc, to: type(of:glCompressedTextureSubImage1D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCompressedTextureSubImage2D") {
+    glCompressedTextureSubImage2D_P = unsafeBitCast(proc, to: type(of:glCompressedTextureSubImage2D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCompressedTextureSubImage3D") {
+    glCompressedTextureSubImage3D_P = unsafeBitCast(proc, to: type(of:glCompressedTextureSubImage3D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCopyBufferSubData") {
+    glCopyBufferSubData_P = unsafeBitCast(proc, to: type(of:glCopyBufferSubData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCopyImageSubData") {
+    glCopyImageSubData_P = unsafeBitCast(proc, to: type(of:glCopyImageSubData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCopyNamedBufferSubData") {
+    glCopyNamedBufferSubData_P = unsafeBitCast(proc, to: type(of:glCopyNamedBufferSubData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCopyTexImage1D") {
+    glCopyTexImage1D_P = unsafeBitCast(proc, to: type(of:glCopyTexImage1D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCopyTexImage2D") {
+    glCopyTexImage2D_P = unsafeBitCast(proc, to: type(of:glCopyTexImage2D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCopyTexSubImage1D") {
+    glCopyTexSubImage1D_P = unsafeBitCast(proc, to: type(of:glCopyTexSubImage1D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCopyTexSubImage2D") {
+    glCopyTexSubImage2D_P = unsafeBitCast(proc, to: type(of:glCopyTexSubImage2D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCopyTexSubImage3D") {
+    glCopyTexSubImage3D_P = unsafeBitCast(proc, to: type(of:glCopyTexSubImage3D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCopyTextureSubImage1D") {
+    glCopyTextureSubImage1D_P = unsafeBitCast(proc, to: type(of:glCopyTextureSubImage1D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCopyTextureSubImage2D") {
+    glCopyTextureSubImage2D_P = unsafeBitCast(proc, to: type(of:glCopyTextureSubImage2D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCopyTextureSubImage3D") {
+    glCopyTextureSubImage3D_P = unsafeBitCast(proc, to: type(of:glCopyTextureSubImage3D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCreateBuffers") {
+    glCreateBuffers_P = unsafeBitCast(proc, to: type(of:glCreateBuffers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCreateFramebuffers") {
+    glCreateFramebuffers_P = unsafeBitCast(proc, to: type(of:glCreateFramebuffers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCreateProgram") {
+    glCreateProgram_P = unsafeBitCast(proc, to: type(of:glCreateProgram_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCreateProgramPipelines") {
+    glCreateProgramPipelines_P = unsafeBitCast(proc, to: type(of:glCreateProgramPipelines_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCreateQueries") {
+    glCreateQueries_P = unsafeBitCast(proc, to: type(of:glCreateQueries_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCreateRenderbuffers") {
+    glCreateRenderbuffers_P = unsafeBitCast(proc, to: type(of:glCreateRenderbuffers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCreateSamplers") {
+    glCreateSamplers_P = unsafeBitCast(proc, to: type(of:glCreateSamplers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCreateShader") {
+    glCreateShader_P = unsafeBitCast(proc, to: type(of:glCreateShader_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCreateShaderProgramv") {
+    glCreateShaderProgramv_P = unsafeBitCast(proc, to: type(of:glCreateShaderProgramv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCreateTextures") {
+    glCreateTextures_P = unsafeBitCast(proc, to: type(of:glCreateTextures_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCreateTransformFeedbacks") {
+    glCreateTransformFeedbacks_P = unsafeBitCast(proc, to: type(of:glCreateTransformFeedbacks_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCreateVertexArrays") {
+    glCreateVertexArrays_P = unsafeBitCast(proc, to: type(of:glCreateVertexArrays_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glCullFace") {
+    glCullFace_P = unsafeBitCast(proc, to: type(of:glCullFace_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDebugMessageCallback") {
+    glDebugMessageCallback_P = unsafeBitCast(proc, to: type(of:glDebugMessageCallback_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDebugMessageControl") {
+    glDebugMessageControl_P = unsafeBitCast(proc, to: type(of:glDebugMessageControl_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDebugMessageInsert") {
+    glDebugMessageInsert_P = unsafeBitCast(proc, to: type(of:glDebugMessageInsert_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDeleteBuffers") {
+    glDeleteBuffers_P = unsafeBitCast(proc, to: type(of:glDeleteBuffers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDeleteFramebuffers") {
+    glDeleteFramebuffers_P = unsafeBitCast(proc, to: type(of:glDeleteFramebuffers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDeleteProgram") {
+    glDeleteProgram_P = unsafeBitCast(proc, to: type(of:glDeleteProgram_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDeleteProgramPipelines") {
+    glDeleteProgramPipelines_P = unsafeBitCast(proc, to: type(of:glDeleteProgramPipelines_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDeleteQueries") {
+    glDeleteQueries_P = unsafeBitCast(proc, to: type(of:glDeleteQueries_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDeleteRenderbuffers") {
+    glDeleteRenderbuffers_P = unsafeBitCast(proc, to: type(of:glDeleteRenderbuffers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDeleteSamplers") {
+    glDeleteSamplers_P = unsafeBitCast(proc, to: type(of:glDeleteSamplers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDeleteShader") {
+    glDeleteShader_P = unsafeBitCast(proc, to: type(of:glDeleteShader_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDeleteSync") {
+    glDeleteSync_P = unsafeBitCast(proc, to: type(of:glDeleteSync_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDeleteTextures") {
+    glDeleteTextures_P = unsafeBitCast(proc, to: type(of:glDeleteTextures_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDeleteTransformFeedbacks") {
+    glDeleteTransformFeedbacks_P = unsafeBitCast(proc, to: type(of:glDeleteTransformFeedbacks_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDeleteVertexArrays") {
+    glDeleteVertexArrays_P = unsafeBitCast(proc, to: type(of:glDeleteVertexArrays_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDepthFunc") {
+    glDepthFunc_P = unsafeBitCast(proc, to: type(of:glDepthFunc_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDepthMask") {
+    glDepthMask_P = unsafeBitCast(proc, to: type(of:glDepthMask_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDepthRange") {
+    glDepthRange_P = unsafeBitCast(proc, to: type(of:glDepthRange_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDepthRangeArrayv") {
+    glDepthRangeArrayv_P = unsafeBitCast(proc, to: type(of:glDepthRangeArrayv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDepthRangeIndexed") {
+    glDepthRangeIndexed_P = unsafeBitCast(proc, to: type(of:glDepthRangeIndexed_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDepthRangef") {
+    glDepthRangef_P = unsafeBitCast(proc, to: type(of:glDepthRangef_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDetachShader") {
+    glDetachShader_P = unsafeBitCast(proc, to: type(of:glDetachShader_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDisable") {
+    glDisable_P = unsafeBitCast(proc, to: type(of:glDisable_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDisableVertexArrayAttrib") {
+    glDisableVertexArrayAttrib_P = unsafeBitCast(proc, to: type(of:glDisableVertexArrayAttrib_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDisableVertexAttribArray") {
+    glDisableVertexAttribArray_P = unsafeBitCast(proc, to: type(of:glDisableVertexAttribArray_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDisablei") {
+    glDisablei_P = unsafeBitCast(proc, to: type(of:glDisablei_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDispatchCompute") {
+    glDispatchCompute_P = unsafeBitCast(proc, to: type(of:glDispatchCompute_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDispatchComputeIndirect") {
+    glDispatchComputeIndirect_P = unsafeBitCast(proc, to: type(of:glDispatchComputeIndirect_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawArrays") {
+    glDrawArrays_P = unsafeBitCast(proc, to: type(of:glDrawArrays_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawArraysIndirect") {
+    glDrawArraysIndirect_P = unsafeBitCast(proc, to: type(of:glDrawArraysIndirect_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawArraysInstanced") {
+    glDrawArraysInstanced_P = unsafeBitCast(proc, to: type(of:glDrawArraysInstanced_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawArraysInstancedBaseInstance") {
+    glDrawArraysInstancedBaseInstance_P = unsafeBitCast(proc, to: type(of:glDrawArraysInstancedBaseInstance_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawBuffer") {
+    glDrawBuffer_P = unsafeBitCast(proc, to: type(of:glDrawBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawBuffers") {
+    glDrawBuffers_P = unsafeBitCast(proc, to: type(of:glDrawBuffers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawElements") {
+    glDrawElements_P = unsafeBitCast(proc, to: type(of:glDrawElements_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawElementsBaseVertex") {
+    glDrawElementsBaseVertex_P = unsafeBitCast(proc, to: type(of:glDrawElementsBaseVertex_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawElementsIndirect") {
+    glDrawElementsIndirect_P = unsafeBitCast(proc, to: type(of:glDrawElementsIndirect_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawElementsInstanced") {
+    glDrawElementsInstanced_P = unsafeBitCast(proc, to: type(of:glDrawElementsInstanced_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawElementsInstancedBaseInstance") {
+    glDrawElementsInstancedBaseInstance_P = unsafeBitCast(proc, to: type(of:glDrawElementsInstancedBaseInstance_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawElementsInstancedBaseVertex") {
+    glDrawElementsInstancedBaseVertex_P = unsafeBitCast(proc, to: type(of:glDrawElementsInstancedBaseVertex_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawElementsInstancedBaseVertexBaseInstance") {
+    glDrawElementsInstancedBaseVertexBaseInstance_P = unsafeBitCast(proc, to: type(of:glDrawElementsInstancedBaseVertexBaseInstance_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawRangeElements") {
+    glDrawRangeElements_P = unsafeBitCast(proc, to: type(of:glDrawRangeElements_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawRangeElementsBaseVertex") {
+    glDrawRangeElementsBaseVertex_P = unsafeBitCast(proc, to: type(of:glDrawRangeElementsBaseVertex_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawTransformFeedback") {
+    glDrawTransformFeedback_P = unsafeBitCast(proc, to: type(of:glDrawTransformFeedback_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawTransformFeedbackInstanced") {
+    glDrawTransformFeedbackInstanced_P = unsafeBitCast(proc, to: type(of:glDrawTransformFeedbackInstanced_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawTransformFeedbackStream") {
+    glDrawTransformFeedbackStream_P = unsafeBitCast(proc, to: type(of:glDrawTransformFeedbackStream_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glDrawTransformFeedbackStreamInstanced") {
+    glDrawTransformFeedbackStreamInstanced_P = unsafeBitCast(proc, to: type(of:glDrawTransformFeedbackStreamInstanced_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glEnable") {
+    glEnable_P = unsafeBitCast(proc, to: type(of:glEnable_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glEnableVertexArrayAttrib") {
+    glEnableVertexArrayAttrib_P = unsafeBitCast(proc, to: type(of:glEnableVertexArrayAttrib_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glEnableVertexAttribArray") {
+    glEnableVertexAttribArray_P = unsafeBitCast(proc, to: type(of:glEnableVertexAttribArray_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glEnablei") {
+    glEnablei_P = unsafeBitCast(proc, to: type(of:glEnablei_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glEndConditionalRender") {
+    glEndConditionalRender_P = proc
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glEndQuery") {
+    glEndQuery_P = unsafeBitCast(proc, to: type(of:glEndQuery_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glEndQueryIndexed") {
+    glEndQueryIndexed_P = unsafeBitCast(proc, to: type(of:glEndQueryIndexed_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glEndTransformFeedback") {
+    glEndTransformFeedback_P = proc
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glFenceSync") {
+    glFenceSync_P = unsafeBitCast(proc, to: type(of:glFenceSync_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glFinish") {
+    glFinish_P = proc
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glFlush") {
+    glFlush_P = proc
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glFlushMappedBufferRange") {
+    glFlushMappedBufferRange_P = unsafeBitCast(proc, to: type(of:glFlushMappedBufferRange_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glFlushMappedNamedBufferRange") {
+    glFlushMappedNamedBufferRange_P = unsafeBitCast(proc, to: type(of:glFlushMappedNamedBufferRange_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glFramebufferParameteri") {
+    glFramebufferParameteri_P = unsafeBitCast(proc, to: type(of:glFramebufferParameteri_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glFramebufferRenderbuffer") {
+    glFramebufferRenderbuffer_P = unsafeBitCast(proc, to: type(of:glFramebufferRenderbuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glFramebufferTexture") {
+    glFramebufferTexture_P = unsafeBitCast(proc, to: type(of:glFramebufferTexture_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glFramebufferTexture1D") {
+    glFramebufferTexture1D_P = unsafeBitCast(proc, to: type(of:glFramebufferTexture1D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glFramebufferTexture2D") {
+    glFramebufferTexture2D_P = unsafeBitCast(proc, to: type(of:glFramebufferTexture2D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glFramebufferTexture3D") {
+    glFramebufferTexture3D_P = unsafeBitCast(proc, to: type(of:glFramebufferTexture3D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glFramebufferTextureLayer") {
+    glFramebufferTextureLayer_P = unsafeBitCast(proc, to: type(of:glFramebufferTextureLayer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glFrontFace") {
+    glFrontFace_P = unsafeBitCast(proc, to: type(of:glFrontFace_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGenBuffers") {
+    glGenBuffers_P = unsafeBitCast(proc, to: type(of:glGenBuffers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGenFramebuffers") {
+    glGenFramebuffers_P = unsafeBitCast(proc, to: type(of:glGenFramebuffers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGenProgramPipelines") {
+    glGenProgramPipelines_P = unsafeBitCast(proc, to: type(of:glGenProgramPipelines_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGenQueries") {
+    glGenQueries_P = unsafeBitCast(proc, to: type(of:glGenQueries_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGenRenderbuffers") {
+    glGenRenderbuffers_P = unsafeBitCast(proc, to: type(of:glGenRenderbuffers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGenSamplers") {
+    glGenSamplers_P = unsafeBitCast(proc, to: type(of:glGenSamplers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGenTextures") {
+    glGenTextures_P = unsafeBitCast(proc, to: type(of:glGenTextures_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGenTransformFeedbacks") {
+    glGenTransformFeedbacks_P = unsafeBitCast(proc, to: type(of:glGenTransformFeedbacks_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGenVertexArrays") {
+    glGenVertexArrays_P = unsafeBitCast(proc, to: type(of:glGenVertexArrays_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGenerateMipmap") {
+    glGenerateMipmap_P = unsafeBitCast(proc, to: type(of:glGenerateMipmap_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGenerateTextureMipmap") {
+    glGenerateTextureMipmap_P = unsafeBitCast(proc, to: type(of:glGenerateTextureMipmap_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetActiveAtomicCounterBufferiv") {
+    glGetActiveAtomicCounterBufferiv_P = unsafeBitCast(proc, to: type(of:glGetActiveAtomicCounterBufferiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetActiveAttrib") {
+    glGetActiveAttrib_P = unsafeBitCast(proc, to: type(of:glGetActiveAttrib_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetActiveSubroutineName") {
+    glGetActiveSubroutineName_P = unsafeBitCast(proc, to: type(of:glGetActiveSubroutineName_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetActiveSubroutineUniformName") {
+    glGetActiveSubroutineUniformName_P = unsafeBitCast(proc, to: type(of:glGetActiveSubroutineUniformName_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetActiveSubroutineUniformiv") {
+    glGetActiveSubroutineUniformiv_P = unsafeBitCast(proc, to: type(of:glGetActiveSubroutineUniformiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetActiveUniform") {
+    glGetActiveUniform_P = unsafeBitCast(proc, to: type(of:glGetActiveUniform_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetActiveUniformBlockName") {
+    glGetActiveUniformBlockName_P = unsafeBitCast(proc, to: type(of:glGetActiveUniformBlockName_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetActiveUniformBlockiv") {
+    glGetActiveUniformBlockiv_P = unsafeBitCast(proc, to: type(of:glGetActiveUniformBlockiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetActiveUniformName") {
+    glGetActiveUniformName_P = unsafeBitCast(proc, to: type(of:glGetActiveUniformName_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetActiveUniformsiv") {
+    glGetActiveUniformsiv_P = unsafeBitCast(proc, to: type(of:glGetActiveUniformsiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetAttachedShaders") {
+    glGetAttachedShaders_P = unsafeBitCast(proc, to: type(of:glGetAttachedShaders_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetAttribLocation") {
+    glGetAttribLocation_P = unsafeBitCast(proc, to: type(of:glGetAttribLocation_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetBooleani_v") {
+    glGetBooleani_v_P = unsafeBitCast(proc, to: type(of:glGetBooleani_v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetBooleanv") {
+    glGetBooleanv_P = unsafeBitCast(proc, to: type(of:glGetBooleanv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetBufferParameteri64v") {
+    glGetBufferParameteri64v_P = unsafeBitCast(proc, to: type(of:glGetBufferParameteri64v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetBufferParameteriv") {
+    glGetBufferParameteriv_P = unsafeBitCast(proc, to: type(of:glGetBufferParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetBufferPointerv") {
+    glGetBufferPointerv_P = unsafeBitCast(proc, to: type(of:glGetBufferPointerv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetBufferSubData") {
+    glGetBufferSubData_P = unsafeBitCast(proc, to: type(of:glGetBufferSubData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetCompressedTexImage") {
+    glGetCompressedTexImage_P = unsafeBitCast(proc, to: type(of:glGetCompressedTexImage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetCompressedTextureImage") {
+    glGetCompressedTextureImage_P = unsafeBitCast(proc, to: type(of:glGetCompressedTextureImage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetCompressedTextureSubImage") {
+    glGetCompressedTextureSubImage_P = unsafeBitCast(proc, to: type(of:glGetCompressedTextureSubImage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetDebugMessageLog") {
+    glGetDebugMessageLog_P = unsafeBitCast(proc, to: type(of:glGetDebugMessageLog_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetDoublei_v") {
+    glGetDoublei_v_P = unsafeBitCast(proc, to: type(of:glGetDoublei_v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetDoublev") {
+    glGetDoublev_P = unsafeBitCast(proc, to: type(of:glGetDoublev_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetError") {
+    glGetError_P = unsafeBitCast(proc, to: type(of:glGetError_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetFloati_v") {
+    glGetFloati_v_P = unsafeBitCast(proc, to: type(of:glGetFloati_v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetFloatv") {
+    glGetFloatv_P = unsafeBitCast(proc, to: type(of:glGetFloatv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetFragDataIndex") {
+    glGetFragDataIndex_P = unsafeBitCast(proc, to: type(of:glGetFragDataIndex_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetFragDataLocation") {
+    glGetFragDataLocation_P = unsafeBitCast(proc, to: type(of:glGetFragDataLocation_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetFramebufferAttachmentParameteriv") {
+    glGetFramebufferAttachmentParameteriv_P = unsafeBitCast(proc, to: type(of:glGetFramebufferAttachmentParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetFramebufferParameteriv") {
+    glGetFramebufferParameteriv_P = unsafeBitCast(proc, to: type(of:glGetFramebufferParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetGraphicsResetStatus") {
+    glGetGraphicsResetStatus_P = unsafeBitCast(proc, to: type(of:glGetGraphicsResetStatus_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetInteger64i_v") {
+    glGetInteger64i_v_P = unsafeBitCast(proc, to: type(of:glGetInteger64i_v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetInteger64v") {
+    glGetInteger64v_P = unsafeBitCast(proc, to: type(of:glGetInteger64v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetIntegeri_v") {
+    glGetIntegeri_v_P = unsafeBitCast(proc, to: type(of:glGetIntegeri_v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetIntegerv") {
+    glGetIntegerv_P = unsafeBitCast(proc, to: type(of:glGetIntegerv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetInternalformati64v") {
+    glGetInternalformati64v_P = unsafeBitCast(proc, to: type(of:glGetInternalformati64v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetInternalformativ") {
+    glGetInternalformativ_P = unsafeBitCast(proc, to: type(of:glGetInternalformativ_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetMultisamplefv") {
+    glGetMultisamplefv_P = unsafeBitCast(proc, to: type(of:glGetMultisamplefv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetNamedBufferParameteri64v") {
+    glGetNamedBufferParameteri64v_P = unsafeBitCast(proc, to: type(of:glGetNamedBufferParameteri64v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetNamedBufferParameteriv") {
+    glGetNamedBufferParameteriv_P = unsafeBitCast(proc, to: type(of:glGetNamedBufferParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetNamedBufferPointerv") {
+    glGetNamedBufferPointerv_P = unsafeBitCast(proc, to: type(of:glGetNamedBufferPointerv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetNamedBufferSubData") {
+    glGetNamedBufferSubData_P = unsafeBitCast(proc, to: type(of:glGetNamedBufferSubData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetNamedFramebufferAttachmentParameteriv") {
+    glGetNamedFramebufferAttachmentParameteriv_P = unsafeBitCast(proc, to: type(of:glGetNamedFramebufferAttachmentParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetNamedFramebufferParameteriv") {
+    glGetNamedFramebufferParameteriv_P = unsafeBitCast(proc, to: type(of:glGetNamedFramebufferParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetNamedRenderbufferParameteriv") {
+    glGetNamedRenderbufferParameteriv_P = unsafeBitCast(proc, to: type(of:glGetNamedRenderbufferParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetObjectLabel") {
+    glGetObjectLabel_P = unsafeBitCast(proc, to: type(of:glGetObjectLabel_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetObjectPtrLabel") {
+    glGetObjectPtrLabel_P = unsafeBitCast(proc, to: type(of:glGetObjectPtrLabel_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetPointerv") {
+    glGetPointerv_P = unsafeBitCast(proc, to: type(of:glGetPointerv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetProgramBinary") {
+    glGetProgramBinary_P = unsafeBitCast(proc, to: type(of:glGetProgramBinary_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetProgramInfoLog") {
+    glGetProgramInfoLog_P = unsafeBitCast(proc, to: type(of:glGetProgramInfoLog_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetProgramInterfaceiv") {
+    glGetProgramInterfaceiv_P = unsafeBitCast(proc, to: type(of:glGetProgramInterfaceiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetProgramPipelineInfoLog") {
+    glGetProgramPipelineInfoLog_P = unsafeBitCast(proc, to: type(of:glGetProgramPipelineInfoLog_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetProgramPipelineiv") {
+    glGetProgramPipelineiv_P = unsafeBitCast(proc, to: type(of:glGetProgramPipelineiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetProgramResourceIndex") {
+    glGetProgramResourceIndex_P = unsafeBitCast(proc, to: type(of:glGetProgramResourceIndex_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetProgramResourceLocation") {
+    glGetProgramResourceLocation_P = unsafeBitCast(proc, to: type(of:glGetProgramResourceLocation_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetProgramResourceLocationIndex") {
+    glGetProgramResourceLocationIndex_P = unsafeBitCast(proc, to: type(of:glGetProgramResourceLocationIndex_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetProgramResourceName") {
+    glGetProgramResourceName_P = unsafeBitCast(proc, to: type(of:glGetProgramResourceName_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetProgramResourceiv") {
+    glGetProgramResourceiv_P = unsafeBitCast(proc, to: type(of:glGetProgramResourceiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetProgramStageiv") {
+    glGetProgramStageiv_P = unsafeBitCast(proc, to: type(of:glGetProgramStageiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetProgramiv") {
+    glGetProgramiv_P = unsafeBitCast(proc, to: type(of:glGetProgramiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetQueryBufferObjecti64v") {
+    glGetQueryBufferObjecti64v_P = unsafeBitCast(proc, to: type(of:glGetQueryBufferObjecti64v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetQueryBufferObjectiv") {
+    glGetQueryBufferObjectiv_P = unsafeBitCast(proc, to: type(of:glGetQueryBufferObjectiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetQueryBufferObjectui64v") {
+    glGetQueryBufferObjectui64v_P = unsafeBitCast(proc, to: type(of:glGetQueryBufferObjectui64v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetQueryBufferObjectuiv") {
+    glGetQueryBufferObjectuiv_P = unsafeBitCast(proc, to: type(of:glGetQueryBufferObjectuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetQueryIndexediv") {
+    glGetQueryIndexediv_P = unsafeBitCast(proc, to: type(of:glGetQueryIndexediv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetQueryObjecti64v") {
+    glGetQueryObjecti64v_P = unsafeBitCast(proc, to: type(of:glGetQueryObjecti64v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetQueryObjectiv") {
+    glGetQueryObjectiv_P = unsafeBitCast(proc, to: type(of:glGetQueryObjectiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetQueryObjectui64v") {
+    glGetQueryObjectui64v_P = unsafeBitCast(proc, to: type(of:glGetQueryObjectui64v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetQueryObjectuiv") {
+    glGetQueryObjectuiv_P = unsafeBitCast(proc, to: type(of:glGetQueryObjectuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetQueryiv") {
+    glGetQueryiv_P = unsafeBitCast(proc, to: type(of:glGetQueryiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetRenderbufferParameteriv") {
+    glGetRenderbufferParameteriv_P = unsafeBitCast(proc, to: type(of:glGetRenderbufferParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetSamplerParameterIiv") {
+    glGetSamplerParameterIiv_P = unsafeBitCast(proc, to: type(of:glGetSamplerParameterIiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetSamplerParameterIuiv") {
+    glGetSamplerParameterIuiv_P = unsafeBitCast(proc, to: type(of:glGetSamplerParameterIuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetSamplerParameterfv") {
+    glGetSamplerParameterfv_P = unsafeBitCast(proc, to: type(of:glGetSamplerParameterfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetSamplerParameteriv") {
+    glGetSamplerParameteriv_P = unsafeBitCast(proc, to: type(of:glGetSamplerParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetShaderInfoLog") {
+    glGetShaderInfoLog_P = unsafeBitCast(proc, to: type(of:glGetShaderInfoLog_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetShaderPrecisionFormat") {
+    glGetShaderPrecisionFormat_P = unsafeBitCast(proc, to: type(of:glGetShaderPrecisionFormat_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetShaderSource") {
+    glGetShaderSource_P = unsafeBitCast(proc, to: type(of:glGetShaderSource_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetShaderiv") {
+    glGetShaderiv_P = unsafeBitCast(proc, to: type(of:glGetShaderiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetString") {
+    glGetString_P = unsafeBitCast(proc, to: type(of:glGetString_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetStringi") {
+    glGetStringi_P = unsafeBitCast(proc, to: type(of:glGetStringi_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetSubroutineIndex") {
+    glGetSubroutineIndex_P = unsafeBitCast(proc, to: type(of:glGetSubroutineIndex_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetSubroutineUniformLocation") {
+    glGetSubroutineUniformLocation_P = unsafeBitCast(proc, to: type(of:glGetSubroutineUniformLocation_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetSynciv") {
+    glGetSynciv_P = unsafeBitCast(proc, to: type(of:glGetSynciv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTexImage") {
+    glGetTexImage_P = unsafeBitCast(proc, to: type(of:glGetTexImage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTexLevelParameterfv") {
+    glGetTexLevelParameterfv_P = unsafeBitCast(proc, to: type(of:glGetTexLevelParameterfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTexLevelParameteriv") {
+    glGetTexLevelParameteriv_P = unsafeBitCast(proc, to: type(of:glGetTexLevelParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTexParameterIiv") {
+    glGetTexParameterIiv_P = unsafeBitCast(proc, to: type(of:glGetTexParameterIiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTexParameterIuiv") {
+    glGetTexParameterIuiv_P = unsafeBitCast(proc, to: type(of:glGetTexParameterIuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTexParameterfv") {
+    glGetTexParameterfv_P = unsafeBitCast(proc, to: type(of:glGetTexParameterfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTexParameteriv") {
+    glGetTexParameteriv_P = unsafeBitCast(proc, to: type(of:glGetTexParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTextureImage") {
+    glGetTextureImage_P = unsafeBitCast(proc, to: type(of:glGetTextureImage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTextureLevelParameterfv") {
+    glGetTextureLevelParameterfv_P = unsafeBitCast(proc, to: type(of:glGetTextureLevelParameterfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTextureLevelParameteriv") {
+    glGetTextureLevelParameteriv_P = unsafeBitCast(proc, to: type(of:glGetTextureLevelParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTextureParameterIiv") {
+    glGetTextureParameterIiv_P = unsafeBitCast(proc, to: type(of:glGetTextureParameterIiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTextureParameterIuiv") {
+    glGetTextureParameterIuiv_P = unsafeBitCast(proc, to: type(of:glGetTextureParameterIuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTextureParameterfv") {
+    glGetTextureParameterfv_P = unsafeBitCast(proc, to: type(of:glGetTextureParameterfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTextureParameteriv") {
+    glGetTextureParameteriv_P = unsafeBitCast(proc, to: type(of:glGetTextureParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTextureSubImage") {
+    glGetTextureSubImage_P = unsafeBitCast(proc, to: type(of:glGetTextureSubImage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTransformFeedbackVarying") {
+    glGetTransformFeedbackVarying_P = unsafeBitCast(proc, to: type(of:glGetTransformFeedbackVarying_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTransformFeedbacki64_v") {
+    glGetTransformFeedbacki64_v_P = unsafeBitCast(proc, to: type(of:glGetTransformFeedbacki64_v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTransformFeedbacki_v") {
+    glGetTransformFeedbacki_v_P = unsafeBitCast(proc, to: type(of:glGetTransformFeedbacki_v_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetTransformFeedbackiv") {
+    glGetTransformFeedbackiv_P = unsafeBitCast(proc, to: type(of:glGetTransformFeedbackiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetUniformBlockIndex") {
+    glGetUniformBlockIndex_P = unsafeBitCast(proc, to: type(of:glGetUniformBlockIndex_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetUniformIndices") {
+    glGetUniformIndices_P = unsafeBitCast(proc, to: type(of:glGetUniformIndices_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetUniformLocation") {
+    glGetUniformLocation_P = unsafeBitCast(proc, to: type(of:glGetUniformLocation_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetUniformSubroutineuiv") {
+    glGetUniformSubroutineuiv_P = unsafeBitCast(proc, to: type(of:glGetUniformSubroutineuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetUniformdv") {
+    glGetUniformdv_P = unsafeBitCast(proc, to: type(of:glGetUniformdv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetUniformfv") {
+    glGetUniformfv_P = unsafeBitCast(proc, to: type(of:glGetUniformfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetUniformiv") {
+    glGetUniformiv_P = unsafeBitCast(proc, to: type(of:glGetUniformiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetUniformuiv") {
+    glGetUniformuiv_P = unsafeBitCast(proc, to: type(of:glGetUniformuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetVertexArrayIndexed64iv") {
+    glGetVertexArrayIndexed64iv_P = unsafeBitCast(proc, to: type(of:glGetVertexArrayIndexed64iv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetVertexArrayIndexediv") {
+    glGetVertexArrayIndexediv_P = unsafeBitCast(proc, to: type(of:glGetVertexArrayIndexediv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetVertexArrayiv") {
+    glGetVertexArrayiv_P = unsafeBitCast(proc, to: type(of:glGetVertexArrayiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetVertexAttribIiv") {
+    glGetVertexAttribIiv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribIiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetVertexAttribIuiv") {
+    glGetVertexAttribIuiv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribIuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetVertexAttribLdv") {
+    glGetVertexAttribLdv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribLdv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetVertexAttribPointerv") {
+    glGetVertexAttribPointerv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribPointerv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetVertexAttribdv") {
+    glGetVertexAttribdv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribdv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetVertexAttribfv") {
+    glGetVertexAttribfv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetVertexAttribiv") {
+    glGetVertexAttribiv_P = unsafeBitCast(proc, to: type(of:glGetVertexAttribiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetnCompressedTexImage") {
+    glGetnCompressedTexImage_P = unsafeBitCast(proc, to: type(of:glGetnCompressedTexImage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetnTexImage") {
+    glGetnTexImage_P = unsafeBitCast(proc, to: type(of:glGetnTexImage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetnUniformdv") {
+    glGetnUniformdv_P = unsafeBitCast(proc, to: type(of:glGetnUniformdv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetnUniformfv") {
+    glGetnUniformfv_P = unsafeBitCast(proc, to: type(of:glGetnUniformfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetnUniformiv") {
+    glGetnUniformiv_P = unsafeBitCast(proc, to: type(of:glGetnUniformiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glGetnUniformuiv") {
+    glGetnUniformuiv_P = unsafeBitCast(proc, to: type(of:glGetnUniformuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glHint") {
+    glHint_P = unsafeBitCast(proc, to: type(of:glHint_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glInvalidateBufferData") {
+    glInvalidateBufferData_P = unsafeBitCast(proc, to: type(of:glInvalidateBufferData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glInvalidateBufferSubData") {
+    glInvalidateBufferSubData_P = unsafeBitCast(proc, to: type(of:glInvalidateBufferSubData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glInvalidateFramebuffer") {
+    glInvalidateFramebuffer_P = unsafeBitCast(proc, to: type(of:glInvalidateFramebuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glInvalidateNamedFramebufferData") {
+    glInvalidateNamedFramebufferData_P = unsafeBitCast(proc, to: type(of:glInvalidateNamedFramebufferData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glInvalidateNamedFramebufferSubData") {
+    glInvalidateNamedFramebufferSubData_P = unsafeBitCast(proc, to: type(of:glInvalidateNamedFramebufferSubData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glInvalidateSubFramebuffer") {
+    glInvalidateSubFramebuffer_P = unsafeBitCast(proc, to: type(of:glInvalidateSubFramebuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glInvalidateTexImage") {
+    glInvalidateTexImage_P = unsafeBitCast(proc, to: type(of:glInvalidateTexImage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glInvalidateTexSubImage") {
+    glInvalidateTexSubImage_P = unsafeBitCast(proc, to: type(of:glInvalidateTexSubImage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glIsBuffer") {
+    glIsBuffer_P = unsafeBitCast(proc, to: type(of:glIsBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glIsEnabled") {
+    glIsEnabled_P = unsafeBitCast(proc, to: type(of:glIsEnabled_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glIsEnabledi") {
+    glIsEnabledi_P = unsafeBitCast(proc, to: type(of:glIsEnabledi_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glIsFramebuffer") {
+    glIsFramebuffer_P = unsafeBitCast(proc, to: type(of:glIsFramebuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glIsProgram") {
+    glIsProgram_P = unsafeBitCast(proc, to: type(of:glIsProgram_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glIsProgramPipeline") {
+    glIsProgramPipeline_P = unsafeBitCast(proc, to: type(of:glIsProgramPipeline_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glIsQuery") {
+    glIsQuery_P = unsafeBitCast(proc, to: type(of:glIsQuery_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glIsRenderbuffer") {
+    glIsRenderbuffer_P = unsafeBitCast(proc, to: type(of:glIsRenderbuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glIsSampler") {
+    glIsSampler_P = unsafeBitCast(proc, to: type(of:glIsSampler_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glIsShader") {
+    glIsShader_P = unsafeBitCast(proc, to: type(of:glIsShader_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glIsSync") {
+    glIsSync_P = unsafeBitCast(proc, to: type(of:glIsSync_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glIsTexture") {
+    glIsTexture_P = unsafeBitCast(proc, to: type(of:glIsTexture_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glIsTransformFeedback") {
+    glIsTransformFeedback_P = unsafeBitCast(proc, to: type(of:glIsTransformFeedback_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glIsVertexArray") {
+    glIsVertexArray_P = unsafeBitCast(proc, to: type(of:glIsVertexArray_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glLineWidth") {
+    glLineWidth_P = unsafeBitCast(proc, to: type(of:glLineWidth_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glLinkProgram") {
+    glLinkProgram_P = unsafeBitCast(proc, to: type(of:glLinkProgram_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glLogicOp") {
+    glLogicOp_P = unsafeBitCast(proc, to: type(of:glLogicOp_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glMapBuffer") {
+    glMapBuffer_P = unsafeBitCast(proc, to: type(of:glMapBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glMapBufferRange") {
+    glMapBufferRange_P = unsafeBitCast(proc, to: type(of:glMapBufferRange_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glMapNamedBuffer") {
+    glMapNamedBuffer_P = unsafeBitCast(proc, to: type(of:glMapNamedBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glMapNamedBufferRange") {
+    glMapNamedBufferRange_P = unsafeBitCast(proc, to: type(of:glMapNamedBufferRange_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glMemoryBarrier") {
+    glMemoryBarrier_P = unsafeBitCast(proc, to: type(of:glMemoryBarrier_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glMemoryBarrierByRegion") {
+    glMemoryBarrierByRegion_P = unsafeBitCast(proc, to: type(of:glMemoryBarrierByRegion_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glMinSampleShading") {
+    glMinSampleShading_P = unsafeBitCast(proc, to: type(of:glMinSampleShading_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glMultiDrawArrays") {
+    glMultiDrawArrays_P = unsafeBitCast(proc, to: type(of:glMultiDrawArrays_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glMultiDrawArraysIndirect") {
+    glMultiDrawArraysIndirect_P = unsafeBitCast(proc, to: type(of:glMultiDrawArraysIndirect_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glMultiDrawElements") {
+    glMultiDrawElements_P = unsafeBitCast(proc, to: type(of:glMultiDrawElements_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glMultiDrawElementsBaseVertex") {
+    glMultiDrawElementsBaseVertex_P = unsafeBitCast(proc, to: type(of:glMultiDrawElementsBaseVertex_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glMultiDrawElementsIndirect") {
+    glMultiDrawElementsIndirect_P = unsafeBitCast(proc, to: type(of:glMultiDrawElementsIndirect_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glNamedBufferData") {
+    glNamedBufferData_P = unsafeBitCast(proc, to: type(of:glNamedBufferData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glNamedBufferStorage") {
+    glNamedBufferStorage_P = unsafeBitCast(proc, to: type(of:glNamedBufferStorage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glNamedBufferSubData") {
+    glNamedBufferSubData_P = unsafeBitCast(proc, to: type(of:glNamedBufferSubData_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glNamedFramebufferDrawBuffer") {
+    glNamedFramebufferDrawBuffer_P = unsafeBitCast(proc, to: type(of:glNamedFramebufferDrawBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glNamedFramebufferDrawBuffers") {
+    glNamedFramebufferDrawBuffers_P = unsafeBitCast(proc, to: type(of:glNamedFramebufferDrawBuffers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glNamedFramebufferParameteri") {
+    glNamedFramebufferParameteri_P = unsafeBitCast(proc, to: type(of:glNamedFramebufferParameteri_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glNamedFramebufferReadBuffer") {
+    glNamedFramebufferReadBuffer_P = unsafeBitCast(proc, to: type(of:glNamedFramebufferReadBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glNamedFramebufferRenderbuffer") {
+    glNamedFramebufferRenderbuffer_P = unsafeBitCast(proc, to: type(of:glNamedFramebufferRenderbuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glNamedFramebufferTexture") {
+    glNamedFramebufferTexture_P = unsafeBitCast(proc, to: type(of:glNamedFramebufferTexture_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glNamedFramebufferTextureLayer") {
+    glNamedFramebufferTextureLayer_P = unsafeBitCast(proc, to: type(of:glNamedFramebufferTextureLayer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glNamedRenderbufferStorage") {
+    glNamedRenderbufferStorage_P = unsafeBitCast(proc, to: type(of:glNamedRenderbufferStorage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glNamedRenderbufferStorageMultisample") {
+    glNamedRenderbufferStorageMultisample_P = unsafeBitCast(proc, to: type(of:glNamedRenderbufferStorageMultisample_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glObjectLabel") {
+    glObjectLabel_P = unsafeBitCast(proc, to: type(of:glObjectLabel_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glObjectPtrLabel") {
+    glObjectPtrLabel_P = unsafeBitCast(proc, to: type(of:glObjectPtrLabel_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPatchParameterfv") {
+    glPatchParameterfv_P = unsafeBitCast(proc, to: type(of:glPatchParameterfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPatchParameteri") {
+    glPatchParameteri_P = unsafeBitCast(proc, to: type(of:glPatchParameteri_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPauseTransformFeedback") {
+    glPauseTransformFeedback_P = proc
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPixelStoref") {
+    glPixelStoref_P = unsafeBitCast(proc, to: type(of:glPixelStoref_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPixelStorei") {
+    glPixelStorei_P = unsafeBitCast(proc, to: type(of:glPixelStorei_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPointParameterf") {
+    glPointParameterf_P = unsafeBitCast(proc, to: type(of:glPointParameterf_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPointParameterfv") {
+    glPointParameterfv_P = unsafeBitCast(proc, to: type(of:glPointParameterfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPointParameteri") {
+    glPointParameteri_P = unsafeBitCast(proc, to: type(of:glPointParameteri_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPointParameteriv") {
+    glPointParameteriv_P = unsafeBitCast(proc, to: type(of:glPointParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPointSize") {
+    glPointSize_P = unsafeBitCast(proc, to: type(of:glPointSize_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPolygonMode") {
+    glPolygonMode_P = unsafeBitCast(proc, to: type(of:glPolygonMode_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPolygonOffset") {
+    glPolygonOffset_P = unsafeBitCast(proc, to: type(of:glPolygonOffset_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPopDebugGroup") {
+    glPopDebugGroup_P = proc
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPrimitiveRestartIndex") {
+    glPrimitiveRestartIndex_P = unsafeBitCast(proc, to: type(of:glPrimitiveRestartIndex_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramBinary") {
+    glProgramBinary_P = unsafeBitCast(proc, to: type(of:glProgramBinary_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramParameteri") {
+    glProgramParameteri_P = unsafeBitCast(proc, to: type(of:glProgramParameteri_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform1d") {
+    glProgramUniform1d_P = unsafeBitCast(proc, to: type(of:glProgramUniform1d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform1dv") {
+    glProgramUniform1dv_P = unsafeBitCast(proc, to: type(of:glProgramUniform1dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform1f") {
+    glProgramUniform1f_P = unsafeBitCast(proc, to: type(of:glProgramUniform1f_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform1fv") {
+    glProgramUniform1fv_P = unsafeBitCast(proc, to: type(of:glProgramUniform1fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform1i") {
+    glProgramUniform1i_P = unsafeBitCast(proc, to: type(of:glProgramUniform1i_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform1iv") {
+    glProgramUniform1iv_P = unsafeBitCast(proc, to: type(of:glProgramUniform1iv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform1ui") {
+    glProgramUniform1ui_P = unsafeBitCast(proc, to: type(of:glProgramUniform1ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform1uiv") {
+    glProgramUniform1uiv_P = unsafeBitCast(proc, to: type(of:glProgramUniform1uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform2d") {
+    glProgramUniform2d_P = unsafeBitCast(proc, to: type(of:glProgramUniform2d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform2dv") {
+    glProgramUniform2dv_P = unsafeBitCast(proc, to: type(of:glProgramUniform2dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform2f") {
+    glProgramUniform2f_P = unsafeBitCast(proc, to: type(of:glProgramUniform2f_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform2fv") {
+    glProgramUniform2fv_P = unsafeBitCast(proc, to: type(of:glProgramUniform2fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform2i") {
+    glProgramUniform2i_P = unsafeBitCast(proc, to: type(of:glProgramUniform2i_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform2iv") {
+    glProgramUniform2iv_P = unsafeBitCast(proc, to: type(of:glProgramUniform2iv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform2ui") {
+    glProgramUniform2ui_P = unsafeBitCast(proc, to: type(of:glProgramUniform2ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform2uiv") {
+    glProgramUniform2uiv_P = unsafeBitCast(proc, to: type(of:glProgramUniform2uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform3d") {
+    glProgramUniform3d_P = unsafeBitCast(proc, to: type(of:glProgramUniform3d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform3dv") {
+    glProgramUniform3dv_P = unsafeBitCast(proc, to: type(of:glProgramUniform3dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform3f") {
+    glProgramUniform3f_P = unsafeBitCast(proc, to: type(of:glProgramUniform3f_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform3fv") {
+    glProgramUniform3fv_P = unsafeBitCast(proc, to: type(of:glProgramUniform3fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform3i") {
+    glProgramUniform3i_P = unsafeBitCast(proc, to: type(of:glProgramUniform3i_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform3iv") {
+    glProgramUniform3iv_P = unsafeBitCast(proc, to: type(of:glProgramUniform3iv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform3ui") {
+    glProgramUniform3ui_P = unsafeBitCast(proc, to: type(of:glProgramUniform3ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform3uiv") {
+    glProgramUniform3uiv_P = unsafeBitCast(proc, to: type(of:glProgramUniform3uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform4d") {
+    glProgramUniform4d_P = unsafeBitCast(proc, to: type(of:glProgramUniform4d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform4dv") {
+    glProgramUniform4dv_P = unsafeBitCast(proc, to: type(of:glProgramUniform4dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform4f") {
+    glProgramUniform4f_P = unsafeBitCast(proc, to: type(of:glProgramUniform4f_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform4fv") {
+    glProgramUniform4fv_P = unsafeBitCast(proc, to: type(of:glProgramUniform4fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform4i") {
+    glProgramUniform4i_P = unsafeBitCast(proc, to: type(of:glProgramUniform4i_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform4iv") {
+    glProgramUniform4iv_P = unsafeBitCast(proc, to: type(of:glProgramUniform4iv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform4ui") {
+    glProgramUniform4ui_P = unsafeBitCast(proc, to: type(of:glProgramUniform4ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniform4uiv") {
+    glProgramUniform4uiv_P = unsafeBitCast(proc, to: type(of:glProgramUniform4uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix2dv") {
+    glProgramUniformMatrix2dv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix2dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix2fv") {
+    glProgramUniformMatrix2fv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix2fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix2x3dv") {
+    glProgramUniformMatrix2x3dv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix2x3dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix2x3fv") {
+    glProgramUniformMatrix2x3fv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix2x3fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix2x4dv") {
+    glProgramUniformMatrix2x4dv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix2x4dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix2x4fv") {
+    glProgramUniformMatrix2x4fv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix2x4fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix3dv") {
+    glProgramUniformMatrix3dv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix3dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix3fv") {
+    glProgramUniformMatrix3fv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix3fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix3x2dv") {
+    glProgramUniformMatrix3x2dv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix3x2dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix3x2fv") {
+    glProgramUniformMatrix3x2fv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix3x2fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix3x4dv") {
+    glProgramUniformMatrix3x4dv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix3x4dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix3x4fv") {
+    glProgramUniformMatrix3x4fv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix3x4fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix4dv") {
+    glProgramUniformMatrix4dv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix4dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix4fv") {
+    glProgramUniformMatrix4fv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix4fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix4x2dv") {
+    glProgramUniformMatrix4x2dv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix4x2dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix4x2fv") {
+    glProgramUniformMatrix4x2fv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix4x2fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix4x3dv") {
+    glProgramUniformMatrix4x3dv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix4x3dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProgramUniformMatrix4x3fv") {
+    glProgramUniformMatrix4x3fv_P = unsafeBitCast(proc, to: type(of:glProgramUniformMatrix4x3fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glProvokingVertex") {
+    glProvokingVertex_P = unsafeBitCast(proc, to: type(of:glProvokingVertex_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glPushDebugGroup") {
+    glPushDebugGroup_P = unsafeBitCast(proc, to: type(of:glPushDebugGroup_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glQueryCounter") {
+    glQueryCounter_P = unsafeBitCast(proc, to: type(of:glQueryCounter_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glReadBuffer") {
+    glReadBuffer_P = unsafeBitCast(proc, to: type(of:glReadBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glReadPixels") {
+    glReadPixels_P = unsafeBitCast(proc, to: type(of:glReadPixels_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glReadnPixels") {
+    glReadnPixels_P = unsafeBitCast(proc, to: type(of:glReadnPixels_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glReleaseShaderCompiler") {
+    glReleaseShaderCompiler_P = proc
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glRenderbufferStorage") {
+    glRenderbufferStorage_P = unsafeBitCast(proc, to: type(of:glRenderbufferStorage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glRenderbufferStorageMultisample") {
+    glRenderbufferStorageMultisample_P = unsafeBitCast(proc, to: type(of:glRenderbufferStorageMultisample_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glResumeTransformFeedback") {
+    glResumeTransformFeedback_P = proc
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glSampleCoverage") {
+    glSampleCoverage_P = unsafeBitCast(proc, to: type(of:glSampleCoverage_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glSampleMaski") {
+    glSampleMaski_P = unsafeBitCast(proc, to: type(of:glSampleMaski_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glSamplerParameterIiv") {
+    glSamplerParameterIiv_P = unsafeBitCast(proc, to: type(of:glSamplerParameterIiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glSamplerParameterIuiv") {
+    glSamplerParameterIuiv_P = unsafeBitCast(proc, to: type(of:glSamplerParameterIuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glSamplerParameterf") {
+    glSamplerParameterf_P = unsafeBitCast(proc, to: type(of:glSamplerParameterf_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glSamplerParameterfv") {
+    glSamplerParameterfv_P = unsafeBitCast(proc, to: type(of:glSamplerParameterfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glSamplerParameteri") {
+    glSamplerParameteri_P = unsafeBitCast(proc, to: type(of:glSamplerParameteri_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glSamplerParameteriv") {
+    glSamplerParameteriv_P = unsafeBitCast(proc, to: type(of:glSamplerParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glScissor") {
+    glScissor_P = unsafeBitCast(proc, to: type(of:glScissor_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glScissorArrayv") {
+    glScissorArrayv_P = unsafeBitCast(proc, to: type(of:glScissorArrayv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glScissorIndexed") {
+    glScissorIndexed_P = unsafeBitCast(proc, to: type(of:glScissorIndexed_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glScissorIndexedv") {
+    glScissorIndexedv_P = unsafeBitCast(proc, to: type(of:glScissorIndexedv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glShaderBinary") {
+    glShaderBinary_P = unsafeBitCast(proc, to: type(of:glShaderBinary_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glShaderSource") {
+    glShaderSource_P = unsafeBitCast(proc, to: type(of:glShaderSource_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glShaderStorageBlockBinding") {
+    glShaderStorageBlockBinding_P = unsafeBitCast(proc, to: type(of:glShaderStorageBlockBinding_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glStencilFunc") {
+    glStencilFunc_P = unsafeBitCast(proc, to: type(of:glStencilFunc_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glStencilFuncSeparate") {
+    glStencilFuncSeparate_P = unsafeBitCast(proc, to: type(of:glStencilFuncSeparate_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glStencilMask") {
+    glStencilMask_P = unsafeBitCast(proc, to: type(of:glStencilMask_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glStencilMaskSeparate") {
+    glStencilMaskSeparate_P = unsafeBitCast(proc, to: type(of:glStencilMaskSeparate_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glStencilOp") {
+    glStencilOp_P = unsafeBitCast(proc, to: type(of:glStencilOp_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glStencilOpSeparate") {
+    glStencilOpSeparate_P = unsafeBitCast(proc, to: type(of:glStencilOpSeparate_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexBuffer") {
+    glTexBuffer_P = unsafeBitCast(proc, to: type(of:glTexBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexBufferRange") {
+    glTexBufferRange_P = unsafeBitCast(proc, to: type(of:glTexBufferRange_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexImage1D") {
+    glTexImage1D_P = unsafeBitCast(proc, to: type(of:glTexImage1D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexImage2D") {
+    glTexImage2D_P = unsafeBitCast(proc, to: type(of:glTexImage2D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexImage2DMultisample") {
+    glTexImage2DMultisample_P = unsafeBitCast(proc, to: type(of:glTexImage2DMultisample_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexImage3D") {
+    glTexImage3D_P = unsafeBitCast(proc, to: type(of:glTexImage3D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexImage3DMultisample") {
+    glTexImage3DMultisample_P = unsafeBitCast(proc, to: type(of:glTexImage3DMultisample_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexParameterIiv") {
+    glTexParameterIiv_P = unsafeBitCast(proc, to: type(of:glTexParameterIiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexParameterIuiv") {
+    glTexParameterIuiv_P = unsafeBitCast(proc, to: type(of:glTexParameterIuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexParameterf") {
+    glTexParameterf_P = unsafeBitCast(proc, to: type(of:glTexParameterf_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexParameterfv") {
+    glTexParameterfv_P = unsafeBitCast(proc, to: type(of:glTexParameterfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexParameteri") {
+    glTexParameteri_P = unsafeBitCast(proc, to: type(of:glTexParameteri_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexParameteriv") {
+    glTexParameteriv_P = unsafeBitCast(proc, to: type(of:glTexParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexStorage1D") {
+    glTexStorage1D_P = unsafeBitCast(proc, to: type(of:glTexStorage1D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexStorage2D") {
+    glTexStorage2D_P = unsafeBitCast(proc, to: type(of:glTexStorage2D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexStorage2DMultisample") {
+    glTexStorage2DMultisample_P = unsafeBitCast(proc, to: type(of:glTexStorage2DMultisample_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexStorage3D") {
+    glTexStorage3D_P = unsafeBitCast(proc, to: type(of:glTexStorage3D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexStorage3DMultisample") {
+    glTexStorage3DMultisample_P = unsafeBitCast(proc, to: type(of:glTexStorage3DMultisample_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexSubImage1D") {
+    glTexSubImage1D_P = unsafeBitCast(proc, to: type(of:glTexSubImage1D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexSubImage2D") {
+    glTexSubImage2D_P = unsafeBitCast(proc, to: type(of:glTexSubImage2D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTexSubImage3D") {
+    glTexSubImage3D_P = unsafeBitCast(proc, to: type(of:glTexSubImage3D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureBarrier") {
+    glTextureBarrier_P = proc
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureBuffer") {
+    glTextureBuffer_P = unsafeBitCast(proc, to: type(of:glTextureBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureBufferRange") {
+    glTextureBufferRange_P = unsafeBitCast(proc, to: type(of:glTextureBufferRange_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureParameterIiv") {
+    glTextureParameterIiv_P = unsafeBitCast(proc, to: type(of:glTextureParameterIiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureParameterIuiv") {
+    glTextureParameterIuiv_P = unsafeBitCast(proc, to: type(of:glTextureParameterIuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureParameterf") {
+    glTextureParameterf_P = unsafeBitCast(proc, to: type(of:glTextureParameterf_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureParameterfv") {
+    glTextureParameterfv_P = unsafeBitCast(proc, to: type(of:glTextureParameterfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureParameteri") {
+    glTextureParameteri_P = unsafeBitCast(proc, to: type(of:glTextureParameteri_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureParameteriv") {
+    glTextureParameteriv_P = unsafeBitCast(proc, to: type(of:glTextureParameteriv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureStorage1D") {
+    glTextureStorage1D_P = unsafeBitCast(proc, to: type(of:glTextureStorage1D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureStorage2D") {
+    glTextureStorage2D_P = unsafeBitCast(proc, to: type(of:glTextureStorage2D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureStorage2DMultisample") {
+    glTextureStorage2DMultisample_P = unsafeBitCast(proc, to: type(of:glTextureStorage2DMultisample_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureStorage3D") {
+    glTextureStorage3D_P = unsafeBitCast(proc, to: type(of:glTextureStorage3D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureStorage3DMultisample") {
+    glTextureStorage3DMultisample_P = unsafeBitCast(proc, to: type(of:glTextureStorage3DMultisample_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureSubImage1D") {
+    glTextureSubImage1D_P = unsafeBitCast(proc, to: type(of:glTextureSubImage1D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureSubImage2D") {
+    glTextureSubImage2D_P = unsafeBitCast(proc, to: type(of:glTextureSubImage2D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureSubImage3D") {
+    glTextureSubImage3D_P = unsafeBitCast(proc, to: type(of:glTextureSubImage3D_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTextureView") {
+    glTextureView_P = unsafeBitCast(proc, to: type(of:glTextureView_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTransformFeedbackBufferBase") {
+    glTransformFeedbackBufferBase_P = unsafeBitCast(proc, to: type(of:glTransformFeedbackBufferBase_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTransformFeedbackBufferRange") {
+    glTransformFeedbackBufferRange_P = unsafeBitCast(proc, to: type(of:glTransformFeedbackBufferRange_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glTransformFeedbackVaryings") {
+    glTransformFeedbackVaryings_P = unsafeBitCast(proc, to: type(of:glTransformFeedbackVaryings_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform1d") {
+    glUniform1d_P = unsafeBitCast(proc, to: type(of:glUniform1d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform1dv") {
+    glUniform1dv_P = unsafeBitCast(proc, to: type(of:glUniform1dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform1f") {
+    glUniform1f_P = unsafeBitCast(proc, to: type(of:glUniform1f_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform1fv") {
+    glUniform1fv_P = unsafeBitCast(proc, to: type(of:glUniform1fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform1i") {
+    glUniform1i_P = unsafeBitCast(proc, to: type(of:glUniform1i_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform1iv") {
+    glUniform1iv_P = unsafeBitCast(proc, to: type(of:glUniform1iv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform1ui") {
+    glUniform1ui_P = unsafeBitCast(proc, to: type(of:glUniform1ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform1uiv") {
+    glUniform1uiv_P = unsafeBitCast(proc, to: type(of:glUniform1uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform2d") {
+    glUniform2d_P = unsafeBitCast(proc, to: type(of:glUniform2d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform2dv") {
+    glUniform2dv_P = unsafeBitCast(proc, to: type(of:glUniform2dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform2f") {
+    glUniform2f_P = unsafeBitCast(proc, to: type(of:glUniform2f_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform2fv") {
+    glUniform2fv_P = unsafeBitCast(proc, to: type(of:glUniform2fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform2i") {
+    glUniform2i_P = unsafeBitCast(proc, to: type(of:glUniform2i_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform2iv") {
+    glUniform2iv_P = unsafeBitCast(proc, to: type(of:glUniform2iv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform2ui") {
+    glUniform2ui_P = unsafeBitCast(proc, to: type(of:glUniform2ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform2uiv") {
+    glUniform2uiv_P = unsafeBitCast(proc, to: type(of:glUniform2uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform3d") {
+    glUniform3d_P = unsafeBitCast(proc, to: type(of:glUniform3d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform3dv") {
+    glUniform3dv_P = unsafeBitCast(proc, to: type(of:glUniform3dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform3f") {
+    glUniform3f_P = unsafeBitCast(proc, to: type(of:glUniform3f_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform3fv") {
+    glUniform3fv_P = unsafeBitCast(proc, to: type(of:glUniform3fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform3i") {
+    glUniform3i_P = unsafeBitCast(proc, to: type(of:glUniform3i_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform3iv") {
+    glUniform3iv_P = unsafeBitCast(proc, to: type(of:glUniform3iv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform3ui") {
+    glUniform3ui_P = unsafeBitCast(proc, to: type(of:glUniform3ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform3uiv") {
+    glUniform3uiv_P = unsafeBitCast(proc, to: type(of:glUniform3uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform4d") {
+    glUniform4d_P = unsafeBitCast(proc, to: type(of:glUniform4d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform4dv") {
+    glUniform4dv_P = unsafeBitCast(proc, to: type(of:glUniform4dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform4f") {
+    glUniform4f_P = unsafeBitCast(proc, to: type(of:glUniform4f_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform4fv") {
+    glUniform4fv_P = unsafeBitCast(proc, to: type(of:glUniform4fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform4i") {
+    glUniform4i_P = unsafeBitCast(proc, to: type(of:glUniform4i_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform4iv") {
+    glUniform4iv_P = unsafeBitCast(proc, to: type(of:glUniform4iv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform4ui") {
+    glUniform4ui_P = unsafeBitCast(proc, to: type(of:glUniform4ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniform4uiv") {
+    glUniform4uiv_P = unsafeBitCast(proc, to: type(of:glUniform4uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformBlockBinding") {
+    glUniformBlockBinding_P = unsafeBitCast(proc, to: type(of:glUniformBlockBinding_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix2dv") {
+    glUniformMatrix2dv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix2dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix2fv") {
+    glUniformMatrix2fv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix2fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix2x3dv") {
+    glUniformMatrix2x3dv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix2x3dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix2x3fv") {
+    glUniformMatrix2x3fv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix2x3fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix2x4dv") {
+    glUniformMatrix2x4dv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix2x4dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix2x4fv") {
+    glUniformMatrix2x4fv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix2x4fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix3dv") {
+    glUniformMatrix3dv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix3dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix3fv") {
+    glUniformMatrix3fv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix3fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix3x2dv") {
+    glUniformMatrix3x2dv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix3x2dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix3x2fv") {
+    glUniformMatrix3x2fv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix3x2fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix3x4dv") {
+    glUniformMatrix3x4dv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix3x4dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix3x4fv") {
+    glUniformMatrix3x4fv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix3x4fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix4dv") {
+    glUniformMatrix4dv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix4dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix4fv") {
+    glUniformMatrix4fv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix4fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix4x2dv") {
+    glUniformMatrix4x2dv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix4x2dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix4x2fv") {
+    glUniformMatrix4x2fv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix4x2fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix4x3dv") {
+    glUniformMatrix4x3dv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix4x3dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformMatrix4x3fv") {
+    glUniformMatrix4x3fv_P = unsafeBitCast(proc, to: type(of:glUniformMatrix4x3fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUniformSubroutinesuiv") {
+    glUniformSubroutinesuiv_P = unsafeBitCast(proc, to: type(of:glUniformSubroutinesuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUnmapBuffer") {
+    glUnmapBuffer_P = unsafeBitCast(proc, to: type(of:glUnmapBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUnmapNamedBuffer") {
+    glUnmapNamedBuffer_P = unsafeBitCast(proc, to: type(of:glUnmapNamedBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUseProgram") {
+    glUseProgram_P = unsafeBitCast(proc, to: type(of:glUseProgram_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glUseProgramStages") {
+    glUseProgramStages_P = unsafeBitCast(proc, to: type(of:glUseProgramStages_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glValidateProgram") {
+    glValidateProgram_P = unsafeBitCast(proc, to: type(of:glValidateProgram_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glValidateProgramPipeline") {
+    glValidateProgramPipeline_P = unsafeBitCast(proc, to: type(of:glValidateProgramPipeline_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexArrayAttribBinding") {
+    glVertexArrayAttribBinding_P = unsafeBitCast(proc, to: type(of:glVertexArrayAttribBinding_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexArrayAttribFormat") {
+    glVertexArrayAttribFormat_P = unsafeBitCast(proc, to: type(of:glVertexArrayAttribFormat_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexArrayAttribIFormat") {
+    glVertexArrayAttribIFormat_P = unsafeBitCast(proc, to: type(of:glVertexArrayAttribIFormat_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexArrayAttribLFormat") {
+    glVertexArrayAttribLFormat_P = unsafeBitCast(proc, to: type(of:glVertexArrayAttribLFormat_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexArrayBindingDivisor") {
+    glVertexArrayBindingDivisor_P = unsafeBitCast(proc, to: type(of:glVertexArrayBindingDivisor_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexArrayElementBuffer") {
+    glVertexArrayElementBuffer_P = unsafeBitCast(proc, to: type(of:glVertexArrayElementBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexArrayVertexBuffer") {
+    glVertexArrayVertexBuffer_P = unsafeBitCast(proc, to: type(of:glVertexArrayVertexBuffer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexArrayVertexBuffers") {
+    glVertexArrayVertexBuffers_P = unsafeBitCast(proc, to: type(of:glVertexArrayVertexBuffers_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib1d") {
+    glVertexAttrib1d_P = unsafeBitCast(proc, to: type(of:glVertexAttrib1d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib1dv") {
+    glVertexAttrib1dv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib1dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib1f") {
+    glVertexAttrib1f_P = unsafeBitCast(proc, to: type(of:glVertexAttrib1f_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib1fv") {
+    glVertexAttrib1fv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib1fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib1s") {
+    glVertexAttrib1s_P = unsafeBitCast(proc, to: type(of:glVertexAttrib1s_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib1sv") {
+    glVertexAttrib1sv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib1sv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib2d") {
+    glVertexAttrib2d_P = unsafeBitCast(proc, to: type(of:glVertexAttrib2d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib2dv") {
+    glVertexAttrib2dv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib2dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib2f") {
+    glVertexAttrib2f_P = unsafeBitCast(proc, to: type(of:glVertexAttrib2f_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib2fv") {
+    glVertexAttrib2fv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib2fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib2s") {
+    glVertexAttrib2s_P = unsafeBitCast(proc, to: type(of:glVertexAttrib2s_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib2sv") {
+    glVertexAttrib2sv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib2sv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib3d") {
+    glVertexAttrib3d_P = unsafeBitCast(proc, to: type(of:glVertexAttrib3d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib3dv") {
+    glVertexAttrib3dv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib3dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib3f") {
+    glVertexAttrib3f_P = unsafeBitCast(proc, to: type(of:glVertexAttrib3f_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib3fv") {
+    glVertexAttrib3fv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib3fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib3s") {
+    glVertexAttrib3s_P = unsafeBitCast(proc, to: type(of:glVertexAttrib3s_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib3sv") {
+    glVertexAttrib3sv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib3sv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4Nbv") {
+    glVertexAttrib4Nbv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4Nbv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4Niv") {
+    glVertexAttrib4Niv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4Niv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4Nsv") {
+    glVertexAttrib4Nsv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4Nsv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4Nub") {
+    glVertexAttrib4Nub_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4Nub_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4Nubv") {
+    glVertexAttrib4Nubv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4Nubv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4Nuiv") {
+    glVertexAttrib4Nuiv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4Nuiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4Nusv") {
+    glVertexAttrib4Nusv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4Nusv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4bv") {
+    glVertexAttrib4bv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4bv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4d") {
+    glVertexAttrib4d_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4dv") {
+    glVertexAttrib4dv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4f") {
+    glVertexAttrib4f_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4f_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4fv") {
+    glVertexAttrib4fv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4fv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4iv") {
+    glVertexAttrib4iv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4iv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4s") {
+    glVertexAttrib4s_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4s_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4sv") {
+    glVertexAttrib4sv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4sv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4ubv") {
+    glVertexAttrib4ubv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4ubv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4uiv") {
+    glVertexAttrib4uiv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttrib4usv") {
+    glVertexAttrib4usv_P = unsafeBitCast(proc, to: type(of:glVertexAttrib4usv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribBinding") {
+    glVertexAttribBinding_P = unsafeBitCast(proc, to: type(of:glVertexAttribBinding_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribDivisor") {
+    glVertexAttribDivisor_P = unsafeBitCast(proc, to: type(of:glVertexAttribDivisor_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribFormat") {
+    glVertexAttribFormat_P = unsafeBitCast(proc, to: type(of:glVertexAttribFormat_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI1i") {
+    glVertexAttribI1i_P = unsafeBitCast(proc, to: type(of:glVertexAttribI1i_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI1iv") {
+    glVertexAttribI1iv_P = unsafeBitCast(proc, to: type(of:glVertexAttribI1iv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI1ui") {
+    glVertexAttribI1ui_P = unsafeBitCast(proc, to: type(of:glVertexAttribI1ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI1uiv") {
+    glVertexAttribI1uiv_P = unsafeBitCast(proc, to: type(of:glVertexAttribI1uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI2i") {
+    glVertexAttribI2i_P = unsafeBitCast(proc, to: type(of:glVertexAttribI2i_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI2iv") {
+    glVertexAttribI2iv_P = unsafeBitCast(proc, to: type(of:glVertexAttribI2iv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI2ui") {
+    glVertexAttribI2ui_P = unsafeBitCast(proc, to: type(of:glVertexAttribI2ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI2uiv") {
+    glVertexAttribI2uiv_P = unsafeBitCast(proc, to: type(of:glVertexAttribI2uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI3i") {
+    glVertexAttribI3i_P = unsafeBitCast(proc, to: type(of:glVertexAttribI3i_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI3iv") {
+    glVertexAttribI3iv_P = unsafeBitCast(proc, to: type(of:glVertexAttribI3iv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI3ui") {
+    glVertexAttribI3ui_P = unsafeBitCast(proc, to: type(of:glVertexAttribI3ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI3uiv") {
+    glVertexAttribI3uiv_P = unsafeBitCast(proc, to: type(of:glVertexAttribI3uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI4bv") {
+    glVertexAttribI4bv_P = unsafeBitCast(proc, to: type(of:glVertexAttribI4bv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI4i") {
+    glVertexAttribI4i_P = unsafeBitCast(proc, to: type(of:glVertexAttribI4i_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI4iv") {
+    glVertexAttribI4iv_P = unsafeBitCast(proc, to: type(of:glVertexAttribI4iv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI4sv") {
+    glVertexAttribI4sv_P = unsafeBitCast(proc, to: type(of:glVertexAttribI4sv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI4ubv") {
+    glVertexAttribI4ubv_P = unsafeBitCast(proc, to: type(of:glVertexAttribI4ubv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI4ui") {
+    glVertexAttribI4ui_P = unsafeBitCast(proc, to: type(of:glVertexAttribI4ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI4uiv") {
+    glVertexAttribI4uiv_P = unsafeBitCast(proc, to: type(of:glVertexAttribI4uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribI4usv") {
+    glVertexAttribI4usv_P = unsafeBitCast(proc, to: type(of:glVertexAttribI4usv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribIFormat") {
+    glVertexAttribIFormat_P = unsafeBitCast(proc, to: type(of:glVertexAttribIFormat_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribIPointer") {
+    glVertexAttribIPointer_P = unsafeBitCast(proc, to: type(of:glVertexAttribIPointer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribL1d") {
+    glVertexAttribL1d_P = unsafeBitCast(proc, to: type(of:glVertexAttribL1d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribL1dv") {
+    glVertexAttribL1dv_P = unsafeBitCast(proc, to: type(of:glVertexAttribL1dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribL2d") {
+    glVertexAttribL2d_P = unsafeBitCast(proc, to: type(of:glVertexAttribL2d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribL2dv") {
+    glVertexAttribL2dv_P = unsafeBitCast(proc, to: type(of:glVertexAttribL2dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribL3d") {
+    glVertexAttribL3d_P = unsafeBitCast(proc, to: type(of:glVertexAttribL3d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribL3dv") {
+    glVertexAttribL3dv_P = unsafeBitCast(proc, to: type(of:glVertexAttribL3dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribL4d") {
+    glVertexAttribL4d_P = unsafeBitCast(proc, to: type(of:glVertexAttribL4d_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribL4dv") {
+    glVertexAttribL4dv_P = unsafeBitCast(proc, to: type(of:glVertexAttribL4dv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribLFormat") {
+    glVertexAttribLFormat_P = unsafeBitCast(proc, to: type(of:glVertexAttribLFormat_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribLPointer") {
+    glVertexAttribLPointer_P = unsafeBitCast(proc, to: type(of:glVertexAttribLPointer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribP1ui") {
+    glVertexAttribP1ui_P = unsafeBitCast(proc, to: type(of:glVertexAttribP1ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribP1uiv") {
+    glVertexAttribP1uiv_P = unsafeBitCast(proc, to: type(of:glVertexAttribP1uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribP2ui") {
+    glVertexAttribP2ui_P = unsafeBitCast(proc, to: type(of:glVertexAttribP2ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribP2uiv") {
+    glVertexAttribP2uiv_P = unsafeBitCast(proc, to: type(of:glVertexAttribP2uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribP3ui") {
+    glVertexAttribP3ui_P = unsafeBitCast(proc, to: type(of:glVertexAttribP3ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribP3uiv") {
+    glVertexAttribP3uiv_P = unsafeBitCast(proc, to: type(of:glVertexAttribP3uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribP4ui") {
+    glVertexAttribP4ui_P = unsafeBitCast(proc, to: type(of:glVertexAttribP4ui_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribP4uiv") {
+    glVertexAttribP4uiv_P = unsafeBitCast(proc, to: type(of:glVertexAttribP4uiv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexAttribPointer") {
+    glVertexAttribPointer_P = unsafeBitCast(proc, to: type(of:glVertexAttribPointer_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glVertexBindingDivisor") {
+    glVertexBindingDivisor_P = unsafeBitCast(proc, to: type(of:glVertexBindingDivisor_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glViewport") {
+    glViewport_P = unsafeBitCast(proc, to: type(of:glViewport_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glViewportArrayv") {
+    glViewportArrayv_P = unsafeBitCast(proc, to: type(of:glViewportArrayv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glViewportIndexedf") {
+    glViewportIndexedf_P = unsafeBitCast(proc, to: type(of:glViewportIndexedf_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glViewportIndexedfv") {
+    glViewportIndexedfv_P = unsafeBitCast(proc, to: type(of:glViewportIndexedfv_P))
+  } else {
+    return false
+  }
+
+  if let proc = getCommandPtr("glWaitSync") {
+    glWaitSync_P = unsafeBitCast(proc, to: type(of:glWaitSync_P))
+  } else {
+    return false
+  }
+
+  return true
+}
