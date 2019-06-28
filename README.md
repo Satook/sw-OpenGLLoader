@@ -4,6 +4,15 @@ Swift OpenGL Loader
 This is a simple OpenGL loader library. The repo currently contains code to load
 a Core profiles from 3.3 to 4.6. The included profiles do not load any extensions.
 
+This repository has been adapted from code originally written by David Turnbull.
+His code can be found here: https://github.com/SwiftGL/OpenGL
+
+This fork allows generating code for multiple profiles at once and removes the implicit
+library loading and function binding step of the original code.
+By requiring an explicit call to loadGL,  client code to verify if the required OpenGL
+profile was loaded correctly.
+
+
 Using a loader
 ----------------------
 
