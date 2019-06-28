@@ -699,13 +699,8 @@ command(
   }
   assertSaneDelegate(glfile, thede)
 
-  // lookup map for later use
-  let profMap = [String: Int](uniqueKeysWithValues: thede.profiles.enumerated().map { (i, prof) in
-    (prof.name, i)
-  })
-
   // They didn't provide a valid profile name so provide a list
-  if profMap[profile] == nil {
+  guard let profIdx = thede.profiles.firstIndex(where: {$0.name == profile}) else {
     print("ERROR: Invalid profile \(profile) requested")
     print("\tAvailable profiles:")
     for prof in thede.profiles {
@@ -713,7 +708,6 @@ command(
     }
     exit(1)
   }
-  let desiredProfile = profile
 
   // get the list of extensions the user wanted
   let wantedExtensions = extensions.map { eName -> (String, GLExtension) in
@@ -733,7 +727,7 @@ command(
     enums: thede.enums,
     commands: thede.commands,
     extensions: wantedExtensions,
-    profile: thede.profiles[profMap[desiredProfile]!]
+    profile: thede.profiles[profIdx]
   )
 
   writeCodeFile(glDefs, "\(outdir)/Enums.swift", generateEnums)
