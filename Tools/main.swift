@@ -31,8 +31,8 @@ let dummyReturnVals = [
 ]
 
 /*
- * Add ability to write string as UTF8 encoded data.
- */
+Add ability to write string as UTF8 encoded data.
+*/
 extension OutputStream {
   func write(_ string: String) -> Int {
     if string.isEmpty {
@@ -46,8 +46,8 @@ extension OutputStream {
 
 extension String {
   /*
-   * Returns a new string with the first count characters removed.
-   */
+  Returns a new string with the first count characters removed.
+  */
   func firstDropped(_ count: Int) -> String {
     // make a non-optional copy of ourselves
     var newStr = String(repeating: self, count: 1)
@@ -65,12 +65,12 @@ func * (left: String, right: Int) -> String {
 }
 
 /*
- * Takes a textual enum value and makes sure it will be represented exactly in
- * Swift literal syntax.
- *
- * Note: Literals are written out as UInt32(integerLiteral: "0xFFFF").
- * This makes sure that the Swift compiler interprets the value as an unsigned
- * value so that 0xFFFFFFFF won't overflow and such.
+Takes a textual enum value and makes sure it will be represented exactly in
+Swift literal syntax.
+
+Note: Literals are written out as UInt32(integerLiteral: "0xFFFF").
+This makes sure that the Swift compiler interprets the value as an unsigned
+value so that 0xFFFFFFFF won't overflow and such.
  */
 func glEnumValueToSwiftLiteral(_ val: String) -> String {
   // here are the cases we're covering
@@ -170,8 +170,8 @@ func glReturnToSwiftType(_ type: String) -> String {
 }
 
 /*
- * Stores the information about a single GL enum definition
- */
+Stores the information about a single GL enum definition
+*/
 internal class GLEnumDef {
   var value: String
 
@@ -191,26 +191,26 @@ internal class GLParam {
   var ptr: String = ""
 
   /*
-   * Returns the param type as a valid Swift type declaration
-   *
-   * e.g. "UnsafeMutablePointer<UnsafeRawPointer>?"
-   */
+  Returns the param type as a valid Swift type declaration
+
+  e.g. "UnsafeMutablePointer<UnsafeRawPointer>?"
+  */
   func swiftType() -> String {
     return glParamToSwiftType(self.type, self.ptr)
   }
 
   /*
-   * Returns the param as a valid swift parameter declaration.
-   *
-   * e.g. "_ op: GLenum"
-   */
+  Returns the param as a valid swift parameter declaration.
+
+  e.g. "_ op: GLenum"
+  */
   func swiftFuncSpec() -> String {
     return "_ \(self.safeName()): \(self.swiftType())"
   }
 
   /*
-   * Changes the param name if it conflicts with a Swift keyword
-   */
+  Changes the param name if it conflicts with a Swift keyword
+  */
   func safeName() -> String {
     if self.name == "func" {
       return "fn"
@@ -276,8 +276,8 @@ var \(self.name)_P:@convention(c)(\(ptrSpecParamList)) -> \(returnTypeStr) = \(s
 }
 
 /**
- * Stores the required commands and enums for a single GL profile
- */
+Stores the required commands and enums for a single GL profile
+*/
 internal struct GLProfile {
   var api = ""
   var name = ""
@@ -286,22 +286,22 @@ internal struct GLProfile {
 }
 
 /*
- * Stores information about the required enums and commands for a single GL extension
- */
+Stores information about the required enums and commands for a single GL extension
+*/
 internal class GLExtension {
   var enums = Set<String>()
   var commands = Set<String>()
 }
 
 /*
- * Stores the resulting enums, commands and requested profile + extensions for
- * writing out.
- *
- * enums should contain all enums
- * commands should contain all commands
- * extensions should contain the extensions that are to be written out
- * profile should contain the profile that is desired
- */
+Stores the resulting enums, commands and requested profile + extensions for
+writing out.
+
+enums should contain all enums
+commands should contain all commands
+extensions should contain the extensions that are to be written out
+profile should contain the profile that is desired
+*/
 internal struct DefinitionSet {
   let enums: [String: GLEnumDef]
   let commands: [String: GLCommand]
@@ -310,8 +310,8 @@ internal struct DefinitionSet {
 }
 
 /*
- * Collects the info we need during the XML parsing
- */
+Collects the info we need during the XML parsing
+*/
 internal class GLXmlDelegate : NSObject, XMLParserDelegate {
   let compat: Bool    // are we doing a compatability profile?
 
@@ -548,10 +548,10 @@ let licenseText =
 "// MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.\n\n\n"
 
 /*
- * Give it the delegate and a function that generates content.
- * The function should call the given callback for each block of code to be written.
- * Each block is seperated by a line in the output stream
- */
+Give it the delegate and a function that generates content.
+The function should call the given callback for each block of code to be written.
+Each block is seperated by a line in the output stream
+*/
 func writeCodeFile(_ defs: DefinitionSet, _ filename: String, _ generator: BlockGenerator) -> Void {
   let outstream:OutputStream! = OutputStream(toFileAtPath: filename, append: false)
   outstream.open()
