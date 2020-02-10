@@ -23,8 +23,10 @@
 // MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 
 import Foundation
-import FoundationXML
 import Commander
+#if canImport(FoundationXML)
+import FoundationXML
+#endif
 
 // for these two return types, I can't just "return 0" in the dummy func
 let dummyReturnVals = [
