@@ -20,14 +20,14 @@ let package = Package(
   ],
   targets: [
 // our various pre-generated GL versions
-    .target(name: "GLLoader33", path: "loader3.3"),
-    .target(name: "GLLoader40", path: "loader4.0"),
-    .target(name: "GLLoader41", path: "loader4.1"),
-    .target(name: "GLLoader42", path: "loader4.2"),
-    .target(name: "GLLoader43", path: "loader4.3"),
-    .target(name: "GLLoader44", path: "loader4.4"),
-    .target(name: "GLLoader45", path: "loader4.5"),
-    .target(name: "GLLoader46", path: "loader4.6"),
+    .target(name: "GLLoader33", path: "loader33"),
+    .target(name: "GLLoader40", path: "loader40"),
+    .target(name: "GLLoader41", path: "loader41"),
+    .target(name: "GLLoader42", path: "loader42"),
+    .target(name: "GLLoader43", path: "loader43"),
+    .target(name: "GLLoader44", path: "loader44"),
+    .target(name: "GLLoader45", path: "loader45"),
+    .target(name: "GLLoader46", path: "loader46"),
 
 // The code generator itself
     .target(name: "glgen", dependencies: ["Commander"], path: "Tools")
